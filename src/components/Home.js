@@ -5,8 +5,12 @@ import SearchBar from "./SearchBar.js"
 import Map from "./Map.js"
 import DataDash from "./DataDash.js"
 
-function Home() {
+function Home(props) {
     const { isLoaded } = useLoadScript({googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API})
+
+    console.log(props.lat, props.lng);
+
+
 
 
     if (!isLoaded) {
@@ -19,7 +23,7 @@ function Home() {
             <div className="home-dash">
             <div>Home Dashboard</div>
             <SearchBar/>
-            <Map/>
+            <Map lat={props.lat} lng={props.lng}/>
             <DataDash/>
     
             </div>
