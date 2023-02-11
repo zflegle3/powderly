@@ -1,8 +1,10 @@
-import { GoogleMap, useLoadScript, MarkerF } from "@react-google-maps/api"
+import { GoogleMap, useLoadScript, MarkerF, getBounds } from "@react-google-maps/api"
 import { useMemo } from "react";
-import { useState } from "react";
+import { useState, createRef } from "react";
 
 function Map(props) {
+
+    const map = createRef();
     //props.lat
     //props.lng
     // const { isLoaded } = useLoadScript({googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API})
@@ -28,8 +30,15 @@ function Map(props) {
 
     // getLocation();
 
+    function onMapLoad(e) {
+        const bounds = new window.google.maps.LatLngBounds();
+        console.log("Map Loaded...", bounds);
 
-
+        // const bounds = map.getBounds();
+        // console.log(bounds);
+        console.log(map.current);
+        // console.log(map.getBounds());
+      };
 
 
 
@@ -39,10 +48,14 @@ function Map(props) {
         return (
 
             <div className="google-map">
-                <GoogleMap 
-                    zoom={10} 
+                <GoogleMap
+                    ref={map} 
+                    zoom={5} 
                     center={{lat: props.lat, lng: props.lng}} 
                     mapContainerClassName="map-container"
+                    // onBoundsChanged={map => onMapLoad(map)}
+                    onLoad = {onMapLoad}
+
                 >
                     {/* <MarkerF position={center} /> */}
                 </GoogleMap>
