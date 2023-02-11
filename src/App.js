@@ -11,8 +11,8 @@ function App() {
   const [lng, setLng] = useState(false);
   const [lat, setLat] = useState(false);
 
-  console.log(process.env.REACT_APP_GOOGLE_MAPS_API);
-  console.log(process.env.NODE_ENV);
+  // console.log(process.env.REACT_APP_GOOGLE_MAPS_API);
+  // console.log(process.env.NODE_ENV);
 
   function getLocation() {
     //attempts to pull users location and set as lat/lng states
@@ -25,8 +25,6 @@ function App() {
     //if user accepts geolocation, sets lat/lng to user location
     setLng(position.coords.longitude);
     setLat(position.coords.latitude);
-    console.log("Latitude: " + position.coords.latitude + 
-    "Longitude: " + position.coords.longitude)
   }
 
   function defaultPosition(err) {
@@ -38,6 +36,11 @@ function App() {
   }
 
 
+
+
+
+
+  
   if (lat && lng) {
     return (
       <div className="App">

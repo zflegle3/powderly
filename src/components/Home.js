@@ -10,40 +10,35 @@ import axios from 'axios';
 
 function Home(props) {
     const { isLoaded } = useLoadScript({googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API})
-    const [resorts, setResorts] = useState();
-
-    console.log(props.lat, props.lng);
-
-    const getMarkers = async () => {
-
-
-        const markersIn = await axios.get("http://localhost:8080/locations/all")
-            .catch(function (err) {
-                console.log("ERROR WITH MARKER DATA,", err)
-            });
-        console.log(markersIn.data);
-        setResorts(markersIn);
-    }
+    const [resorts, setResorts] = useState(false);
+    // console.log(props.lat, props.lng);
 
     useEffect(() => {
-        getMarkers()
-        
+        const getMarkers = async () => {
+            const markersIn = await axios.get("http://localhost:8080/locations/all")
+                .catch(function (err) {
+                    console.log("ERROR WITH MARKER DATA,", err)
+                });
+            setResorts(markersIn.data);
+        }
+
+        getMarkers(); 
     },[]);
 
 
-    if (!isLoaded) {
+    if (!isLoaded || !resorts) {
+        console.log("loading map and resort data")
         return (
               <div>Loading Screen</div>
+            //   Add loading component here
           );
-
     } else {
         return (
             <div className="home-dash">
-            <div>Home Dashboard</div>
-            <SearchBar/>
-            <Map lat={props.lat} lng={props.lng} resorts={resorts}/>
-            <DataDash/>
-    
+                <div>Home Dashboard</div>
+                <SearchBar/>
+                <Map lat={props.lat} lng={props.lng} resorts={resorts}/>
+                <DataDash/>
             </div>
         );
     }

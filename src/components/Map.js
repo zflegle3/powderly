@@ -1,10 +1,11 @@
-import { GoogleMap, useLoadScript, MarkerF, getBounds } from "@react-google-maps/api"
+import { GoogleMap, useLoadScript, MarkerF, getBounds, Marker } from "@react-google-maps/api"
 import { useMemo } from "react";
 import { useState, createRef } from "react";
+// import LocationMarker from "./LocationMarker";
 
-function Map(props) {
-
-    const map = createRef();
+function Map({resorts, lat, lng}) {
+    //props.resorts
+    const myMap = createRef();
     //props.lat
     //props.lng
     // const { isLoaded } = useLoadScript({googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API})
@@ -30,34 +31,47 @@ function Map(props) {
 
     // getLocation();
 
-    function onMapLoad(e) {
-        const bounds = new window.google.maps.LatLngBounds();
-        console.log("Map Loaded...", bounds);
-
-        // const bounds = map.getBounds();
-        // console.log(bounds);
-        console.log(map.current);
-        // console.log(map.getBounds());
-      };
 
 
+    // function onMapLoad(e) {
+    //     // const bounds = new window.google.maps.LatLngBounds();
+    //     // console.log("Map Loaded...", bounds);
 
-    if (props.lng && props.lat) {
+    //     // const bounds = map.getBounds();
+    //     // console.log(bounds);
+    //     // console.log(map.current);
+    //     // console.log(map.getBounds());
+    // };
+
+    const handleClick = () => {
+        console.log("SHREEEED IT DUUUUUUDE!!!")
+    }
+
+    console.log(Array.isArray(resorts));
+    console.log(resorts);
+    const markers = resorts.map((resort) => {
+        return <MarkerF key={resort.refId} onClick={handleClick} position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,), optimized: true }}/>
+    });
+
+    if (lng && lat) {
         console.log("loaded");
+        const defaultLat = 39.7392;
+        const defaultLng = -104.9903;
 
         return (
 
             <div className="google-map">
                 <GoogleMap
-                    ref={map} 
-                    zoom={5} 
-                    center={{lat: props.lat, lng: props.lng}} 
+                    ref={myMap} 
+                    zoom={8} 
+                    center={{lat: lat, lng: lng}} 
                     mapContainerClassName="map-container"
                     // onBoundsChanged={map => onMapLoad(map)}
-                    onLoad = {onMapLoad}
-
+                    // onLoad = {onMapLoad}
                 >
-                    {/* <MarkerF position={center} /> */}
+                    {/* <LocationMarker lat={defaultLat} lng={defaultLng} /> */}
+                    {markers}
+                    <MarkerF position={{lat: lat, lng: lng}} />
                 </GoogleMap>
             </div>
         );
