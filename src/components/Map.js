@@ -1,6 +1,8 @@
 import { GoogleMap, useLoadScript, MarkerF, getBounds, Marker } from "@react-google-maps/api"
 import { useMemo } from "react";
 import { useState, createRef } from "react";
+import { ReactComponent as Greaticon } from '../svgs/bestIcon.svg';
+import IconPng from "../svgs/bestIcon.png";
 // import LocationMarker from "./LocationMarker";
 
 function Map({resorts, lat, lng}) {
@@ -12,45 +14,31 @@ function Map({resorts, lat, lng}) {
     // const [lng, setLng] = useState(false);
     // const [lat, setLat] = useState(false);
 
-    // const center  = useMemo(() => ({lat: 39.7392, lng: -104.9903}), []);
-    // function getLocation() {
-    //     if (navigator.geolocation) {
-    //       navigator.geolocation.getCurrentPosition(showPosition);
-    //     } else {
-    //       console.log("Geolocation is not supported by this browser.")
-    //     }
-    // }
-
-    // function showPosition(position) {
-    //     setLng(position.coords.longitude);
-    //     setLat(position.coords.latitude);
-    //     console.log("Latitude: " + position.coords.latitude + 
-    //     "Longitude: " + position.coords.longitude)
-    // }
 
 
-    // getLocation();
-
-
-
-    // function onMapLoad(e) {
-    //     // const bounds = new window.google.maps.LatLngBounds();
-    //     // console.log("Map Loaded...", bounds);
-
-    //     // const bounds = map.getBounds();
-    //     // console.log(bounds);
-    //     // console.log(map.current);
-    //     // console.log(map.getBounds());
-    // };
 
     const handleClick = () => {
         console.log("SHREEEED IT DUUUUUUDE!!!")
     }
 
+
+
+
+    const svgMarker = {
+        path: "M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
+        fillColor: "blue",
+        fillOpacity: 0.6,
+        strokeWeight: 0,
+        rotation: 0,
+        scale: 2,
+        // anchor: new Point(0, 20),
+      };
+
+
     console.log(Array.isArray(resorts));
     console.log(resorts);
     const markers = resorts.map((resort) => {
-        return <MarkerF key={resort.refId} onClick={handleClick} position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,), optimized: true }}/>
+        return <Marker key={resort.refId} onClick={handleClick} position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,), optimized: true, icon: svgMarker }}/>
     });
 
     if (lng && lat) {
@@ -71,7 +59,7 @@ function Map({resorts, lat, lng}) {
                 >
                     {/* <LocationMarker lat={defaultLat} lng={defaultLng} /> */}
                     {markers}
-                    <MarkerF position={{lat: lat, lng: lng}} />
+                    <Marker position={{lat: lat, lng: lng}} />
                 </GoogleMap>
             </div>
         );
