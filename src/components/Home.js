@@ -1,5 +1,13 @@
 
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
+import usePlacesAutocomplete, { getGeocode, getLatLng} from "use-places-autocomplete"
+import {
+    Combobox,
+    ComboboxInput, 
+    ComboboxPopover, 
+    ComboboxList,
+    CombobocOption,
+} from "@reach/combobox";
 //Components
 import SearchBar from "./SearchBar.js"
 import Map from "./Map.js"
@@ -9,7 +17,7 @@ import axios from 'axios';
 
 
 function Home(props) {
-    const { isLoaded } = useLoadScript({googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API})
+    const { isLoaded } = useLoadScript({googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API, libraries: ["places"]})
     const [resorts, setResorts] = useState(false);
     // console.log(props.lat, props.lng);
 
@@ -36,7 +44,7 @@ function Home(props) {
         return (
             <div className="home-dash">
                 <div>Home Dashboard</div>
-                <SearchBar/>
+                {/* <SearchBar/> */}
                 <Map lat={props.lat} lng={props.lng} resorts={resorts}/>
                 <DataDash/>
             </div>
@@ -45,3 +53,5 @@ function Home(props) {
 }
 
 export default Home;
+
+

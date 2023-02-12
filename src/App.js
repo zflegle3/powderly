@@ -23,8 +23,8 @@ function App() {
 
   function showPosition(position) {
     //if user accepts geolocation, sets lat/lng to user location
-    setLng(position.coords.longitude);
-    setLat(position.coords.latitude);
+    setLng(Number(position.coords.longitude));
+    setLat(Number(position.coords.latitude));
   }
 
   function defaultPosition(err) {
@@ -37,10 +37,6 @@ function App() {
 
 
 
-
-
-
-  
   if (lat && lng) {
     return (
       <div className="App">
