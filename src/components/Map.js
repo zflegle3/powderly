@@ -1,19 +1,16 @@
-import { GoogleMap, useLoadScript, MarkerF, getBounds, Marker } from "@react-google-maps/api"
+import { GoogleMap, LoadScript, MarkerF, getBounds, Marker } from "@react-google-maps/api"
 import { useMemo } from "react";
-import { useState, createRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ReactComponent as Greaticon } from '../svgs/bestIcon.svg';
 import IconPng from "../svgs/bestIcon.png";
+import mapStyles from "../custom-styles/mapStyles"
 // import LocationMarker from "./LocationMarker";
 
 function Map({resorts, lat, lng}) {
     //props.resorts
-    const myMap = createRef();
-    //props.lat
-    //props.lng
-    // const { isLoaded } = useLoadScript({googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API})
-    // const [lng, setLng] = useState(false);
-    // const [lat, setLat] = useState(false);
-
+    // const testMap = useRef();
+    const [myMap, setMyMap] = useState(null);
+    const [bounds, setBounds] = useState(null);
 
 
 
@@ -21,45 +18,89 @@ function Map({resorts, lat, lng}) {
         console.log("SHREEEED IT DUUUUUUDE!!!")
     }
 
-
-
-
-    const svgMarker = {
-        path: "M-1.547 12l6.563-6.609-1.406-1.406-5.156 5.203-2.063-2.109-1.406 1.406zM0 0q2.906 0 4.945 2.039t2.039 4.945q0 1.453-0.727 3.328t-1.758 3.516-2.039 3.070-1.711 2.273l-0.75 0.797q-0.281-0.328-0.75-0.867t-1.688-2.156-2.133-3.141-1.664-3.445-0.75-3.375q0-2.906 2.039-4.945t4.945-2.039z",
-        fillColor: "blue",
-        fillOpacity: 0.6,
-        strokeWeight: 0,
-        rotation: 0,
-        scale: 2,
-        // anchor: new Point(0, 20),
-      };
-
-
-    console.log(Array.isArray(resorts));
-    console.log(resorts);
     const markers = resorts.map((resort) => {
-        return <Marker key={resort.refId} onClick={handleClick} position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,), optimized: true, icon: svgMarker }}/>
+        return <Marker key={resort.refId} onClick={handleClick} optimized={true} icon={{url:"https://i.imgur.com/ypeOzou.png", scale: 0.1}}  position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}/>
     });
+
+    const filterLocations = (latHi,latLo,lngHi,lngLo) => {
+        console.log(resorts);
+        console.log("39.12,84.8858208");
+        console.log(latHi,latLo,lngHi,lngLo);
+        console.log("Lat", latHi > Number("39.1508879") && Number("39.1508879") > latLo);
+        console.log("Lng", lngHi > Number("-84.8858208") && Number("-84.8858208") > lngLo);
+        let filtered = resorts.filter(resort => (latHi > resort.location.lat && resort.location.lat > latLo && lngHi > resort.location.lng && resort.location.lng > lngLo))
+        console.log(filtered);
+    }
+
+    const onMapLoad = (map) => {
+        //sets myMap state with map object
+        console.log("setting myMap...");
+        setMyMap(map);
+    };
+
+    const onMapIdle = (map) => {
+        console.log("Map Idle...");
+        console.log(map.getBounds());
+        let bounds = map.getBounds();
+        
+        filterLocations(bounds.Ya.hi, bounds.Ya.lo, bounds.Ma.hi, bounds.Ma.lo);
+        // (latHi,latLo,lngHi,lngLo)
+
+    };
+
 
     if (lng && lat) {
         console.log("loaded");
-        const defaultLat = 39.7392;
-        const defaultLng = -104.9903;
+        // const defaultLat = 39.7392;
+        // const defaultLng = -104.9903;
 
         return (
 
             <div className="google-map">
                 <GoogleMap
-                    ref={myMap} 
-                    zoom={8} 
+                    // ref={testMap} 
+                    zoom={9}
                     center={{lat: lat, lng: lng}} 
                     mapContainerClassName="map-container"
-                    // onBoundsChanged={map => onMapLoad(map)}
-                    // onLoad = {onMapLoad}
+                    id={"a5b17b69dbe1a9d9"}
+                    options={{styles: mapStyles.lightStyle}}
+                    onBoundsChanged={console.log("bounds changed")}
+                    onLoad={onMapLoad}
+                    onIdle={() => onMapIdle(myMap)}
                 >
                     {/* <LocationMarker lat={defaultLat} lng={defaultLng} /> */}
                     {markers}
                     <Marker position={{lat: lat, lng: lng}} />
+
+
+                    {/* {bounds && (
+                        <>
+                        <Marker
+                            position={{
+                            lat: bounds.north,
+                            lng: bounds.west,
+                            }}
+                        />
+                        <Marker
+                            position={{
+                            lat: bounds.north,
+                            lng: bounds.east,
+                            }}
+                        />
+                        <Marker
+                            position={{
+                            lat: bounds.south,
+                            lng: bounds.west,
+                            }}
+                        />
+                        <Marker
+                            position={{
+                            lat: bounds.south,
+                            lng: bounds.east,
+                            }}
+                        />
+                        </>
+                    )} */}
                 </GoogleMap>
             </div>
         );
