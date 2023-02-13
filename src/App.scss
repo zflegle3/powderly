@@ -95,8 +95,7 @@ table {
   z-index: 1;
   margin-left: auto; 
   margin-right: auto; 
-  padding: 1.5rem;
-  border: 1px solid red;
+  padding: 1.5rem 1.5rem 0rem 1.5rem;
 }
 
 .search-bar {
@@ -163,7 +162,6 @@ table {
     justify-content: center;
     align-items: flex-start;
     flex-grow: 1;
-    border: 1px solid orange;
     cursor: pointer;
 
     input:nth-child(1) {
@@ -199,8 +197,25 @@ table {
 }
 
 .combo-box-input {
-  width: 40rem;
+  width: 100%;
   padding: 0.5rem;
+}
+
+.combo-box-list {
+  margin-top: 2rem;
+}
+
+.combo-box {
+  width: 100%;
+}
+.combo-box-option {
+  background-color: #ffffff;
+  z-index: 10;
+  padding: 0.5rem;
+  cursor: pointer;
+  span {
+    font-size: 1.5rem;
+  }
 }
 
 

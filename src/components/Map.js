@@ -1,9 +1,11 @@
-import { GoogleMap, MarkerF, getBounds, Marker } from "@react-google-maps/api"
+import { GoogleMap, MarkerF, getBounds, Marker, Size } from "@react-google-maps/api"
 import { useMemo } from "react";
 import { useState, useEffect, useRef } from "react";
 import { ReactComponent as Greaticon } from '../svgs/bestIcon.svg';
 import IconPng from "../svgs/bestIcon.png";
-import mapStyles from "../custom-styles/mapStyles"
+import mapStyles from "../custom-styles/mapStyles";
+import PlacesAutocomplete from "./PlacesAutocomplete.js";
+import SearchBar from "./SearchBar.js"
 
 import usePlacesAutocomplete, { getGeocode, getLatLng} from "use-places-autocomplete"
 import {
@@ -17,10 +19,10 @@ import {
 
 function Map({resorts, lat, lng}) {
     //props.resorts
-    // const testMap = useRef();
     const [myMap, setMyMap] = useState(null);
-    const [bounds, setBounds] = useState(null);
     const [selected, setSelected] = useState({lat, lng});
+    const [editStatus, setEditStatus] = useState(false);
+    //controls search bar display, set true for edit mode and false for display only
 
 
 
@@ -29,7 +31,15 @@ function Map({resorts, lat, lng}) {
     }
 
     const markers = resorts.map((resort) => {
-        return <Marker key={resort.refId} onClick={handleClick} optimized={true} icon={{url:"https://i.imgur.com/ypeOzou.png", scale: 0.1}}  position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}/>
+        return (
+            <Marker 
+                key={resort.refId} 
+                onClick={handleClick} 
+                optimized={true} 
+                icon={{url:"https://i.imgur.com/ypeOzou.png", scale: 0.1, scaledSize: new window.google.maps.Size(50, 50)}}  
+                position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
+            />
+        );
     });
 
     const filterLocations = (latHi,latLo,lngHi,lngLo) => {
@@ -58,6 +68,13 @@ function Map({resorts, lat, lng}) {
 
     };
 
+    const handleMapClick = () => {
+        console.log("Map being clicked");
+        if (editStatus) {
+            setEditStatus(false);
+        }
+    }
+
     console.log(typeof selected.lat,typeof selected.lng);
     if (lng && lat) {
         console.log("loaded");
@@ -66,20 +83,26 @@ function Map({resorts, lat, lng}) {
         return (
 
             <div className="google-map">
-                <PlacesAutocomplete setSelected={setSelected} />
+                <SearchBar setSelected={setSelected} selected={selected} editStatus={editStatus} setEditStatus={setEditStatus}/>
+                {/* <PlacesAutocomplete setSelected={setSelected} /> */}
                 <GoogleMap
                     // ref={testMap} 
                     zoom={9}
                     center={selected}
                     mapContainerClassName="map-container"
                     id={"a5b17b69dbe1a9d9"}
-                    options={{styles: mapStyles.lightStyle}}
-                    onBoundsChanged={console.log("bounds changed")}
+                    options={{
+                        styles: mapStyles.darkStyle,
+                        disableDefaultUI: true,
+                        zoomControl: true,
+                    }}
+                    // onBoundsChanged={console.log("bounds changed")}
                     onLoad={onMapLoad}
                     onIdle={() => onMapIdle(myMap)}
+                    onMouseDown = {handleMapClick}
                 >
                     {markers}
-                    {selected && <Marker position={selected} />}
+                    {selected && <Marker position={selected} icon={{url:"https://cdn-icons-png.flaticon.com/512/2503/2503562.png", scaledSize: new window.google.maps.Size(50, 50),}}/>}
 
                 </GoogleMap>
             </div>
@@ -101,41 +124,3 @@ function Map({resorts, lat, lng}) {
   export default Map;
 
 
-  const PlacesAutocomplete = ({ setSelected }) => {
-    const {
-        ready,
-        value,
-        setValue,
-        suggestions: {status, data},
-        clearSuggestions
-    } = usePlacesAutocomplete();
-
-    const handleSelect = async (address) => {
-        setValue(address, false);
-        clearSuggestions();
-        //convert address to lat/lng
-        const results = await getGeocode({address});
-        const {lat,lng} = await getLatLng(results[0]);
-        console.log(lat,lng);
-        setSelected({lat, lng});
-    }
-
-    return(
-        <Combobox onSelect={handleSelect}>
-            <ComboboxInput 
-                className="combo-box-input" 
-                placeholder="Search any location..."
-                value={value} 
-                onChange = {e => setValue(e.target.value)} 
-                disabled={!ready}
-            />
-            <ComboboxPopover>
-                <ComboboxList>
-                    {status === "OK" && data.map(({place_id, description}) => 
-                        <ComboboxOption key={place_id} value={description}/>
-                    )}
-                </ComboboxList>
-            </ComboboxPopover>
-        </Combobox>
-    );
-}

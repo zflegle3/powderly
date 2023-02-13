@@ -1,14 +1,15 @@
 import { useState } from "react";
 import { FaSearch, FaInfo } from 'react-icons/fa';
+import PlacesAutocomplete from "./PlacesAutocomplete.js";
 
 
-function SearchBar() {
-    const {location, setLocation} = useState("Default Location");
-    const {date, setDate} = useState("Default Date");
-    const [editStatus, setEditStatus] = useState(false);//set true for edit mode
+function SearchBar({setSelected, selected, editStatus, setEditStatus}) {
+    const [location, setLocation] = useState("Search any Location...");
+    const [date, setDate] = useState(new Date());
+
 
     
-
+    console.log(selected);  
     const editSearch = () => {
         //changes edit status to edit inputs
         console.log("Open search edits");
@@ -16,7 +17,7 @@ function SearchBar() {
 
     }
 
-    const submitSearch = () => {
+    const handleSearchBtn = () => {
         //changes edit status to edit inputs
         console.log("Close search edits");
         setEditStatus(false);
@@ -27,17 +28,17 @@ function SearchBar() {
         console.log("Open Help Info");
     }
 
-
+    console.log(location);
     if (!editStatus) {
         return (
             <div className="search-container">
                 <div className="search-bar">
-                    <div className="search-submit" onClick={submitSearch}>
+                    <div className="search-submit" onClick={handleSearchBtn}>
                         <FaSearch />
                     </div>
                     <div className="search-display" onClick={editSearch}>
-                        <p>Default Location</p>
-                        <p>Tue, Mar 4 at 9:41 pm</p>
+                        <p>{location}</p>
+                        <p>{date.toDateString()}</p>
                     </div>
                     <div className="help-submit" onClick={openHelp}>
                         <FaInfo/>
@@ -49,12 +50,13 @@ function SearchBar() {
         return (
             <div className="search-container">
                 <div className="search-bar">
-                    <div className="search-submit" onClick={submitSearch}>
+                    <div className="search-submit" onClick={handleSearchBtn}>
                         <FaSearch />
                     </div>
                     <form className="search-form" onClick={editSearch}>
-                        <input className="location-in" type="text" name="location" onChange={ e => setLocation(e.target.value)}></input>
-                        <input className="date-in" type="date" name="location"></input>
+                        {/* <input className="location-in" type="text" name="location" onChange={ e => setLocation(e.target.value)}></input> */}
+                        <PlacesAutocomplete setSelected={setSelected} setEditStatus={setEditStatus} setLocation={setLocation} />
+                        {/* <input className="date-in" type="date" name="location"></input> */}
                     </form>
                     <div className="help-submit" onClick={openHelp}>
                     <FaInfo/>
