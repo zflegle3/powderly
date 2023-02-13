@@ -43,7 +43,6 @@ function Home(props) {
     } else {
         return (
             <div className="home-dash">
-                <div>Home Dashboard</div>
                 {/* <SearchBar/> */}
                 <Map lat={props.lat} lng={props.lng} resorts={resorts}/>
                 <DataDash/>
