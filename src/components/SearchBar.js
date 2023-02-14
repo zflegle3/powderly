@@ -1,20 +1,17 @@
 import { useState } from "react";
 import { FaSearch, FaInfo } from 'react-icons/fa';
 import PlacesAutocomplete from "./PlacesAutocomplete.js";
+import FilterBar from "./FilterBar"
 
 
 function SearchBar({setSelected, selected, editStatus, setEditStatus}) {
     const [location, setLocation] = useState("Search any Location...");
     const [date, setDate] = useState(new Date());
 
-
-    
-    console.log(selected);  
     const editSearch = () => {
         //changes edit status to edit inputs
         console.log("Open search edits");
         setEditStatus(true);
-
     }
 
     const handleSearchBtn = () => {
@@ -28,7 +25,6 @@ function SearchBar({setSelected, selected, editStatus, setEditStatus}) {
         console.log("Open Help Info");
     }
 
-    console.log(location);
     if (!editStatus) {
         return (
             <div className="search-container">

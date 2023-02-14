@@ -22,11 +22,11 @@ function SidePanel({searchResults}) {
                         <div className='sort-icon'>
                             <FaSort/>
                         </div>
-                        <p>Sort by Current Conditions</p>
+                        <p>Sorting by Current Conditions</p>
                     </div>
                 </header>
                 <div className='resorts-display'>
-                    {searchResults.map((resortData) => <ConditionsDisplay resortData={resortData}/>)}
+                    {searchResults.map((resortData) => <ConditionsDisplay key={resortData.refId} resortData={resortData}/>)}
                 </div>
 
             </div>

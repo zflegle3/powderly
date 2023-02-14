@@ -19,22 +19,27 @@ import SidePanel from "./SidePanel.js";
 
 
 function Home(props) {
-    const { isLoaded } = useLoadScript({googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API, libraries: ["places"]})
+    const [ libraries ] = useState(['places']);
+    const { isLoaded, loadError } = useLoadScript({
+        googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
+        libraries,
+    });
     const [resorts, setResorts] = useState(false);
     const [isOpen, setOpen] = useState(false);
     const [searchResults, setSearchResults] = useState(null);
+    const [sort, setSort] = useState(null);
     // console.log(props.lat, props.lng);
 
-    useEffect(() => {
-        const getMarkers = async () => {
-            const markersIn = await axios.get("http://localhost:8080/conditions/all")
-                .catch(function (err) {
-                    console.log("ERROR WITH MARKER DATA,", err)
-                });
-            setResorts(markersIn.data);
-        }
+    const getData = async () => {
+        const dataIn = await axios.get("http://localhost:8080/conditions/all")
+            .catch(function (err) {
+                console.log("ERROR WITH MARKER DATA,", err)
+            });
+        setResorts(dataIn.data);
+    }
 
-        getMarkers(); 
+    useEffect(() => {
+        getData(); 
     },[]);
 
 
