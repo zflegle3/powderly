@@ -6,9 +6,11 @@ import {
     ComboboxList,
     ComboboxOption,
 } from "@reach/combobox";
+import { useState, useEffect, createRef } from "react";
 
 
 const PlacesAutocomplete = ({ setSelected, setEditStatus, setLocation }) => {
+    const textInput = createRef();
     const {
         ready,
         value,
@@ -31,6 +33,17 @@ const PlacesAutocomplete = ({ setSelected, setEditStatus, setLocation }) => {
         setLocation(address);
     }
 
+    // useEffect(() => {
+    //     console.log("focus input...");
+    //     let input = document.querySelector(".combo-box-input");
+    //     console.log(input);
+    //     input.setAttribute('autoFocus', true);
+    //     // input.focus();
+    //     // textInput.current.focus();
+    // },[]);
+
+
+
     return(
         <Combobox className="combo-box" onSelect={handleSelect}>
             <ComboboxInput 
@@ -39,9 +52,10 @@ const PlacesAutocomplete = ({ setSelected, setEditStatus, setLocation }) => {
                 value={value} 
                 onChange = {e => setValue(e.target.value)} 
                 disabled={!ready}
+                ref={textInput}
             />
             <ComboboxPopover>
-                <ComboboxList className="combo-box-list">
+                <ComboboxList className="combo-box-list ">
                     {status === "OK" && data.map(({place_id, description}) => 
                         <ComboboxOption className="combo-box-option" key={place_id} value={description}/>
                     )}

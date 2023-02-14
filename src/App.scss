@@ -72,7 +72,130 @@ table {
 .chat-dash {
   background-color: purple;
   height: 100%;
-  width: 30%;
+  width: 35%;
+}
+
+.side-panel-display {
+  background-color: #ffffff;
+  height: 100%;
+  width: 35%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+
+
+  header {
+    width: 100%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-bottom: 1px solid black;
+    box-shadow: 0px 5px 5px rgba(61, 61, 63, 0.25);
+
+    h2{
+      font-size: 2.5rem;
+      font-weight: 600;
+    }
+
+    .sort-control {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: flex-start;
+
+      .sort-icon {
+        width: 2rem;
+        height: 2rem;
+
+        svg {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      p {
+        font-size: 1.5rem;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .resorts-display {
+    width: 100%;
+    height: 100%;
+    overflow: scroll;
+    // border: 1px solid red;
+
+    .resort-conditions-display {
+      // border: 1px solid blue;
+      padding: 1rem;
+      border-bottom: 1px solid rgb(61, 61, 63);
+
+      .resort-conditions-data {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 0.5rem 0rem;
+
+      }
+
+      .resort-conditions-calendar {
+        height: 100px;
+        width: 100%;
+        background-color: rebeccapurple;
+      }
+
+      .rating {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #6BA407;
+        padding-right: 1.2rem;
+      }
+
+      .resort-name {
+        font-size: 2rem;
+        font-weight: 600;
+        color: #000000;
+        max-width: 25rem;
+        overflow: hidden;
+        white-space: nowrap;
+        text-align: start;
+        text-overflow: ellipsis;        
+        padding-right: 1.2rem;
+      }
+
+      .twenty-four-hr-snow, .seventy-two-hr-snow, .conditions-detail, .lifts-detail {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-right: 1.2rem;
+
+        p:nth-child(1) {
+          font-size: 1.5rem;
+          font-weight: 400;
+          color: #000000;
+          padding-bottom: 0.2rem;
+        }
+
+        p:nth-child(2) {
+          font-size: 1.2rem;
+          font-weight: 400;
+          color: rgb(61, 61, 63);
+        }
+      }
+
+
+
+    }
+
+  }
+
 }
 
 .home-dash {
@@ -82,12 +205,12 @@ table {
   position: relative;
 
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
 }
 
-.search-container {
+.controls-container {
   position: absolute; 
   top: 0rem;
   left: 0; 
@@ -95,7 +218,21 @@ table {
   z-index: 1;
   margin-left: auto; 
   margin-right: auto; 
-  padding: 1.5rem 1.5rem 0rem 1.5rem;
+  // padding: 1.5rem 1.5rem 0rem 1.5rem;
+
+}
+
+.search-container {
+  position: relative;
+  padding: 1.5rem;
+  // position: absolute; 
+  // top: 0rem;
+  // left: 0; 
+  // right: 0; 
+  // z-index: 1;
+  // margin-left: auto; 
+  // margin-right: auto; 
+  // padding: 1.5rem 1.5rem 0rem 1.5rem;
 }
 
 .search-bar {
@@ -140,7 +277,7 @@ table {
     cursor: pointer;
     margin-left: 1rem;
     margin-right: 1rem;
-    border-right: 1px solid rgb(61, 61, 63); ;
+    border-right: 1px solid rgb(61, 61, 63);
 
     p:nth-child(1) {
       color: black;
@@ -160,9 +297,12 @@ table {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     flex-grow: 1;
     cursor: pointer;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-right: 1px solid rgb(61, 61, 63);
 
     input:nth-child(1) {
       border: none;
@@ -183,7 +323,9 @@ table {
 
 .google-map {
   height: 100vh;
-  width: 100%;
+  // width: 100%;
+  flex-grow: 1;
+  position: relative;
 
   .map-container {
     width: 100%;
@@ -199,22 +341,47 @@ table {
 .combo-box-input {
   width: 100%;
   padding: 0.5rem;
+  color: rgb(61, 61, 63);
 }
 
 .combo-box-list {
-  margin-top: 2rem;
+  background-color: #ffffff;
+  position: relative;
+  // padding-top: 2rem;
+  z-index: 100;
+  border-radius: 0.5rem;
+  padding: 1rem;
 }
 
 .combo-box {
   width: 100%;
 }
 .combo-box-option {
-  background-color: #ffffff;
-  z-index: 10;
-  padding: 0.5rem;
+  // background-color: #ffffff;
+  padding-top: 1rem;
   cursor: pointer;
   span {
     font-size: 1.5rem;
+  }
+  border-radius: 0.5rem;
+}
+
+.filter-bar {
+  width: 100%;
+  padding: 0.5rem 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  button {
+    margin: 0rem 2rem;
+    background-color: #ffffff;
+    border: none;
+    border-radius: 10rem;
+    padding: 0.5rem 1rem;
+    font-size: 1.5rem;
+    font-weight: 300;
   }
 }
 

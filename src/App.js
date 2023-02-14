@@ -41,7 +41,7 @@ function App() {
     return (
       <div className="App">
         <Home lat={lat} lng={lng}/>
-        <Chat/>
+        {/* <Chat/> */}
       </div>
     );
   } else {
