@@ -1,5 +1,6 @@
 import logo from './logo.svg';
-import './App.scss';
+import "./custom-styles/App.scss";
+import "./custom-styles/Calendar.scss";
 import { useState, useMemo } from 'react';
 // import { GoogleMap, useLoadScript, Marker } from "react-google-maps"
 
@@ -17,7 +18,7 @@ function App() {
   function getLocation() {
     //attempts to pull users location and set as lat/lng states
     //if err, sets default as denver lat/lng
-    console.log("getting location")
+    // console.log("getting location")
     navigator.geolocation.getCurrentPosition(showPosition, defaultPosition);
   }
 
@@ -41,7 +42,6 @@ function App() {
     return (
       <div className="App">
         <Home lat={lat} lng={lng}/>
-        {/* <Chat/> */}
       </div>
     );
   } else {

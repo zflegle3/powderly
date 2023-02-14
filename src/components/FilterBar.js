@@ -11,31 +11,43 @@ import { useState, useEffect, useRef } from "react";
 function FilterBar({resorts, lat, lng}) {
     const [filters, setFilters] = useState([
         {
-            title:"Conditions Rating",
+            title:"A to Z",
+            titleLong:"Alphabetical A to Z",
+            id: 1
+        },
+        {
+            title:"Rating",
+            titleLong:"Current Conditions Rating",
             id: 1
         },
         {
             title:"Fresh Snow",
+            titleLong:"Fresh Snowall total (in.)",
             id: 2
         },
         {
-            title:"24 hrs",
+            title:"24 hr Snow",
+            titleLong:"Snowfall total within 24 hrs (in.)",
             id: 3
         },
         {
-            title:"72 hrs",
+            title:"72 hrs Snow",
+            titleLong:"Snowfall total within 72 hrs (in.)",
             id: 4
         },
         {
             title:"Peak Depth",
+            titleLong:"Snow depth at resort peak (in.)",
             id: 5
         },
         {
             title:"Base Depth",
+            titleLong:"Snow depth at resort base (in.)",
             id: 6
         },
         {
             title:"Favorites",
+            titleLong:"Your favorite resorts",
             id: 7
         },
     ]);

@@ -43,8 +43,7 @@ function Map({resorts, lat, lng, setSearchResults}) {
     });
 
     const filterLocations = (latHi,latLo,lngHi,lngLo) => {
-        let filtered = resorts.filter(resort => (latHi > resort.location.lat && resort.location.lat > latLo && lngHi > resort.location.lng && resort.location.lng > lngLo))
-        console.log(filtered);
+        let filtered = resorts.filter(resort => (latHi > resort.location.lat && resort.location.lat > latLo && lngHi > resort.location.lng && resort.location.lng > lngLo));
         setSearchResults(filtered);
     }
 

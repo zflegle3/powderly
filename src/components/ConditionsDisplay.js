@@ -1,3 +1,5 @@
+import Timeline from "./calendar/Timeline";
+
 
 function ConditionsDisplay({resortData}) {
     let cmToIn = 2.54;
@@ -54,7 +56,9 @@ function ConditionsDisplay({resortData}) {
                 </div>
 
             </div>
-            <div className="resort-conditions-calendar"></div>
+            <div className="resort-conditions-calendar">
+                <Timeline dataIn={resortData.conditions.history}/>
+            </div>
             <br></br>
         </div>
     );
