@@ -27,7 +27,13 @@ function Home(props) {
     const [resorts, setResorts] = useState(false);
     const [isOpen, setOpen] = useState(false);
     const [searchResults, setSearchResults] = useState(null);
-    const [sort, setSort] = useState(null);
+    const [sort, setSort] = useState(
+        {
+            title:"A to Z",
+            titleLong:"Alphabetical A to Z",
+            id: 0
+        },
+    );
     // console.log(props.lat, props.lng);
 
     const getData = async () => {
@@ -57,8 +63,8 @@ function Home(props) {
             return (
                 <div className="home-dash">
                     {/* <SearchBar/> */}
-                    <Map lat={props.lat} lng={props.lng} resorts={resorts} setSearchResults={setSearchResults}/>
-                    <SidePanel searchResults={searchResults}/>
+                    <Map lat={props.lat} lng={props.lng} resorts={resorts} setSearchResults={setSearchResults} setSort={setSort}/>
+                    <SidePanel searchResults={searchResults} sortData={sort}/>
                 </div>
             );
         //Mobile 

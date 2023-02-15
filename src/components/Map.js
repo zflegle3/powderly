@@ -17,7 +17,7 @@ import {
 } from "@reach/combobox";
 // import LocationMarker from "./LocationMarker";
 
-function Map({resorts, lat, lng, setSearchResults}) {
+function Map({resorts, lat, lng, setSearchResults, setSort}) {
     //props.resorts
     const [myMap, setMyMap] = useState(null);
     const [selected, setSelected] = useState({lat, lng});
@@ -48,11 +48,13 @@ function Map({resorts, lat, lng, setSearchResults}) {
     }
 
     const onMapLoad = (map) => {
+
         //sets myMap state with map object
         setMyMap(map);
     };
 
     const onMapIdle = (map) => {
+        console.log("loading new map");
         //when map done moving, sends bounds and pulls viewport bounds
         let bounds = map.getBounds();
         filterLocations(bounds.Ya.hi, bounds.Ya.lo, bounds.Ma.hi, bounds.Ma.lo);
@@ -73,7 +75,7 @@ function Map({resorts, lat, lng, setSearchResults}) {
             <div className="google-map">
                 <div className="controls-container">
                     <SearchBar setSelected={setSelected} selected={selected} editStatus={editStatus} setEditStatus={setEditStatus}/>
-                    <FilterBar />
+                    <FilterBar setSort={setSort}/>
                 </div>
 
                 <GoogleMap

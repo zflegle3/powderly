@@ -8,57 +8,63 @@ import { useState, useEffect, useRef } from "react";
 // import SearchBar from "./SearchBar.js"
 
 
-function FilterBar({resorts, lat, lng}) {
+function FilterBar({resorts, lat, lng, setSort}) {
     const [filters, setFilters] = useState([
         {
             title:"A to Z",
-            titleLong:"Alphabetical A to Z",
+            titleLong:"alphabetical A to Z",
             id: 1
         },
         {
-            title:"Rating",
-            titleLong:"Current Conditions Rating",
-            id: 1
-        },
-        {
-            title:"Fresh Snow",
-            titleLong:"Fresh Snowall total (in.)",
+            title:"Z to A",
+            titleLong:"alphabetical Z to A",
             id: 2
         },
         {
-            title:"24 hr Snow",
-            titleLong:"Snowfall total within 24 hrs (in.)",
+            title:"Rating",
+            titleLong:"current conditions rating",
             id: 3
         },
         {
-            title:"72 hrs Snow",
-            titleLong:"Snowfall total within 72 hrs (in.)",
+            title:"Fresh Snow",
+            titleLong:"fresh snowall total (in.)",
             id: 4
         },
         {
-            title:"Peak Depth",
-            titleLong:"Snow depth at resort peak (in.)",
+            title:"24 hr Snow",
+            titleLong:"snowfall total within 24 hrs (in.)",
             id: 5
         },
         {
-            title:"Base Depth",
-            titleLong:"Snow depth at resort base (in.)",
+            title:"72 hrs Snow",
+            titleLong:"snowfall total within 72 hrs (in.)",
             id: 6
         },
         {
-            title:"Favorites",
-            titleLong:"Your favorite resorts",
+            title:"Peak Depth",
+            titleLong:"snow depth at resort peak (in.)",
             id: 7
+        },
+        {
+            title:"Base Depth",
+            titleLong:"snow depth at resort base (in.)",
+            id: 8
+        },
+        {
+            title:"Favorites",
+            titleLong:"your favorite resorts",
+            id: 9
         },
     ]);
 
     const handleBtnClick = (e) => {
         e.preventDefault();
-        console.log(e.target.id);
+        let selectedFilter = filters.filter(filterObj => filterObj.id === Number(e.target.id))[0];
+        setSort(selectedFilter);
     }
 
     let filterBtns = filters.map((item) => {
-        return(<button key={item.id} className="filter-btn" id={item.title} onClick={handleBtnClick}>{item.title}</button>)
+        return(<button key={item.id} className="filter-btn" id={item.id} onClick={handleBtnClick}>{item.title}</button>)
     })
 
     return (
