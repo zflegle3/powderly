@@ -136,7 +136,7 @@ table {
       border-bottom: 1px solid rgb(61, 61, 63);
       transition: all 0.3s;
 
-      .resort-conditions-data {
+      .resort-conditions-header {
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
@@ -145,7 +145,7 @@ table {
 
       }
 
-      .expand-collapse-icon {
+      .header-icon {
         height: 2rem;
         width: 2rem;
         margin-right: 1rem;
@@ -157,28 +157,105 @@ table {
         }
       }
 
+      .expand-collapse-btn {
+				z-index: 1;
+				width: 3rem;
+				height: 3rem;
+				padding: 0.5rem;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: cener;
+        position: relative;
+        margin-right: 1rem;
+        cursor: pointer;
+
+				div[class*="bar-1"] {
+					width: 100%;
+					border-bottom: 3px solid black;
+          transform: translateY(2px)
+				}
+
+				div[class*="bar-2"] {
+					width: 100%;
+					border-bottom: 3px solid black;
+          transform: rotate(90deg);
+				}
+
+				div[class*="bar-3"] {
+					width: 50%;
+					border-bottom: 2px solid black;
+				}
+			}
+
+      .resort-conditions-current {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+        padding-top: 1rem;
+      }
+
+      .snow-condition {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        padding: 1rem 1rem 0rem 1rem;
+
+        p {
+          font-size: 1.5rem;
+          font-weight: 400;
+          color: #000000;
+          padding-right: 1rem;
+        }
+      }
+
       .resort-conditions-calendar {
         width: 100%;
         // background-color: rebeccapurple;
       }
 
-      .rating {
+      p[class*="rating"] { 
         font-size: 2rem;
-        font-weight: 600;
-        color: #6BA407;
+        font-weight: 800;
+
         padding-right: 1.2rem;
       }
+
+      .rating-best {
+        color: #067411;
+      }
+
+      .rating-good {
+        color: #799210;
+      }
+
+      .rating-ok {
+        color: #BC8F2A;
+      }
+
+      .rating-bad {
+        color: #A15533;
+      }
+
+      .rating-na {
+        color: #3B3E49;
+      }
+
+
 
       .resort-name {
         font-size: 2rem;
         font-weight: 600;
         color: #000000;
-        max-width: 25rem;
-        overflow: hidden;
+        // max-width: 25rem;
+        // overflow: hidden;
         white-space: nowrap;
         text-align: start;
         text-overflow: ellipsis;        
         padding-right: 1.2rem;
+        flex-grow: 1;
       }
 
       .twenty-four-hr-snow, .seventy-two-hr-snow, .conditions-detail, .lifts-detail {
