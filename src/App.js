@@ -1,9 +1,23 @@
-import logo from './logo.svg';
+
+
+import { useState, useEffect, useMemo } from 'react';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+  useNavigate
+} from "react-router-dom";
+import { useSelector, useDispatch } from 'react-redux';
+
+
+//Styles
 import "./custom-styles/App.scss";
 import "./custom-styles/Calendar.scss";
-import { useState, useMemo } from 'react';
-// import { GoogleMap, useLoadScript, Marker } from "react-google-maps"
+import "./custom-styles/auth.scss";
 
+//Components
 import Home from "./components/Home"
 import Chat from "./components/Chat"
 

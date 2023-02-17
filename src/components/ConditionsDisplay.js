@@ -1,6 +1,6 @@
 import Timeline from "./calendar/Timeline";
 import ConditionsDetail from "./ConditionsDetail";
-import { FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaCrosshairs } from 'react-icons/fa';
+import { FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaSearchLocation, FaCrosshairs } from 'react-icons/fa';
 import { useState } from "react";
 import gsap from "gsap";
 
@@ -94,7 +94,7 @@ function ConditionsDisplay({resortData}) {
                     </button>
 
                     <div className="header-icon" onClick={expandCollapse}>
-                        <FaCrosshairs/>
+                        <FaSearchLocation/>
                     </div>
 
                     <div className="header-icon" onClick={expandCollapse}>
@@ -132,7 +132,7 @@ function ConditionsDisplay({resortData}) {
                     </button>
 
                     <div className="header-icon" onClick={expandCollapse}>
-                        <FaCrosshairs/>
+                        <FaSearchLocation/>
                     </div>
 
                     <div className="header-icon" onClick={expandCollapse}>

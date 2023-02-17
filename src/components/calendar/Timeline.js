@@ -3,7 +3,7 @@ import WeekDay from "./Weekday";
 import Month from "./Month";
 import { DateTime } from 'luxon';
 
-function Timeline({ dataIn}) {
+function Timeline({dataIn}) {
     //Component takes in historical data as an array of objects
     //each object should be {date: DateObject, snowfall: number}
 
