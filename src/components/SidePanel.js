@@ -1,4 +1,4 @@
-import { FaSort } from 'react-icons/fa';
+import { FaSort, FaPlus } from 'react-icons/fa';
 import ConditionsDisplay from './ConditionsDisplay';
 import { useEffect, useState } from 'react';
 
@@ -7,9 +7,9 @@ function SidePanel({searchResults, sortData}) {
     const [sortedResults, setSortedResults] = useState(searchResults);
     
     const trimResults = (filteredResults) => {
-        if (filteredResults.length > 10) {
-            filteredResults.length=10;
-        }
+        // if (filteredResults.length > 10) {
+        //     filteredResults.length=10;
+        // }
         setSortedResults(filteredResults);
     }
 

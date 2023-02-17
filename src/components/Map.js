@@ -25,21 +25,64 @@ function Map({resorts, lat, lng, setSearchResults, setSort}) {
     //controls search bar display, set true for edit mode and false for display only
 
 
-
     const handleClick = () => {
         console.log("SHREEEED IT DUUUUUUDE!!!")
     }
 
     const markers = resorts.map((resort) => {
-        return (
-            <Marker 
-                key={resort.refId} 
-                onClick={handleClick} 
-                optimized={true} 
-                icon={{url:"https://i.imgur.com/ypeOzou.png", scale: 0.1, scaledSize: new window.google.maps.Size(50, 50)}}  
-                position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
-            />
-        );
+        let rating = resort.conditions.forecast[0].rating;
+
+        if (rating > 7.5) {
+            return (
+                <Marker 
+                    key={resort.refId} 
+                    onClick={handleClick} 
+                    optimized={true} 
+                    icon={{url:"https://i.imgur.com/PR6meRZ.png", scaledSize: new window.google.maps.Size(50, 50)}}  
+                    position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
+                />
+            );
+        } else if (rating > 5) {
+            return (
+                <Marker 
+                    key={resort.refId} 
+                    onClick={handleClick} 
+                    optimized={true} 
+                    icon={{url:"https://i.imgur.com/QBGAEs4.png", scaledSize: new window.google.maps.Size(40, 40)}}  
+                    position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
+                />
+            )
+        } else if (rating > 2.5) {
+            return (
+                <Marker 
+                    key={resort.refId} 
+                    onClick={handleClick} 
+                    optimized={true} 
+                    icon={{url:"https://i.imgur.com/j1V6upn.png", scaledSize: new window.google.maps.Size(30, 30)}}  
+                    position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
+                />
+            )
+        } else if (rating > 0) {
+            return (
+                <Marker 
+                    key={resort.refId} 
+                    onClick={handleClick} 
+                    optimized={true} 
+                    icon={{url:"https://i.imgur.com/pJYtoxS.png", scaledSize: new window.google.maps.Size(20, 20)}}  
+                    position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
+                />
+            )
+        } else {
+            return (
+                <Marker 
+                    key={resort.refId} 
+                    onClick={handleClick} 
+                    optimized={true} 
+                    icon={{url:"https://i.imgur.com/d9hNHHW.png", scaledSize: new window.google.maps.Size(20, 20)}}  
+                    position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
+                />
+            )
+        }
     });
 
     const filterLocations = (latHi,latLo,lngHi,lngLo) => {
@@ -57,7 +100,8 @@ function Map({resorts, lat, lng, setSearchResults, setSort}) {
         console.log("loading new map");
         //when map done moving, sends bounds and pulls viewport bounds
         let bounds = map.getBounds();
-        filterLocations(bounds.Ya.hi, bounds.Ya.lo, bounds.Ma.hi, bounds.Ma.lo);
+        console.log(bounds);
+        filterLocations(bounds.Ua.hi, bounds.Ua.lo, bounds.Ia.hi, bounds.Ia.lo);
     };
 
     const handleMapClick = () => {
@@ -66,6 +110,8 @@ function Map({resorts, lat, lng, setSearchResults, setSort}) {
             setEditStatus(false);
         }
     }
+
+    
 
 
     if (lng && lat) {

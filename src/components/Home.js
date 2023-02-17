@@ -16,6 +16,7 @@ import DataDash from "./DataDash.js"
 import { useEffect, useState } from "react"
 import axios from 'axios';
 import SidePanel from "./SidePanel.js";
+// import {sortData} from "../features/sort.js";
 
 
 function Home(props) {
@@ -25,6 +26,7 @@ function Home(props) {
         libraries,
     });
     const [resorts, setResorts] = useState(false);
+    const [resortsSorted, setResortsSorted] = useState(false);
     const [isOpen, setOpen] = useState(false);
     const [searchResults, setSearchResults] = useState(null);
     const [sort, setSort] = useState(
@@ -46,8 +48,15 @@ function Home(props) {
 
     useEffect(() => {
         getData(); 
+
+
     },[]);
 
+    // useEffect(() => {
+    //     // sortData(resorts);
+
+
+    // },[sort, resorts]);
 
 
 
