@@ -7,7 +7,7 @@ import {
   Route,
   Link,
   Navigate,
-  useNavigate
+  useNavigate,
 } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -20,8 +20,17 @@ import "./custom-styles/auth.scss";
 //Components
 import Home from "./components/Home"
 import Chat from "./components/Chat"
+import Login from './components/auth/Login';
+import SignUp from './components/auth/SignUp';
+import PasswordReset from "./components/auth/PasswordReset";
+import Reset from "./components/auth/Reset";
 
 function App() {
+  const [user, setUser] = useState(null);
+  // const {user} = useSelector((state) => state.auth);
+
+
+
   const center  = useMemo(() => getLocation(), []);
   const [lng, setLng] = useState(false);
   const [lat, setLat] = useState(false);
@@ -52,17 +61,41 @@ function App() {
 
 
 
-  if (lat && lng) {
+  // if (lat && lng) {
+  //   return (
+  //     <div className="App">
+  //       <Home lat={lat} lng={lng}/>
+  //     </div>
+  //   );
+  // } else {
+  //   return (
+  //     <div>Loadin user Location</div>
+  //   )
+  // }
+
+  if (user) {
     return (
-      <div className="App">
-        <Home lat={lat} lng={lng}/>
+      <div className="app-layout">
+        <div className="app-container">
+           <Home lat={lat} lng={lng}/>
+        </div>
+        <div id="modal-portal"></div>
       </div>
-    );
+    )
   } else {
     return (
-      <div>Loadin user Location</div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login />}/>
+          <Route path="/sign-up" element={<SignUp/>}/>
+          <Route path="/forgot" element={<PasswordReset/>}/>
+          <Route path="/reset/:email/:id/:token" element={<Reset/>}/>
+        </Routes>
+      </Router>
     )
   }
+
+
 
 }
 

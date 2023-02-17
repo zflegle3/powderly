@@ -3,13 +3,14 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // import { toast } from "react-toastify";
-import {register, resetUser } from "../../features/auth/authSlice";
-import { ReactComponent as CheckSvg } from '../../images/icons/check.svg';
+// import {register, resetUser } from "../../features/auth/authSlice";
+// import { ReactComponent as CheckSvg } from '../../images/icons/check.svg';
+import { FaRegCheckCircle, FaCheck, FaRegTimesCircle } from 'react-icons/fa';
 //Components
 import LoadingSpinner from "../LoadingSpinner";
 import PasswordInput from "./PasswordInput"
 
-function SignUp(props) {
+function SignUp() {
     const [passStatus, setPassStatus] = useState("");//true when user is valid
     // const [newUserValid, setNewUserValid] = useState("");
     // const [newEmailValid, setNewEmailValid] = useState("");
@@ -37,7 +38,7 @@ function SignUp(props) {
                         password: passwordIn,
                     };
                     //dispatches register function from authSlice to create new user
-                    dispatch(register(userData)); 
+                    // dispatch(register(userData)); 
 
                 } else {
                     document.querySelector(".form-item-container.pass-in").classList.add("invalid");
@@ -210,7 +211,7 @@ function SignUp(props) {
             navigate("/")
         };
 
-        dispatch(resetUser());
+        // dispatch(resetUser());
 
         if (isLoading) {
             
@@ -264,25 +265,25 @@ function SignUp(props) {
                         <div className="pass-error-container">
                             <div id="pass-error-signin-length">
                                 <div>
-                                    <CheckSvg />
+                                    <FaRegCheckCircle />
                                 </div>
                                 <p>have at least 8 characters</p>
                             </div>
                             <div id="pass-error-signin-upper">
                                 <div>
-                                    <CheckSvg />
+                                    <FaRegCheckCircle />
                                 </div>
                                 <p >have at least 1 Upper characters</p>
                             </div>
                             <div id="pass-error-signin-number">
                                 <div>
-                                    <CheckSvg />
+                                    <FaRegCheckCircle />
                                 </div>
                                 <p >have at least 1 number</p>
                             </div>
                             <div id="pass-error-signin-special">
                                 <div>
-                                    <CheckSvg />
+                                    <FaRegCheckCircle />
                                 </div>
                                 <p >have at least 1 special character (i.e. ! @ # $ % ^ & *)</p>
                             </div>

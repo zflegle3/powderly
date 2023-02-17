@@ -5,7 +5,8 @@ import {
     useNavigate
 } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {login, resetUser} from "../../features/auth/authSlice";
+// import {login, resetUser} from "../../features/auth/authSlice";
+
 //Components
 import PasswordInput from "./PasswordInput";
 // import LoadingSpinner from "../LoadingSpinner";
@@ -33,7 +34,7 @@ function Login(props) {
                         emailOrUsername: userEmailOrNameIn,
                         password: userPasswordIn
                     };
-                    dispatch(login(userIn));
+                    // dispatch(login(userIn));
                 } else {
                     document.querySelector(".form-item-container.pass-in").classList.add("invalid");
                     document.getElementById("pass-error").textContent = "Cannot be empty";
@@ -106,7 +107,7 @@ function Login(props) {
             navigate("/")
         };
 
-        dispatch(resetUser());
+        // dispatch(resetUser());
 
         if (isLoading) {
             
