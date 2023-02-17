@@ -34,6 +34,11 @@ function ConditionsDetail({resortData}) {
     }
 
 
+
+
+    
+
+
     return (
         <div className="resort-conditions-detail">
 
