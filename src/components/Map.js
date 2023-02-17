@@ -97,10 +97,8 @@ function Map({resorts, lat, lng, setSearchResults, setSort}) {
     };
 
     const onMapIdle = (map) => {
-        console.log("loading new map");
         //when map done moving, sends bounds and pulls viewport bounds
         let bounds = map.getBounds();
-        console.log(bounds);
         filterLocations(bounds.Ua.hi, bounds.Ua.lo, bounds.Ia.hi, bounds.Ia.lo);
     };
 

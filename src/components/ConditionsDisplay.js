@@ -25,18 +25,6 @@ function ConditionsDisplay({resortData}) {
         fresh = (0).toFixed(1);
     }
 
-    const expandCollapse = () => {
-        if (displayStatus) {
-            console.log("close");
-            minusToPlus();
-            setDisplayStatus(false);
-        } else {
-            console.log("open");
-            plusToMinus();
-            setDisplayStatus(true);
-        }
-    }
-
     const plusToMinus = () => {
         gsap.to(`.bar-1-${resortData.refId}`, {
             duration: 0.5,
@@ -63,6 +51,16 @@ function ConditionsDisplay({resortData}) {
         });
     }
 
+    const expandCollapse = (e) => {
+        e.preventDefault();
+        if (displayStatus) {
+            minusToPlus();
+            setDisplayStatus(false);
+        } else {
+            plusToMinus();
+            setDisplayStatus(true);
+        }
+    }
 
     let ratingVal = "na"
     if (Number(resortData.conditions.forecast[0].rating) > 7.5) {
@@ -80,16 +78,20 @@ function ConditionsDisplay({resortData}) {
         return (
             <div className="resort-conditions-display">
                 <div className="resort-conditions-header">
-    
-                    <div className="expand-collapse-btn" onClick={expandCollapse}>
-                        <div className={`bar-1-${resortData.refId}`}></div>
-                        <div className={`bar-2-${resortData.refId}`}></div>
-                        {/* <div className={`bar-3-${resortData.refId}`}></div> */}
-                    </div>
-    
-                    <p className={`rating-${ratingVal}`}>{resortData.conditions.forecast[0].rating}</p>
-    
-                    <p className="resort-name">{resortData.name}</p>
+
+                    <button className="expand-collapse-btn" onClick={expandCollapse}>
+
+                        <div className="expand-collapse-icon">
+                            <div className={`bar-1-${resortData.refId}`}></div>
+                            <div className={`bar-2-${resortData.refId}`}></div>
+                            {/* <div className={`bar-3-${resortData.refId}`}></div> */}
+                        </div>
+        
+                        <p className={`rating-${ratingVal}`}>{resortData.conditions.forecast[0].rating}</p>
+        
+                        <p className="resort-name">{resortData.name}</p>
+
+                    </button>
 
                     <div className="header-icon" onClick={expandCollapse}>
                         <FaCrosshairs/>
@@ -115,15 +117,19 @@ function ConditionsDisplay({resortData}) {
             <div className="resort-conditions-display">
                 <div className="resort-conditions-header">
     
-                    <div className="expand-collapse-btn" onClick={expandCollapse}>
-                        <div className={`bar-1-${resortData.refId}`}></div>
-                        <div className={`bar-2-${resortData.refId}`}></div>
-                        {/* <div className={`bar-3-${resortData.refId}`}></div> */}
-                    </div>
-    
-                    <p className={`rating-${ratingVal}`}>{resortData.conditions.forecast[0].rating}</p>
-    
-                    <p className="resort-name">{resortData.name}</p>
+                    <button className="expand-collapse-btn" onClick={expandCollapse}>
+
+                        <div className="expand-collapse-icon" >
+                            <div className={`bar-1-${resortData.refId}`}></div>
+                            <div className={`bar-2-${resortData.refId}`}></div>
+                            {/* <div className={`bar-3-${resortData.refId}`}></div> */}
+                        </div>
+
+                        <p className={`rating-${ratingVal}`}>{resortData.conditions.forecast[0].rating}</p>
+
+                        <p className="resort-name">{resortData.name}</p>
+
+                    </button>
 
                     <div className="header-icon" onClick={expandCollapse}>
                         <FaCrosshairs/>
