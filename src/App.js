@@ -26,38 +26,38 @@ import PasswordReset from "./components/auth/PasswordReset";
 import Reset from "./components/auth/Reset";
 
 function App() {
-  const [user, setUser] = useState(null);
-  // const {user} = useSelector((state) => state.auth);
+  // const [user, setUser] = useState(null);
+  const {user} = useSelector((state) => state.auth);
 
 
 
-  const center  = useMemo(() => getLocation(), []);
-  const [lng, setLng] = useState(false);
-  const [lat, setLat] = useState(false);
+  // const center  = useMemo(() => getLocation(), []);
+  // const [lng, setLng] = useState(false);
+  // const [lat, setLat] = useState(false);
 
   // console.log(process.env.REACT_APP_GOOGLE_MAPS_API);
   // console.log(process.env.NODE_ENV);
 
-  function getLocation() {
-    //attempts to pull users location and set as lat/lng states
-    //if err, sets default as denver lat/lng
-    // console.log("getting location")
-    navigator.geolocation.getCurrentPosition(showPosition, defaultPosition);
-  }
+  // function getLocation() {
+  //   //attempts to pull users location and set as lat/lng states
+  //   //if err, sets default as denver lat/lng
+  //   // console.log("getting location")
+  //   navigator.geolocation.getCurrentPosition(showPosition, defaultPosition);
+  // }
 
-  function showPosition(position) {
-    //if user accepts geolocation, sets lat/lng to user location
-    setLng(Number(position.coords.longitude));
-    setLat(Number(position.coords.latitude));
-  }
+  // function showPosition(position) {
+  //   //if user accepts geolocation, sets lat/lng to user location
+  //   setLng(Number(position.coords.longitude));
+  //   setLat(Number(position.coords.latitude));
+  // }
 
-  function defaultPosition(err) {
-    //if user declines geolocation, sets lat/lng to Denver, CO
-    console.log(err);
-    console.log("Geolocation is not supported by this browser.")
-    setLng(-104.9903);
-    setLat(39.7392);
-  }
+  // function defaultPosition(err) {
+  //   //if user declines geolocation, sets lat/lng to Denver, CO
+  //   console.log(err);
+  //   console.log("Geolocation is not supported by this browser.")
+  //   setLng(-104.9903);
+  //   setLat(39.7392);
+  // }
 
 
 
@@ -75,21 +75,20 @@ function App() {
 
   if (user) {
     return (
-      <div className="app-layout">
-        <div className="app-container">
-           <Home lat={lat} lng={lng}/>
-        </div>
-        <div id="modal-portal"></div>
-      </div>
+      <Home />     
     )
   } else {
     return (
       <Router>
         <Routes>
           <Route path="/" element={<Login />}/>
-          <Route path="/sign-up" element={<SignUp/>}/>
-          <Route path="/forgot" element={<PasswordReset/>}/>
-          <Route path="/reset/:email/:id/:token" element={<Reset/>}/>
+          {/* <Route exact path="/signup" element={
+            <div>Signup
+              <Link to="/" id="signup">Login</Link>
+            </div>}/> */}
+          <Route exact path="/signup" element={<SignUp/>}/>
+          <Route exact path="/forgot" element={<PasswordReset/>}/>
+          <Route exact path="/reset/:email/:id/:token" element={<Reset/>}/>
         </Routes>
       </Router>
     )

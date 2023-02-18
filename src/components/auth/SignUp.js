@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 // import { toast } from "react-toastify";
-// import {register, resetUser } from "../../features/auth/authSlice";
+import {register, resetUser } from "../../features/auth/authSlice";
 // import { ReactComponent as CheckSvg } from '../../images/icons/check.svg';
 import { FaRegCheckCircle, FaCheck, FaRegTimesCircle } from 'react-icons/fa';
 //Components
@@ -38,7 +38,7 @@ function SignUp() {
                         password: passwordIn,
                     };
                     //dispatches register function from authSlice to create new user
-                    // dispatch(register(userData)); 
+                    dispatch(register(userData)); 
 
                 } else {
                     document.querySelector(".form-item-container.pass-in").classList.add("invalid");
@@ -207,15 +207,14 @@ function SignUp() {
             alert(message);
         };
 
-        if(isSuccess || user) {
+        if(isSuccess && user) {
             navigate("/")
         };
 
-        // dispatch(resetUser());
+        dispatch(resetUser());
 
-        if (isLoading) {
-            
-        }
+        // if (isLoading) {
+        // }
 
     }, [user, isError, isSuccess, message, navigate, dispatch])
 

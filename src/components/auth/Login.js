@@ -5,7 +5,7 @@ import {
     useNavigate
 } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-// import {login, resetUser} from "../../features/auth/authSlice";
+import {login, resetUser} from "../../features/auth/authSlice";
 
 //Components
 import PasswordInput from "./PasswordInput";
@@ -34,7 +34,7 @@ function Login(props) {
                         emailOrUsername: userEmailOrNameIn,
                         password: userPasswordIn
                     };
-                    // dispatch(login(userIn));
+                    dispatch(login(userIn));
                 } else {
                     document.querySelector(".form-item-container.pass-in").classList.add("invalid");
                     document.getElementById("pass-error").textContent = "Cannot be empty";
@@ -107,11 +107,11 @@ function Login(props) {
             navigate("/")
         };
 
-        // dispatch(resetUser());
+        dispatch(resetUser());
 
-        if (isLoading) {
+        // if (isLoading) {
             
-        }
+        // }
 
     }, [user, isError, isSuccess, message, navigate, dispatch])
 
@@ -125,7 +125,7 @@ function Login(props) {
                     <div className="auth-header">
                         <div className="auth-header-main"> 
                               <h1>Login</h1>
-                            <Link to="/sign-up" id="signup">Sign Up</Link>
+                            <Link to="/signup" id="signup">Sign Up</Link>
                         </div>
                         <div className="auth-header-sub">
                             Sign in using email or username
