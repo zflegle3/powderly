@@ -1,10 +1,14 @@
 import { useState } from "react";
-import { FaSearch, FaInfo } from 'react-icons/fa';
+import { useSelector, useDispatch } from 'react-redux';
+import { FaSearch, FaInfo, FaRegUserCircle } from 'react-icons/fa';
 import PlacesAutocomplete from "./PlacesAutocomplete.js";
 import FilterBar from "./FilterBar"
+import {openAccountModal} from "../features/modals/modalSlice";
+
 
 
 function SearchBar({setSelected, selected, editStatus, setEditStatus}) {
+    const dispatch = useDispatch();
     const [location, setLocation] = useState("Search any Location...");
     const [date, setDate] = useState(new Date());
 
@@ -20,9 +24,10 @@ function SearchBar({setSelected, selected, editStatus, setEditStatus}) {
         setEditStatus(false);
     }
 
-    const openHelp = () => {
+    const openAccount = () => {
         //changes edit status to edit inputs
-        console.log("Open Help Info");
+        console.log("Open Account Info");
+        dispatch(openAccountModal());
     }
 
     if (!editStatus) {
@@ -36,8 +41,8 @@ function SearchBar({setSelected, selected, editStatus, setEditStatus}) {
                         <p>{location}</p>
                         <p>{date.toDateString()}</p>
                     </div>
-                    <div className="help-submit" onClick={openHelp}>
-                        <FaInfo/>
+                    <div className="help-submit" onClick={openAccount}>
+                        <FaRegUserCircle/>
                     </div>
                 </div>
             </div>
@@ -54,8 +59,8 @@ function SearchBar({setSelected, selected, editStatus, setEditStatus}) {
                         <PlacesAutocomplete setSelected={setSelected} setEditStatus={setEditStatus} setLocation={setLocation} />
                         {/* <input className="date-in" type="date" name="location"></input> */}
                     </form>
-                    <div className="help-submit" onClick={openHelp}>
-                    <FaInfo/>
+                    <div className="help-submit" onClick={openAccount}>
+                        <FaRegUserCircle/>
                     </div>
                 </div>
             </div>

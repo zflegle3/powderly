@@ -16,6 +16,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import "./custom-styles/App.scss";
 import "./custom-styles/Calendar.scss";
 import "./custom-styles/auth.scss";
+import "./custom-styles/Modal.scss";
 
 //Components
 import Home from "./components/Home"
@@ -24,6 +25,7 @@ import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import PasswordReset from "./components/auth/PasswordReset";
 import Reset from "./components/auth/Reset";
+import ModalContainer from './components/modals/ModalContainer';
 
 function App() {
   // const [user, setUser] = useState(null);
@@ -31,33 +33,33 @@ function App() {
 
 
 
-  // const center  = useMemo(() => getLocation(), []);
-  // const [lng, setLng] = useState(false);
-  // const [lat, setLat] = useState(false);
+  const center  = useMemo(() => getLocation(), []);
+  const [lng, setLng] = useState(false);
+  const [lat, setLat] = useState(false);
 
-  // console.log(process.env.REACT_APP_GOOGLE_MAPS_API);
-  // console.log(process.env.NODE_ENV);
+  console.log(process.env.REACT_APP_GOOGLE_MAPS_API);
+  console.log(process.env.NODE_ENV);
 
-  // function getLocation() {
-  //   //attempts to pull users location and set as lat/lng states
-  //   //if err, sets default as denver lat/lng
-  //   // console.log("getting location")
-  //   navigator.geolocation.getCurrentPosition(showPosition, defaultPosition);
-  // }
+  function getLocation() {
+    //attempts to pull users location and set as lat/lng states
+    //if err, sets default as denver lat/lng
+    // console.log("getting location")
+    navigator.geolocation.getCurrentPosition(showPosition, defaultPosition);
+  }
 
-  // function showPosition(position) {
-  //   //if user accepts geolocation, sets lat/lng to user location
-  //   setLng(Number(position.coords.longitude));
-  //   setLat(Number(position.coords.latitude));
-  // }
+  function showPosition(position) {
+    //if user accepts geolocation, sets lat/lng to user location
+    setLng(Number(position.coords.longitude));
+    setLat(Number(position.coords.latitude));
+  }
 
-  // function defaultPosition(err) {
-  //   //if user declines geolocation, sets lat/lng to Denver, CO
-  //   console.log(err);
-  //   console.log("Geolocation is not supported by this browser.")
-  //   setLng(-104.9903);
-  //   setLat(39.7392);
-  // }
+  function defaultPosition(err) {
+    //if user declines geolocation, sets lat/lng to Denver, CO
+    console.log(err);
+    console.log("Geolocation is not supported by this browser.")
+    setLng(-104.9903);
+    setLat(39.7392);
+  }
 
 
 
@@ -75,7 +77,10 @@ function App() {
 
   if (user) {
     return (
-      <Home />     
+      <Router>
+        <Home />  
+        <ModalContainer />
+      </Router>
     )
   } else {
     return (
