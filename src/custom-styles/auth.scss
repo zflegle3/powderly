@@ -9,6 +9,12 @@ $error-red: #ff2b6d;
 $input-shdw-a: rgba(0,0,0,0.1);
 $input-shdw-b: rgba(2,32,71,0.1);
 
+//Preload background images
+body::after{
+    position:absolute; width:0; height:0; overflow:hidden; z-index:-1; // hide images
+    content:url("../images/backgrounds/jeff2.jpeg") url("../images/backgrounds/valley.jpeg") url("../images/backgrounds/chalet.jpeg") url("../images/backgrounds/plane1.jpeg");   // load images
+ }
+
 .auth-container {
     position: relative;
     display: flex;
