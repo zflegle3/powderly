@@ -1,10 +1,10 @@
 
 // Variables
-$bg-auth-main: #f8fafd;
+$bg-auth-main: #e3edfe;
 $bg-auth-sub: #fff;
 $txt-auth-main: #000;
-$txt-auth-sub: #8190b0;
-$txt-auth-hl: #00ceb8;
+$txt-auth-sub: #707b95;
+$txt-auth-hl: #4c6ce2;
 $error-red: #ff2b6d;
 $input-shdw-a: rgba(0,0,0,0.1);
 $input-shdw-b: rgba(2,32,71,0.1);
@@ -30,11 +30,11 @@ $input-shdw-b: rgba(2,32,71,0.1);
     }
 
     .auth-left-login {
-        background-image: url("../images/backgrounds/jeff.jpeg");
+        background-image: url("../images/backgrounds/jeff2.jpeg");
     }
 
     .auth-left-signup {
-        background-image: url("../images/backgrounds/slope2.jpeg");
+        background-image: url("../images/backgrounds/valley.jpeg");
         // background-image: url("../images/pictures/9-hole-1-test.JPG");
     }
 
@@ -233,7 +233,7 @@ $input-shdw-b: rgba(2,32,71,0.1);
                     font-size: 1.4rem;
                     cursor: pointer;
                     transition: 0.5s;
-                    background: linear-gradient(315deg,#00b7b3,#4ce2a7);
+                    background: linear-gradient(315deg, #4cc1e2,#4c6ce2);
                     color: #fff;
                     transition: all 0.2s;
                 }
@@ -241,7 +241,7 @@ $input-shdw-b: rgba(2,32,71,0.1);
                 button:hover {
                     box-shadow: 5px 5px 10px 0 $input-shdw-b ;
                     transform: scale(1.05);
-                    background: linear-gradient(100deg,#00b7b3,#4ce2a7);
+                    background: linear-gradient(100deg,#4cc1e2,#4c6ce2);
                     transition: transform 0.2s;
                 }
 

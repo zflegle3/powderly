@@ -13,7 +13,7 @@ import {
 import SearchBar from "./SearchBar.js"
 import Map from "./Map.js"
 import DataDash from "./DataDash.js"
-import { useEffect, useState } from "react"
+import { useEffect, useState, useMemo } from "react"
 import axios from 'axios';
 import SidePanel from "./SidePanel.js";
 // import {sortData} from "../features/sort.js";
@@ -36,7 +36,31 @@ function Home(props) {
             id: 0
         },
     );
+    const center  = useMemo(() => getLocation(), []);
+    const [lng, setLng] = useState(false);
+    const [lat, setLat] = useState(false);
     // console.log(props.lat, props.lng);
+
+    function showPosition(position) {
+        //if user accepts geolocation, sets lat/lng to user location
+        setLng(Number(position.coords.longitude));
+        setLat(Number(position.coords.latitude));
+      }
+    
+      function defaultPosition(err) {
+        //if user declines geolocation, sets lat/lng to Denver, CO
+        console.log(err);
+        console.log("Geolocation is not supported by this browser.")
+        setLng(-104.9903);
+        setLat(39.7392);
+      }
+
+    function getLocation() {
+        //attempts to pull users location and set as lat/lng states
+        //if err, sets default as denver lat/lng
+        // console.log("getting location")
+        navigator.geolocation.getCurrentPosition(showPosition, defaultPosition);
+      }
 
     const getData = async () => {
         const dataIn = await axios.get("http://localhost:8080/conditions/all")
@@ -60,7 +84,13 @@ function Home(props) {
 
 
 
-    if (!isLoaded || !resorts) {
+
+
+
+
+
+
+    if (!isLoaded || !resorts || !lat || !lng ) {
         // console.log("loading map and resort data")
         return (
               <div>Loading Screen</div>
@@ -72,7 +102,7 @@ function Home(props) {
             return (
                 <div className="home-dash">
                     {/* <SearchBar/> */}
-                    <Map lat={props.lat} lng={props.lng} resorts={resorts} setSearchResults={setSearchResults} setSort={setSort}/>
+                    <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults} setSort={setSort}/>
                     <SidePanel searchResults={searchResults} sortData={sort}/>
                 </div>
             );
