@@ -10,7 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import {closeModal} from "../../features/modals/modalSlice"
 import { logout, resetUser,  } from '../../features/auth/authSlice';
 import { FaRegMoon, FaSun  } from 'react-icons/fa';
-import {checkNewUserName, checkFirstName, checkLastName, checkNewEmail, checkNewPass} from "../../features/auth/validation"
+import {checkNewUserName, checkFirstName, checkLastName, checkNewEmail, checkNewPass, checkPassDb} from "../../features/auth/validation"
 //Componenets
 import PasswordChange from './PasswordChange';
 
@@ -30,19 +30,14 @@ function UserAccountModal() {
     const [emailIn, setEmailIn] = useState(user.email);
     const [themeIn, setThemeIn] = useState(user.theme);
     const [favoritesIn, setFavoritesIn] = useState(user.favorites);
-    const [currentPassword, setCurrentPassword] = useState(null);
-    const [newPassword, setNewPassword] = useState(null);
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
 
 
     const close = (e) => {
         e.preventDefault();
         dispatch(closeModal())
     }
-
-    // const navigateSettings = (e) => {
-    //     console.log(e.target.id);
-    //     setFormDisplay(e.target.id);
-    // }
 
     const deleteUser = () => {
         //send alert to conform
@@ -75,59 +70,9 @@ function UserAccountModal() {
     const submitChanges = async (e) => {
         e.preventDefault();
         console.log("submit account changes");
-        //Pull input variable
-        let newUser = {
-            first_name: firstIn,
-            last_name: lastIn,
-            username: usernameIn,
-            email: emailIn,
-            password: newPassword,
-            oldPassword: currentPassword,
-            favorites: favoritesIn,
-            theme: document.querySelector('input[name="color-theme"]:checked').value,
-        }
         //Reset any error text values
         resetErrors();
         //VALIDATE INPUTS
-        //** if non password inputs empty, set as current value
-
- 
-        
-        //current password - not empty, is current password
-        //new password - not empty,  different, meets 
-        // if (await checkNewUserName(newUser.username)) {
-        //     //add validation for username format in checkNewUserName
-        //     if (await checkNewEmail(emailIn)) {
-        //         if (checkNewPass(passwordIn)) {
-        //             //creat new user
-        //             // createAccount(userNameIn, emailIn, passwordIn); 
-        //             const userData = {
-        //                 username: userNameIn,
-        //                 email: emailIn,
-        //                 password: passwordIn,
-        //             };
-        //             //dispatches register function from authSlice to create new user
-        //             dispatch(register(userData)); 
-
-        //         } else {
-        //             document.querySelector(".form-item-container.pass-in").classList.add("invalid");
-        //             document.getElementById("pass-error").textContent = "Password does not meet criteria";
-        //         }
-        //     }
-        // } 
-
-        // if (firstIn.length > 0) {
-        //     if (lastIn.length > 0) {
-            
-        //     } else {
-        //         document.querySelector(".form-item-container.name-last").classList.add("invalid");
-        //         document.getElementById("name-last-error").textContent = "Cannot be empty";
-        //     }
-        // } else {
-        //     document.querySelector(".form-item-container.name-first").classList.add("invalid");
-        //     document.getElementById("name-first-error").textContent = "Cannot be empty";
-        // }
-        
         //First and Last names - not empty 
         let firstNameValid = true;
         if (firstIn !== user.first_name) {
@@ -147,35 +92,65 @@ function UserAccountModal() {
         if (emailIn !== user.email) {
             emailValid = await checkNewEmail(emailIn);
         } 
-        //Password
-        let passwordValid = true;
+        //Password Current
+        let currentPasswordValid = true;
         if (passStatus) {
-            //length
             if (currentPassword.length > 0) {
-                //matching passwords
-                if (currentPassword !== newPassword) {
-                    passwordValid = checkNewPass(newPassword);
-                } else {
-                    document.querySelector(".form-item-container.pass-in").classList.add("invalid");
-                    document.getElementById("pass-error").textContent = "Password must be different from current password";
-                    passwordValid = false;
+                if (await checkPassDb(user._id,currentPassword)) {
+                    //returns true if current password does not match id password
+                    document.querySelector(".form-item-container.pass-current").classList.add("invalid");
+                    document.getElementById("pass-error-current").textContent = "Invalid credentials";
+                    currentPasswordValid= false;
                 }
             } else {
                 document.querySelector(".form-item-container.pass-current").classList.add("invalid");
                 document.getElementById("pass-error-current").textContent = "Cannot be empty";
-                passwordValid = false;
+                currentPasswordValid= false;
             }
         }
-
+        //Password New
+        let newPasswordValid = true;
+        if (passStatus) {
+            //matching passwords
+            if (currentPassword !== newPassword) {
+                newPasswordValid = checkNewPass(newPassword);
+            } else {
+                document.querySelector(".form-item-container.pass-in").classList.add("invalid");
+                document.getElementById("pass-error").textContent = "Password must be different from current password";
+                newPasswordValid = false;
+            }
+        }
         //if all conditions true dispatch update
+        //create new user payload
 
-
-
-        console.log(firstNameValid, lastNameValid, usernameValid, emailValid, passwordValid);
+        if (firstNameValid && lastNameValid && usernameValid && emailValid && currentPasswordValid && newPasswordValid) {
+            console.log("updating user...");
+            let newUser;
+            if (passStatus) {
+                newUser = {
+                    first_name: firstIn,
+                    last_name: lastIn,
+                    username: usernameIn,
+                    email: emailIn,
+                    password: newPassword,
+                    favorites: favoritesIn,
+                    theme: document.querySelector('input[name="color-theme"]:checked').value,
+                }
+    
+            } else {
+                //not updating password
+                newUser = {
+                    first_name: firstIn,
+                    last_name: lastIn,
+                    username: usernameIn,
+                    email: emailIn,
+                    favorites: favoritesIn,
+                    theme: document.querySelector('input[name="color-theme"]:checked').value,
+                }
+            }
+            //dispatch user update call
+        }
     }
-
-
-
 
     //FORM STYLING FUNCTIONS
     //On input focus
@@ -208,15 +183,17 @@ function UserAccountModal() {
             emailItem.classList.remove("invalid");
             document.getElementById("email-error").textContent = "Email Error";
         }
-        let passItem = document.querySelector(".form-item-container.pass-in");
-        if (passItem.classList.contains("invalid")) {
-            passItem.classList.remove("invalid");
-            document.getElementById("pass-error").textContent = "Password Error";
-        }
-        let passCurrItem = document.querySelector(".form-item-container.pass-current");
-        if (passCurrItem.classList.contains("invalid")) {
-            passCurrItem.classList.remove("invalid");
-            document.getElementById("pass-error-current").textContent = "Password Error";
+        if (passStatus) {
+            let passItem = document.querySelector(".form-item-container.pass-in");
+            if (passItem.classList.contains("invalid")) {
+                passItem.classList.remove("invalid");
+                document.getElementById("pass-error").textContent = "Password Error";
+            }
+            let passCurrItem = document.querySelector(".form-item-container.pass-current");
+            if (passCurrItem.classList.contains("invalid")) {
+                passCurrItem.classList.remove("invalid");
+                document.getElementById("pass-error-current").textContent = "Password Error";
+            }
         }
     }
 

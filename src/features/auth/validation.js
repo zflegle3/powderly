@@ -93,7 +93,17 @@ export const checkNewEmail = async(emailIn) => {
     };
 }
 
-//PASSWORD VALIDATION
+//CURRENT PASSWORD VALIDATION
+export const checkPassDb = async (idIn, passIn) => {
+    console.log(idIn,passIn);
+    const responsePass = await axios.post("http://localhost:8080/user/read/password", {id: idIn, password: passIn});
+    console.log(responsePass.data.passMatch);
+    //returns false if passwords match, true if not matching 
+    return responsePass.data.passMatch;
+}
+
+
+//NEW PASSWORD VALIDATION
 export const checkNewPass = (passwordIn) => {
     let passTest = true;
     let passErrorLen = document.getElementById("pass-error-signin-length");
