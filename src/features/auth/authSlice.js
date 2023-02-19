@@ -51,6 +51,18 @@ export const update = createAsyncThunk("auth/update", async (user, thunkAPI) => 
     }
 })
 
+//Update existing user
+export const remove = createAsyncThunk("auth/remove", async (id, thunkAPI) => {
+    console.log("deleting user");
+    try{
+        return await authService.remove(id); 
+    } catch (error) {
+        console.log(error);
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+})
+
 export const authSlice = createSlice({
     name: "auth",
     initialState,
@@ -112,8 +124,21 @@ export const authSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = false;
                 state.isError = true;
-                state.message = "We were unable to update yout account";  
+                state.message = "We were unable to update your account";  
                 state.user = null;
+            })
+            .addCase(remove.pending, (state) => {
+                state.isLoading = true; 
+            })
+            .addCase(remove.fulfilled, (state, action) => {
+                state.user = null;
+                alert("Account deleted");
+            })
+            .addCase(remove.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = false;
+                state.isError = true;
+                alert("Unable to delete account");
             })
     }
 })

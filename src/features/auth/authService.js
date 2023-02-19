@@ -37,14 +37,17 @@ const update= async(userData) => {
     if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
     }
-    
+
     return response.data;
+};
+
+//Delete existing user
+const remove = async(userId) => {
+
+    const response = await axios.delete("http://localhost:8080/user/delete/" + userId);
 };
 
 
 
-
-
-
-const authService = { register, login, logout, update }
+const authService = { register, login, logout, update, remove }
 export default authService;
