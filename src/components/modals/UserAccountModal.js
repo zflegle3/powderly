@@ -1,19 +1,13 @@
 import { useState, useEffect } from 'react';
-import {
-    BrowserRouter as Router,
-    Routes,
-    Route,
-    Link,
-    useNavigate
-  } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import {closeModal} from "../../features/modals/modalSlice"
 import { logout, resetUser,  } from '../../features/auth/authSlice';
 import { FaRegMoon, FaSun  } from 'react-icons/fa';
-import {checkNewUserName, checkFirstName, checkLastName, checkNewEmail, checkNewPass, checkPassDb} from "../../features/auth/validation"
+import {checkNewUserName, checkFirstName, checkLastName, checkNewEmail, checkNewPass, checkPassDb} from "../../features/auth/validation";
+import { addFocus, removeFocus} from '../../custom-styles/style';
 //Componenets
 import PasswordChange from './PasswordChange';
-
 
 
 function UserAccountModal() {
@@ -35,6 +29,7 @@ function UserAccountModal() {
 
 
     const close = (e) => {
+        //open/close modal via redux state
         e.preventDefault();
         dispatch(closeModal())
     }
@@ -53,6 +48,7 @@ function UserAccountModal() {
     }
 
     const togglePasswordChange = (e) => {
+        //toggles pass status to hide/show password form
         e.preventDefault();
         console.log("change password")
         if (passStatus) {
@@ -62,10 +58,6 @@ function UserAccountModal() {
         }
     }
 
-    const confirmDeleteUser = (e) => {
-        e.preventDefault();
-        console.log("delete user")
-    }
 
     const submitChanges = async (e) => {
         e.preventDefault();
@@ -148,20 +140,11 @@ function UserAccountModal() {
                     theme: document.querySelector('input[name="color-theme"]:checked').value,
                 }
             }
-            //dispatch user update call
+            //dispatch user update put call
         }
     }
 
-    //FORM STYLING FUNCTIONS
-    //On input focus
-    const addFocus = (e) => {
-        e.target.parentElement.parentElement.classList.add("focus");
-    }
-    //On input unfocus
-    const removeFocus = (e) => {
-        e.target.parentElement.parentElement.classList.remove("focus");
-    }
-    //Resetting all error texts
+
     const resetErrors = () => {
         let userFirstNameItem = document.querySelector(".form-item-container.name-first");
         if (userFirstNameItem.classList.contains("invalid")) {
