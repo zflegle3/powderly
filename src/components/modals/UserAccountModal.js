@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import {closeModal} from "../../features/modals/modalSlice"
-import { logout, resetUser,  } from '../../features/auth/authSlice';
+import {update, logout, resetUser,  } from '../../features/auth/authSlice';
 import { FaRegMoon, FaSun  } from 'react-icons/fa';
 import {checkNewUserName, checkFirstName, checkLastName, checkNewEmail, checkNewPass, checkPassDb} from "../../features/auth/validation";
 import { addFocus, removeFocus} from '../../custom-styles/style';
@@ -18,8 +18,8 @@ function UserAccountModal() {
     //true for editing, false for not editing 
     const [passStatus, setPassStatus] = useState(false);
     //input variables from user 
-    const [firstIn, setFirstIn] = useState("First Name");
-    const [lastIn, setLastIn] = useState("Last Name");
+    const [firstIn, setFirstIn] = useState(user.first_name);
+    const [lastIn, setLastIn] = useState(user.family_name);
     const [usernameIn, setUsernameIn] = useState(user.username);
     const [emailIn, setEmailIn] = useState(user.email);
     const [themeIn, setThemeIn] = useState(user.theme);
@@ -112,16 +112,16 @@ function UserAccountModal() {
                 newPasswordValid = false;
             }
         }
-        //if all conditions true dispatch update
+        //if all conditions are met, dispatch update
         //create new user payload
-
         if (firstNameValid && lastNameValid && usernameValid && emailValid && currentPasswordValid && newPasswordValid) {
             console.log("updating user...");
-            let newUser;
+            let newUserPayload;
             if (passStatus) {
-                newUser = {
+                newUserPayload = {
+                    id: user._id,
                     first_name: firstIn,
-                    last_name: lastIn,
+                    family_name: lastIn,
                     username: usernameIn,
                     email: emailIn,
                     password: newPassword,
@@ -131,16 +131,20 @@ function UserAccountModal() {
     
             } else {
                 //not updating password
-                newUser = {
+                newUserPayload = {
+                    id: user._id,
                     first_name: firstIn,
-                    last_name: lastIn,
+                    family_name: lastIn,
                     username: usernameIn,
                     email: emailIn,
+                    password: null,
                     favorites: favoritesIn,
                     theme: document.querySelector('input[name="color-theme"]:checked').value,
                 }
             }
             //dispatch user update put call
+            console.log(newUserPayload);
+            dispatch(update(newUserPayload));
         }
     }
 

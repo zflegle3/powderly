@@ -34,8 +34,21 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
     }
 })
 
+//Logout existing user
 export const logout = createAsyncThunk("auth/logout", async () => {
     await authService.logout();
+})
+
+//Update existing user
+export const update = createAsyncThunk("auth/update", async (user, thunkAPI) => {
+    console.log("updating user");
+    try{
+        return await authService.update(user);
+    } catch (error) {
+        console.log(error);
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
 })
 
 export const authSlice = createSlice({
@@ -84,6 +97,22 @@ export const authSlice = createSlice({
                 state.user = null;
             })
             .addCase(logout.fulfilled, (state) => {
+                state.user = null;
+            })
+            .addCase(update.pending, (state) => {
+                state.isLoading = true; 
+            })
+            .addCase(update.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.user = action.payload;
+                alert("Account information successfully updated");
+            })
+            .addCase(update.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = false;
+                state.isError = true;
+                state.message = "We were unable to update yout account";  
                 state.user = null;
             })
     }
