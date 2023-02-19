@@ -133,7 +133,7 @@ $input-shdw-b: rgba(2,32,71,0.1);
                     font-size: 1.2rem;
                     font-weight: 400;
                     color: #707B95;
-                    padding: 0.25rem 0rem;
+                    padding: 0.5rem 0rem;
                 }
 
                 input[type="file"] {
@@ -141,25 +141,38 @@ $input-shdw-b: rgba(2,32,71,0.1);
                 }
 
                 .custom-file-upload {
-                    font-weight: 600;
-                    padding: 1.25rem 3rem;
-                    margin: 1rem 0rem;
+                    // width: 50%;
+                    background-color: transparent;
                     border: none;
-                    border-radius: 10rem;
-                    font-size: 1.4rem;
+                    font-size: 1.6rem;
+                    font-weight: bold;
                     cursor: pointer;
+                    color: #4c6ce2;
                     transition: 0.5s;
-                    background: linear-gradient(315deg, #4cc1e2,#4c6ce2);
-                    color: #fff;
-                    transition: all 0.2s;
+                    text-decoration: none;
+                    padding: 2rem 0rem;
+                    text-align: start;
+
+
+                    // font-weight: 600;
+                    // padding: 1.25rem 3rem;
+                    // margin: 1rem 0rem;
+                    // border: none;
+                    // border-radius: 10rem;
+                    // font-size: 1.4rem;
+                    // cursor: pointer;
+                    // transition: 0.5s;
+                    // background: linear-gradient(315deg, #4cc1e2,#4c6ce2);
+                    // color: #fff;
+                    // transition: all 0.2s;
                 }
 
-                .custom-file-upload:hover {
-                        box-shadow: 5px 5px 10px 0 rgba(2,32,71,0.1) ;
-                        transform: scale(1.05);
-                        background: linear-gradient(100deg,#4cc1e2,#4c6ce2);
-                        transition: transform 0.2s;
-                }
+                // .custom-file-upload:hover {
+                //         box-shadow: 5px 5px 10px 0 rgba(2,32,71,0.1) ;
+                //         transform: scale(1.05);
+                //         background: linear-gradient(100deg,#4cc1e2,#4c6ce2);
+                //         transition: transform 0.2s;
+                // }
             }
         }
 

@@ -30,7 +30,21 @@ const logout = async() => {
     localStorage.removeItem("user");
 };
 
+//Update existing user
+const update= async(userData) => {
+    const response = await axios.put("http://localhost:8080/user/update/id", userData);
 
-const authService = { register, login, logout }
+    if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+    }
+    
+    return response.data;
+};
 
+
+
+
+
+
+const authService = { register, login, logout, update }
 export default authService;
