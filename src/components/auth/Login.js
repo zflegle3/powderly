@@ -20,6 +20,7 @@ function Login() {
     const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
     async function userLogin(e) {
+        console.log("clicked login", passStatus);
         //handles user email submission for login
         //checks if email is valid by calling checkUser() and resets errors if passed
         e.preventDefault();
@@ -36,6 +37,7 @@ function Login() {
                         emailOrUsername: userEmailOrNameIn,
                         password: userPasswordIn
                     };
+                    console.log("Logging In:", userIn);
                     dispatch(login(userIn));
                 } else {
                     document.querySelector(".form-item-container.pass-in").classList.add("invalid");

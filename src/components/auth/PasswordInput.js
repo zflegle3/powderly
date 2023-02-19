@@ -3,7 +3,7 @@ import { FaEye, FaEyeSlash} from 'react-icons/fa';
 import { addFocus, removeFocus} from '../../custom-styles/style';
 
 
-function PasswordInput(passStatus) {
+function PasswordInput({passStatus}) {
     const [hideState, setHideState] = useState(true);
 
     const handleClick = (e) => {

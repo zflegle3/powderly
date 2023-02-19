@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import {closeModal} from "../../features/modals/modalSlice"
-import {update, logout, resetUser,  } from '../../features/auth/authSlice';
+import { update, logout, resetUser, remove } from '../../features/auth/authSlice';
 import { FaRegMoon, FaSun  } from 'react-icons/fa';
 import {checkNewUserName, checkFirstName, checkLastName, checkNewEmail, checkNewPass, checkPassDb} from "../../features/auth/validation";
 import { addFocus, removeFocus} from '../../custom-styles/style';
@@ -34,9 +34,19 @@ function UserAccountModal() {
         dispatch(closeModal())
     }
 
-    const deleteUser = () => {
+    const deleteUser = (e) => {
+        e.preventDefault();
         //send alert to conform
-        console.log("delete user");
+        if (window.confirm("Are you sure you want to delete your account?")) {
+            console.log("delete user", user._id);
+            dispatch(remove(user._id)); //deletes user from db
+            dispatch(logout()); //removes user from local storage
+            dispatch(resetUser()); //resets redux state
+            dispatch(closeModal()); //resets redux state
+            navigate("/"); //navigates to login
+        } else {
+            console.log("keep user");
+        }   
     }
 
     const onLogout = () => {
@@ -187,7 +197,10 @@ function UserAccountModal() {
 
     //FORM CONDITIONAL RENDERING FUNCTIONS
     //Password Form
-    let passChange = <button onClick={togglePasswordChange}>Change Password</button>;
+    let passChange = <div className='btn-container'>
+            <button onClick={togglePasswordChange}>Change Password</button>
+            <button onClick={deleteUser}>Delete Account</button>
+        </div>;
     if (passStatus) {
         passChange = <PasswordChange currentPassword={currentPassword} setCurrentPassword={setCurrentPassword} newPassword={newPassword} setNewPassword={setNewPassword} togglePasswordChange={togglePasswordChange}/>;
     }
