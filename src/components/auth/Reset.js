@@ -4,9 +4,10 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from "axios";
-
+import {checkPassDb, checkNewPass } from "../../features/auth/validation";
+//Components
 import PasswordInput from "./PasswordInput"
-// import { ReactComponent as CheckSvg } from '../../images/icons/check.svg';
+//Icons
 import { FaRegCheckCircle, FaCheck, FaRegTimesCircle } from 'react-icons/fa';
 
 function Reset() {
@@ -43,62 +44,7 @@ function Reset() {
                 document.querySelector(".form-item-container.pass-in").classList.add("invalid");
                 document.getElementById("pass-error").textContent = "New password must not match a previous password";
             }
-        } else {
-            document.querySelector(".form-item-container.pass-in").classList.add("invalid");
-            document.getElementById("pass-error").textContent = "Password does not meet criteria";
         }
-    }
-
-    const checkNewPass = (passwordIn) => {
-        let passTest = true;
-        let passErrorLen = document.getElementById("pass-error-signin-length");
-        let passErrorUp = document.getElementById("pass-error-signin-upper");
-        let passErrorNum = document.getElementById("pass-error-signin-number");
-        let passErrorSp = document.getElementById("pass-error-signin-special");
-        //8 characters
-        if(passwordIn.length < 8) {
-            passTest = false;
-            passErrorLen.classList = "";
-        } else {
-            passErrorLen.classList = "valid";
-        }
-        //uppercase
-        if(!passwordIn.match(/[A-Z]/g)) {
-            passTest = false;
-            passErrorUp.classList = "";
-        } else {
-            passErrorUp.classList = "valid";
-        }
-        //number
-        if(!passwordIn.match(/[0-9]/g)) {
-            passTest = false;
-            passErrorNum.classList = "";
-        } else {
-            passErrorNum.classList = "valid";
-        }
-        // special character
-        if(!passwordIn.match(/[!@#\$%\^&\*]/g)) {
-            passTest = false;
-            passErrorSp.classList = "";
-        } else {
-            passErrorSp.classList = "valid";
-        }
-        return passTest;
-    };
-
-    async function checkPassDb (idIn, passIn) {
-        const responsePass = await axios.post("http://localhost:8080/user/read/password", {id: idIn, password: passIn});
-        return responsePass.data.passMatch;
-    }
-
-    
-
-    const addFocus = (e) => {
-        e.target.parentElement.parentElement.classList.add("focus");
-    }
-
-    const removeFocus = (e) => {
-        e.target.parentElement.parentElement.classList.remove("focus");
     }
 
     const resetErrors = () => {

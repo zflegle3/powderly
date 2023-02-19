@@ -1,25 +1,16 @@
 
-import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api"
-import usePlacesAutocomplete, { getGeocode, getLatLng} from "use-places-autocomplete"
-import Sheet from 'react-modal-sheet';
-import {
-    Combobox,
-    ComboboxInput, 
-    ComboboxPopover, 
-    ComboboxList,
-    CombobocOption,
-} from "@reach/combobox";
+import { useEffect, useState, useMemo } from "react";
+import axios from 'axios';
+import { useLoadScript} from "@react-google-maps/api";
+// import {sortData} from "../features/sort.js";
 //Components
-import SearchBar from "./SearchBar.js"
 import Map from "./Map.js"
 import DataDash from "./DataDash.js"
-import { useEffect, useState, useMemo } from "react"
-import axios from 'axios';
 import SidePanel from "./SidePanel.js";
-// import {sortData} from "../features/sort.js";
+import Sheet from 'react-modal-sheet';
 
 
-function Home(props) {
+function Home() {
     const [ libraries ] = useState(['places']);
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
@@ -39,28 +30,28 @@ function Home(props) {
     const center  = useMemo(() => getLocation(), []);
     const [lng, setLng] = useState(false);
     const [lat, setLat] = useState(false);
-    // console.log(props.lat, props.lng);
+
 
     function showPosition(position) {
         //if user accepts geolocation, sets lat/lng to user location
         setLng(Number(position.coords.longitude));
         setLat(Number(position.coords.latitude));
-      }
+    }
     
-      function defaultPosition(err) {
+    function defaultPosition(err) {
         //if user declines geolocation, sets lat/lng to Denver, CO
         console.log(err);
         console.log("Geolocation is not supported by this browser.")
         setLng(-104.9903);
         setLat(39.7392);
-      }
+    }
 
     function getLocation() {
         //attempts to pull users location and set as lat/lng states
         //if err, sets default as denver lat/lng
         // console.log("getting location")
         navigator.geolocation.getCurrentPosition(showPosition, defaultPosition);
-      }
+    }
 
     const getData = async () => {
         const dataIn = await axios.get("http://localhost:8080/conditions/all")
@@ -72,22 +63,7 @@ function Home(props) {
 
     useEffect(() => {
         getData(); 
-
-
     },[]);
-
-    // useEffect(() => {
-    //     // sortData(resorts);
-
-
-    // },[sort, resorts]);
-
-
-
-
-
-
-
 
 
     if (!isLoaded || !resorts || !lat || !lng ) {
@@ -111,7 +87,7 @@ function Home(props) {
             return (
                 <div className="home-dash">
                     {/* <SearchBar/> */}
-                    <Map lat={props.lat} lng={props.lng} resorts={resorts} setSearchResults={setSearchResults}/>
+                    <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults}/>
                     <Sheet isOpen={isOpen} onClose={() => setOpen(false)}>
                         <Sheet.Container>
                             <Sheet.Header />

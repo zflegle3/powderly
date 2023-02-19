@@ -1,22 +1,24 @@
 import axios from "axios";
 
 
-
-//USERNAME VALIDATION
+//USERNAME FORMAT VALIDATION
 const validateUserNameFormat = (userName) => {
     return userName.match(/^[a-zA-Z0-9]+$/);
 };
 
-async function checkUserDb (usernameIn) {
-    const response = await axios.post("http://localhost:8080/user/read/username", {username: usernameIn});
-    if (response.data.username === usernameIn) {
+//ACTIVE USER DB VALIDATION BY USERNAME
+export const checkUserDb = async (userIn) => {
+    //checks for user in db and returns true if found, false if not found
+    const responseEmail = await axios.post("http://localhost:8080/user/read/username", {username: userIn});
+    if (responseEmail.data.username === userIn) {
         return true;
     } else {
         return false;
     }
 }
 
-async function checkEmailDb (userEmail) {
+//ACTIVE USER DB VALIDATION BY EMAIL
+export const checkEmailDb = async (userEmail) => {
     const response = await axios.post("http://localhost:8080/user/read/email", {email: userEmail});
     if (response.data.email === userEmail) {
         return true;
@@ -25,6 +27,30 @@ async function checkEmailDb (userEmail) {
     }
 }
 
+//ACTIVE USER CREDENTIALS VALIDATION
+export const validateUsernameEmail = async (userEmailOrNameIn) => {
+    //Validates username/email is populated
+    //only handles emails currently
+    if (userEmailOrNameIn.length > 0) {
+        if (await checkUserDb(userEmailOrNameIn)) {
+            //username is valid
+            return(true);
+        } else if (await checkEmailDb(userEmailOrNameIn)) {
+            //email is valid
+            return(true);
+        }else {
+            //invalid user credentials 
+            document.querySelector(".form-item-container.email-in").classList.add("invalid");
+            document.getElementById("email-error").textContent = `Sorry, we were unable to find anyone using ${userEmailOrNameIn}`;
+        }
+    } else {
+        document.querySelector(".form-item-container.email-in").classList.add("invalid");
+        document.getElementById("email-error").textContent = "Cannot be empty";
+    }
+}
+
+
+//NEW USERNAME VALIDATION
 export const checkNewUserName = async (userNameIn) => {
     //LENGTH
     if (userNameIn.length > 2 && userNameIn.length < 16) {
@@ -57,14 +83,15 @@ export const checkNewUserName = async (userNameIn) => {
 }
 
 
-//EMAIL VALIDATION
-const validateEmailFormat = (email) => {
+//EMAIL FORMAT VALIDATION
+export const validateEmailFormat = (email) => {
     return email.match(
       /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     );
 };
 
 
+//NEW EMAIL VALIDATION
 export const checkNewEmail = async(emailIn) => {
     //LENGTH
     if (emailIn.length > 0) {
@@ -174,12 +201,4 @@ export const checkLastName = (lastIn) => {
         return false;
     }
 }
-
-
-
-// const validate = {
-//     checkFirstName, checkLastName, checkNewUserName
-// }
-
-// export default validate;
 

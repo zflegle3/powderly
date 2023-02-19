@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {register, resetUser } from "../../features/auth/authSlice";
 import { FaRegCheckCircle, FaCheck, FaRegTimesCircle } from 'react-icons/fa';
 import {checkNewUserName, checkNewEmail, checkNewPass } from "../../features/auth/validation";
+import { addFocus, removeFocus} from '../../custom-styles/style';
 
 //Components
 import LoadingSpinner from "../LoadingSpinner";
@@ -58,14 +59,6 @@ function SignUp() {
         }
     }
 
-    const addFocus = (e) => {
-        e.target.parentElement.parentElement.classList.add("focus");
-    }
-
-    const removeFocus = (e) => {
-        e.target.parentElement.parentElement.classList.remove("focus");
-    }
-
     useEffect(() => {
         if(isError) {
             alert(message);
@@ -94,7 +87,7 @@ function SignUp() {
                     <div className="auth-header">
                         <div className="auth-header-main">
                             <h1>Sign Up</h1>
-                            <Link to="/" id="signup">Login</Link>
+                            <Link to="/login" id="signup">Login</Link>
                         </div>
                         <div className="auth-header-sub">
                             Let's get started by creating an account

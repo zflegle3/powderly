@@ -3,10 +3,11 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from "axios";
+import { addFocus, removeFocus} from '../../custom-styles/style';
+import { checkEmailDb, validateEmailFormat } from "../../features/auth/validation";
 
 function PasswordReset() {
     const [userEmail, setUserEmail] = useState("");
-
 
     async function resetPassword(e) {
         e.preventDefault();
@@ -17,7 +18,7 @@ function PasswordReset() {
             //validate email format
             if (validateEmailFormat(resetEmail)) {
                 //validate email in db {
-                    if (await checkUserDb(resetEmail)) {
+                    if (await checkEmailDb(resetEmail)) {
                         //send email and await confirmation 
                         const responseSend = await axios.post("http://localhost:8080/user/forgetpass", {email: resetEmail});
                         if (responseSend.data.sendStatus) {
@@ -40,30 +41,6 @@ function PasswordReset() {
             document.getElementById("email-error").textContent = "Cannot be empty";
         }
 
-    }
-
-    const validateEmailFormat = (email) => {
-        return email.match(
-          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        );
-    };
-
-    async function checkUserDb (userIn) {
-        //checks for user in db and returns true if found, false if not found
-        const responseEmail = await axios.post("http://localhost:8080/user/read/email", {email: userIn});
-        if (responseEmail.data.email === userIn) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    const addFocus = (e) => {
-        e.target.parentElement.parentElement.classList.add("focus");
-    }
-
-    const removeFocus = (e) => {
-        e.target.parentElement.parentElement.classList.remove("focus");
     }
 
     const resetErrors = () => {
@@ -138,7 +115,7 @@ function PasswordReset() {
                                 <button onClick={resetPassword}>SEND</button>
                             </div>
 
-                            <Link to="/" id="pass-reset">
+                            <Link to="/login" id="pass-reset">
                                 Back to Login
                             </Link>
                         </div>
