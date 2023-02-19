@@ -1,10 +1,19 @@
+$bg-auth-main: #e3edfe;
+$bg-auth-sub: #fff;
+$txt-auth-main: #151d3d;
+$txt-auth-sub: #707b95;
+$txt-auth-hl: #4c6ce2;
+$error-red: #ff2b6d;
+$input-shdw-a: rgba(0,0,0,0.1);
+$input-shdw-b: rgba(2,32,71,0.1);
+
 .modal-overlay {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(204, 26, 26, 0.55);
+    background-color: rgba(0, 0, 0, 0.65);
     z-index: 1000;
 }
 
@@ -16,11 +25,371 @@
     z-index: 1000;
 
     min-width: 500px;
-    background-color: white;
-    border-radius: 2.4rem;
+    background-color: $bg-auth-main;
+    border-radius: 0.4rem;
     padding: 2.5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    max-width: 80rem;
+
+    .modal-header {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+
+        .header-text {
+            flex-grow: 1;
+
+            h1 {
+                font-size: 3rem;
+                font-weight: 600;
+                color: $txt-auth-main;
+            }
+
+            p {
+                font-size: 1.2rem;
+                font-weight: 400;
+                color: #707B95;
+                padding: 0.25rem 0rem;
+
+            }
+        }
+
+        button {
+            height: 4rem;
+            width: 4rem;
+            padding: 0rem;
+            background-color: transparent;
+            border-radius: 100rem;
+            border: none;
+            font-size: 2rem;
+            font-weight: 400;
+            color: #707B95;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #D9D9D9;
+        }
+
+        button:focus {
+            border: 1px solid #707B95;
+        }
+    }
+
+    .account-settings-form {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        width: 100%;
+        max-height: 75vh;
+        overflow: scroll;
+        padding: 2rem;
+
+        .modal-section-header {
+            width: 100%;
+            text-align: left;
+            margin-top: 2rem;
+            font-size: 1.6rem;
+            font-weight: 600;
+            color: $txt-auth-main;
+            border-bottom: 1px solid $txt-auth-main;
+        }
+
+        .profile-image-container {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            align-items: center;
+            padding: 2rem;
+
+            .account-img {
+                width: 10rem;
+                height: 10rem;
+                background-color: rebeccapurple;
+                border-radius: 100rem;
+            }
+
+            .account-img-upload {
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: flex-start;
+
+                h2 {
+                    margin-top: 2rem;
+                    font-size: 1.6rem;
+                    color: $txt-auth-main;
+                }
+
+                p {
+                    font-size: 1.2rem;
+                    font-weight: 400;
+                    color: #707B95;
+                    padding: 0.25rem 0rem;
+                }
+
+                input[type="file"] {
+                    display: none;
+                }
+
+                .custom-file-upload {
+                    font-weight: 600;
+                    padding: 1.25rem 3rem;
+                    margin: 1rem 0rem;
+                    border: none;
+                    border-radius: 10rem;
+                    font-size: 1.4rem;
+                    cursor: pointer;
+                    transition: 0.5s;
+                    background: linear-gradient(315deg, #4cc1e2,#4c6ce2);
+                    color: #fff;
+                    transition: all 0.2s;
+                }
+
+                .custom-file-upload:hover {
+                        box-shadow: 5px 5px 10px 0 rgba(2,32,71,0.1) ;
+                        transform: scale(1.05);
+                        background: linear-gradient(100deg,#4cc1e2,#4c6ce2);
+                        transition: transform 0.2s;
+                }
+            }
+        }
+
+        .names-container {
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 2rem;
+
+            .form-item-container {
+                width: 50%;
+                min-width: auto;
+            }
+        }
+
+        .form-item-container {
+            //styles condained in auth.scss
+            //styles specific to account modal
+            margin-bottom: 0rem;
+
+        }
+
+        .password-container {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+
+            .form-item-container {
+                width: 100%;
+            }
+
+            button {
+                width: 50%;
+                background-color: transparent;
+                border: none;
+                font-size: 1.6rem;
+                font-weight: bold;
+                cursor: pointer;
+                color: #4c6ce2;
+                transition: 0.5s;
+                text-decoration: none;
+                padding: 1rem 0rem;
+                text-align: start;
+            }
+
+            button:nth-child(2) {
+                color: #ff2b6d;
+            }
+        }
+
+        .color-theme-label {
+            font-family: 'muli', sans-serif;
+            margin-top: 1rem;
+            font-size: 1.3rem;
+            color: $txt-auth-sub;
+            transition: color 0.2s;
+            width: 100%;
+            text-align: start;
+        }
+
+        .color-theme-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2rem;
+            margin: 0.5rem 0rem;
+
+            li {
+                float: left;
+                // margin: 0 5px 0 0;
+                flex-grow: 1;
+                height: 40px;
+                position: relative;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                label, input {
+                    display: block;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    cursor: pointer;
+                    // top: 0;
+                    // left: 0;
+                    // right: 0;
+                    // bottom: 0;
+                }
+
+                input[type="radio"] {
+                    opacity: 0.011;
+                    z-index: 100;
+                    height: 100%;
+                }
+
+                label {
+                    z-index: 90;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    padding: 1rem;
+                    border: 2px solid $txt-auth-sub;
+                    border-radius: 0.4rem;
+                    transition: all 0.3s;
+
+                    div {
+                        height: 3rem;
+                        width: 3rem;
+                        padding: 0.5rem;
+                        border-radius: 10rem;
+                        background-color: $bg-auth-main;
+
+                        svg {
+                            height: 100%;
+                            width: 100%;
+                            fill: $txt-auth-sub;
+                        }
+                    }
+
+                    p {
+                        font-size: 1.4rem;
+                        font-weight: 600;
+                        color: $txt-auth-sub;
+                        flex-grow: 1;
+                        text-align: center;
+                    }
+                }
+
+                input[type="radio"]:checked + label {
+                    background-color: rgba(76, 108, 226, 0.25);
+                    border: 2px solid $txt-auth-hl;
+
+                    p {
+                        color: $txt-auth-hl;
+                    }
+
+                    div {
+                        svg {
+                            fill: $txt-auth-hl;
+                        }
+                    }
+
+                    
+                }
+            }
+        }
+
+        .favorites-container {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid $txt-auth-sub;
+            border-radius: 0.4rem;
+            display: flex;
+            flex-direction: row;
+            gap: 1rem;
+            flex-wrap: wrap;
+
+            button {
+                border: 2px solid $txt-auth-sub;
+                border-radius: 0.4rem;
+                background: rgba(76, 108, 226, 0.25);
+                padding: 0.5rem;
+                display: flex;
+                flex-direction: row;
+                p:nth-child(1) {
+                    font-size: 1.4rem;
+                    font-weight: 800;
+                    color: $txt-auth-hl;
+                    padding-right: 0.5rem ;
+                }
+                p:nth-child(2) {
+                    font-size: 1.4rem;
+                    font-weight: 600;
+                    color: $txt-auth-hl;
+                }
+                
+            }
+
+            p {
+                font-size: 1.4rem;
+                font-weight: 600;
+                color: $txt-auth-sub;
+            }
+        }
+    }
+
+    .submit-form  {
+        width: 100%;
+        font-weight: 600;
+        padding: 1.25rem 3rem;
+        margin: 2rem 0rem;
+        border: none;
+        border-radius: 10rem;
+        font-size: 1.6rem;
+        cursor: pointer;
+        transition: 0.5s;
+        background: linear-gradient(315deg, #4cc1e2,#4c6ce2);
+        color: #fff;
+        transition: all 0.2s;
+    }
+
+    .submit-form:hover {
+        box-shadow: 5px 5px 10px 0 rgba(2,32,71,0.1) ;
+        transform: scale(1.05);
+        background: linear-gradient(100deg,#4cc1e2,#4c6ce2);
+        transition: transform 0.2s;
+    }
+
+    .user-logout {
+        width: 100%;
+        background-color: transparent;
+        border: none;
+        font-size: 1.6rem;
+        font-weight: bold;
+        cursor: pointer;
+        color: $error-red;
+        transition: 0.5s;
+        text-decoration: none;
+        padding: 1rem;
+    }
+
+
+
+
+
+
+
 }
