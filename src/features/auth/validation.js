@@ -122,9 +122,7 @@ export const checkNewEmail = async(emailIn) => {
 
 //CURRENT PASSWORD VALIDATION
 export const checkPassDb = async (idIn, passIn) => {
-    console.log(idIn,passIn);
     const responsePass = await axios.post("http://localhost:8080/user/read/password", {id: idIn, password: passIn});
-    console.log(responsePass.data.passMatch);
     //returns false if passwords match, true if not matching 
     return responsePass.data.passMatch;
 }
@@ -176,7 +174,6 @@ export const checkNewPass = (passwordIn) => {
 
 //FIRST NAME VALIDATION
 export const checkFirstName = (firstIn) => {
-    console.log(firstIn);
     //validates first name is populated
     if (firstIn.length > 0) {
         document.getElementById("name-first-error").className = "";
@@ -189,6 +186,7 @@ export const checkFirstName = (firstIn) => {
     }
 }
 
+//LAST NAME VALIDATION
 export const checkLastName = (lastIn) => {
     //validates last name is populated
     if (lastIn.length > 0) {
@@ -199,6 +197,33 @@ export const checkLastName = (lastIn) => {
         document.querySelector(".form-item-container.name-last").classList.add("invalid");
         document.getElementById("name-last-error").textContent = "Cannot be empty";
         return false;
+    }
+}
+
+//USERNAME FORMAT VALIDATION
+function returnFileSize(number) {
+    // //returns file size in KB
+    // if (number < 1024) {
+    //   return `${number} bytes`;
+    // } else if (number >= 1024 && number < 1048576) {
+    //   return `${(number / 1024).toFixed(1)} KB`;
+    // } else if (number >= 1048576) {
+    //   return `${(number / 1048576).toFixed(1)} MB`;
+    // }
+    return (number / 1024).toFixed(1);
+  }
+export const checkFileSize = (fileIn) => {
+    //validates last name is populated
+    const fileSize = returnFileSize(fileIn.size)
+    if (fileSize > 500) {
+        //set error
+        document.getElementById("img-preview").textContent = "Image exceeds size limit";
+        document.getElementById("img-preview").classList.add("invalid");
+        return false;
+    } else {
+        //reset error
+        document.getElementById("img-preview").className = "";
+        return true;
     }
 }
 
