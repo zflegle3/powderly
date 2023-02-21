@@ -7,6 +7,7 @@ import {
   Navigate,
   useNavigate,
 } from "react-router-dom";
+import {reset} from "./features/auth/authSlice";
 import { useSelector, useDispatch } from 'react-redux';
 
 //Styles
@@ -26,18 +27,34 @@ import ModalContainer from './components/modals/ModalContainer';
 
 function App() {
   // const [user, setUser] = useState(null);
-  const {user} = useSelector((state) => state.auth);
-
+  const dispatch = useDispatch();
+  // const navigate = useNavigate();
+  const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
   console.log(process.env.REACT_APP_GOOGLE_MAPS_API);
   console.log(process.env.NODE_ENV);
 
+
+  useEffect(() => {
+    //resets auth state anytime dependencies change
+    dispatch(reset());
+  }, [user, isError, isSuccess, message, dispatch])
+
+
   if (user) {
+    console.log(user);
     return (
       <Router>
-        <Home />  
-        <ModalContainer />
+        <Routes>
+          <Route exact path="/" element={
+            <>
+              <Home/>  
+              <ModalContainer/>
+            </>
+          }/>
+          <Route path="*" element={<Navigate to="/" replace={true} />}/>
+        </Routes>
       </Router>
-    )
+    );
   } else {
     return (
       <Router>
@@ -49,8 +66,8 @@ function App() {
           <Route path="*" element={<Navigate to="/login" replace={true} />}/>
         </Routes>
       </Router>
-    )
-  }
-}
+    );
+  };
+};
 
 export default App;

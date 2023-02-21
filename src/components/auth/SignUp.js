@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {register, resetUser } from "../../features/auth/authSlice";
+import {register, reset } from "../../features/auth/authSlice";
 import { FaRegCheckCircle, FaCheck, FaRegTimesCircle } from 'react-icons/fa';
 import {checkNewUserName, checkNewEmail, checkNewPass } from "../../features/auth/validation";
 import { addFocus, removeFocus} from '../../custom-styles/style';
@@ -60,19 +60,18 @@ function SignUp() {
     }
 
     useEffect(() => {
+        //catches & displays errors fron failed credential logins
         if(isError) {
             alert(message);
         };
+        //Navigation and state reset handled in app.js
 
-        if(isSuccess && user) {
-            navigate("/")
-        };
-
-        dispatch(resetUser());
-
-        // if (isLoading) {
-        // }
-
+        //Navigate to home on register
+        // if(isSuccess && user) {
+        //     navigate("/")
+        // };
+        //resets state
+        // dispatch(reset());
     }, [user, isError, isSuccess, message, navigate, dispatch])
 
     if (isLoading) {

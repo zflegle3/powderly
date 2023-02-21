@@ -2,18 +2,20 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import {closeModal} from "../../features/modals/modalSlice"
-import { update, logout, resetUser, remove } from '../../features/auth/authSlice';
+import { update, logout, reset, remove, updateImage } from '../../features/auth/authSlice';
 import { FaRegMoon, FaSun  } from 'react-icons/fa';
 import {checkNewUserName, checkFirstName, checkLastName, checkNewEmail, checkNewPass, checkPassDb} from "../../features/auth/validation";
 import { addFocus, removeFocus} from '../../custom-styles/style';
 //Componenets
 import PasswordChange from './PasswordChange';
+//Images
+import defaultUserPic from "../../images/test/IMG_8078.jpg";
 
 
 function UserAccountModal() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {user} = useSelector((state) => state.auth)
+    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
     //passStatus determines if user is editing their password
     //true for editing, false for not editing 
     const [passStatus, setPassStatus] = useState(false);
@@ -26,6 +28,7 @@ function UserAccountModal() {
     const [favoritesIn, setFavoritesIn] = useState(user.favorites);
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
+    const [profileImage, setProfileImage] = useState(user.profileImage)
 
 
     const close = (e) => {
@@ -41,7 +44,6 @@ function UserAccountModal() {
             console.log("delete user", user._id);
             dispatch(remove(user._id)); //deletes user from db
             dispatch(logout()); //removes user from local storage
-            dispatch(resetUser()); //resets redux state
             dispatch(closeModal()); //resets redux state
             navigate("/"); //navigates to login
         } else {
@@ -52,9 +54,8 @@ function UserAccountModal() {
     const onLogout = () => {
         //logs out user using redux state and navigates to login page
         dispatch(logout());
-        dispatch(resetUser());
         dispatch(closeModal());
-        navigate("/");
+        navigate("/login");
     }
 
     const togglePasswordChange = (e) => {
@@ -223,6 +224,46 @@ function UserAccountModal() {
         }
     },[]);
 
+    const submitImage = (e) => {
+        e.preventDefault();
+        let images = document.getElementById("image-upload").files;
+        console.log(images);
+        dispatch(updateImage({image: images[0], id: user._id}))
+    }
+
+    const displayFile = (e) => {
+        e.preventDefault();
+        let preview = document.getElementById("img-preview")
+        let images = document.getElementById("image-upload").files;
+        if (images.length > 0) {
+            preview.textContent = images[0].name;
+        }
+    }
+
+    console.log(profileImage);
+    let imageSrc;
+    if (profileImage) {
+        imageSrc = "http://localhost:8080/"+profileImage;
+    } else {
+        imageSrc = defaultUserPic;
+    }
+
+    useEffect(() => {
+
+        if(isError) {
+            alert(message);
+        };
+
+        // if(isSuccess) {
+        //     //alerts error message on success of update
+        //     alert(message);
+        // };
+
+        //resets state values other than user
+        // dispatch(reset());
+
+    }, [user, isError, isSuccess, message, navigate, dispatch])
+
 
     return (
         <div className="user-account-modal" >
@@ -236,26 +277,39 @@ function UserAccountModal() {
                 </button>
             </div>
 
+            <form className='profile-image-form' >
+
+                <div className='image-display-container'> 
+                    {/* <div className='account-img'></div> */}
+                    <img src={imageSrc} alt="profils pic" className='account-img'/>
+                </div>
+
+                <div className="image-upload-container">
+                    <h2>Update your profile picture</h2>
+                    <p>Upload a photo under 2 MB</p>
+
+                    <div className='upload-controls-container'> 
+
+                        <div>
+                            <label htmlFor="image-upload" className="custom-file-upload">
+                                <input id="image-upload" type="file" onChange={displayFile}/>
+                                Choose a File
+                            </label>
+                            <p id="img-preview">No File Selected</p>
+                        </div>
+
+
+                        <button onClick={submitImage}>Submit</button>
+
+                    </div>
+                    
+                </div>
+            </form>
+
             <form className='account-settings-form'>
 
                 <h2 className='modal-section-header'>Profile Details</h2>
 
-                <div className='profile-image-container'>
-
-                    <div className='account-img'></div>
-
-                    <div className='account-img-upload'>
-                        <h2>Update your profile picture</h2>
-                        <p>Upload a photo under 2 MB</p>
-                        <label htmlFor="image-upload" className="custom-file-upload">
-                            <input id="image-upload" type="file"/>
-                            Choose a File
-                        </label>
-                        
-                    </div>
-
-                </div>
-                
                 <div className='form-input-container'>
 
                     <div className='names-container'>

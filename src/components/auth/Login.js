@@ -5,7 +5,7 @@ import {
     useNavigate
 } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {login, resetUser} from "../../features/auth/authSlice";
+import {login, reset} from "../../features/auth/authSlice";
 import {validateUsernameEmail } from "../../features/auth/validation";
 import { addFocus, removeFocus} from '../../custom-styles/style';
 
@@ -62,21 +62,19 @@ function Login() {
     }
 
     useEffect(() => {
+        //catches & displays errors fron failed credential logins
         if(isError) {
-            //catches & displays errors fron failed credential logins
             document.querySelector(".form-item-container.pass-in").classList.add("invalid");
             document.getElementById("pass-error").textContent = message;
             console.log(message);
         };
+        // //Navigate to home on login
+        // if(isSuccess || user) {
+        //     navigate("/")
+        // };
 
-        if(isSuccess || user) {
-            navigate("/")
-        };
-
-        dispatch(resetUser());
-
-        // if (isLoading) {
-        // }
+        // //resets state
+        // dispatch(reset());
 
     }, [user, isError, isSuccess, message, navigate, dispatch])
 

@@ -2,6 +2,7 @@ import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import authService from "./authService";
 
 //Get user from local storage
+//Token used to access protected routes
 const user = JSON.parse(localStorage.getItem("user"));
 
 const initialState = {
@@ -63,11 +64,23 @@ export const remove = createAsyncThunk("auth/remove", async (id, thunkAPI) => {
     }
 })
 
+//Update existing user image
+export const updateImage = createAsyncThunk("auth/updateImage", async (userData, thunkAPI) => {
+    console.log("updating user image");
+    try{
+        return await authService.updateImage(userData);
+    } catch (error) {
+        console.log(error);
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+})
+
 export const authSlice = createSlice({
     name: "auth",
     initialState,
     reducers: {
-        resetUser: (state) => {
+        reset: (state) => {
             state.isError = false;
             state.isLoading = false;
             state.isSuccess = false;
@@ -76,6 +89,7 @@ export const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            //REGISTER NEW USER
             .addCase(register.pending, (state) => {
                 state.isLoading = true;
             })
@@ -83,6 +97,7 @@ export const authSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.user = action.payload; 
+                state.message = "login successful";
                 //returned user data as payload from register function
             })
             .addCase(register.rejected, (state, action) => {
@@ -93,6 +108,8 @@ export const authSlice = createSlice({
                 //rejectwithvalue returns message as payload in catch above
                 state.user = null;
             })
+
+            //LOGIN EXISTING USER
             .addCase(login.pending, (state) => {
                 state.isLoading = true; 
             })
@@ -108,25 +125,31 @@ export const authSlice = createSlice({
                 state.message = "We were unable to verify login credentials you entered";  
                 state.user = null;
             })
+
+            //LOGOUT EXISTING USER
             .addCase(logout.fulfilled, (state) => {
                 state.user = null;
             })
+
+            //UPDATE EXISTING USER DETAILS
             .addCase(update.pending, (state) => {
                 state.isLoading = true; 
             })
             .addCase(update.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
+                state.isError = false;
+                state.message = "Account information successfully updated";
                 state.user = action.payload;
-                alert("Account information successfully updated");
             })
             .addCase(update.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = false;
                 state.isError = true;
                 state.message = "We were unable to update your account";  
-                state.user = null;
             })
+
+            //DELETE EXISTING USER 
             .addCase(remove.pending, (state) => {
                 state.isLoading = true; 
             })
@@ -140,8 +163,26 @@ export const authSlice = createSlice({
                 state.isError = true;
                 alert("Unable to delete account");
             })
+
+            //UPDATE EXISTING USER IMAGE
+            .addCase(updateImage.pending, (state) => {
+                state.isLoading = true; 
+            })
+            .addCase(updateImage.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.isError = false;
+                state.message = "New profile image successfully updated";  
+                state.user = action.payload;
+            })
+            .addCase(updateImage.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = false;
+                state.isError = true;
+                state.message = "We were unable to update your account";  
+            })
     }
 })
 
-export const { resetUser } = authSlice.actions
+export const { reset } = authSlice.actions
 export default authSlice.reducer
