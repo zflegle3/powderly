@@ -68,14 +68,13 @@ function Login() {
             document.getElementById("pass-error").textContent = message;
             console.log(message);
         };
+        //Navigation and state reset handled in app.js
         // //Navigate to home on login
         // if(isSuccess || user) {
         //     navigate("/")
         // };
-
         // //resets state
         // dispatch(reset());
-
     }, [user, isError, isSuccess, message, navigate, dispatch])
 
 

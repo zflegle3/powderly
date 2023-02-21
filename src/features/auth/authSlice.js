@@ -25,7 +25,6 @@ export const register = createAsyncThunk("auth/register", async (user, thunkAPI)
 
 //Login existing user
 export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
-    console.log("logging in")
     try{
         return await authService.login(user);
     } catch (error) {
@@ -42,7 +41,6 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 
 //Update existing user
 export const update = createAsyncThunk("auth/update", async (user, thunkAPI) => {
-    console.log("updating user");
     try{
         return await authService.update(user);
     } catch (error) {
@@ -54,7 +52,6 @@ export const update = createAsyncThunk("auth/update", async (user, thunkAPI) => 
 
 //Update existing user
 export const remove = createAsyncThunk("auth/remove", async (id, thunkAPI) => {
-    console.log("deleting user");
     try{
         return await authService.remove(id); 
     } catch (error) {
@@ -66,7 +63,7 @@ export const remove = createAsyncThunk("auth/remove", async (id, thunkAPI) => {
 
 //Update existing user image
 export const updateImage = createAsyncThunk("auth/updateImage", async (userData, thunkAPI) => {
-    console.log("updating user image");
+    console.log("updating user image", userData);
     try{
         return await authService.updateImage(userData);
     } catch (error) {
@@ -140,13 +137,13 @@ export const authSlice = createSlice({
                 state.isSuccess = true;
                 state.isError = false;
                 state.message = "Account information successfully updated";
-                state.user = action.payload;
+                state.user = action.payload; //updated user data returned
             })
             .addCase(update.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = false;
                 state.isError = true;
-                state.message = "We were unable to update your account";  
+                state.message = "We were unable to update your account";
             })
 
             //DELETE EXISTING USER 
@@ -155,7 +152,10 @@ export const authSlice = createSlice({
             })
             .addCase(remove.fulfilled, (state, action) => {
                 state.user = null;
-                alert("Account deleted");
+                state.isSuccess = true;
+                state.isError = false;
+                state.message = "Account successfully deleted"; 
+                alert("Account successfully deleted");
             })
             .addCase(remove.rejected, (state, action) => {
                 state.isLoading = false;
@@ -172,14 +172,14 @@ export const authSlice = createSlice({
                 state.isLoading = false;
                 state.isSuccess = true;
                 state.isError = false;
-                state.message = "New profile image successfully updated";  
-                state.user = action.payload;
+                state.message = "New profile image successfully uploaded";  
+                state.user = action.payload; //updated user data returned
             })
             .addCase(updateImage.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = false;
                 state.isError = true;
-                state.message = "We were unable to update your account";  
+                state.message = "We were unable to update your profile image";  
             })
     }
 })

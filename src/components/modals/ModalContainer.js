@@ -8,7 +8,7 @@ import UserAccountModal from './UserAccountModal';
 
 
 
-function ModalContainer() {
+function ModalContainer({profileImage}) {
     const dispatch = useDispatch();
     const { status } = useSelector((state) => state.modal)
 
@@ -20,7 +20,7 @@ function ModalContainer() {
         return ReactDom.createPortal(
             <>  
                 <div className="modal-overlay" onClick={close}></div>
-                <UserAccountModal/>
+                <UserAccountModal profileImage={profileImage}/>
             </>,
             document.getElementById("modal-portal")
         );
