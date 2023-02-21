@@ -97,7 +97,7 @@ $input-shdw-b: rgba(2,32,71,0.1);
             .account-img {
                 width: 10rem;
                 height: 10rem;
-                background-color: rebeccapurple;
+                background-color: transparent;
                 border-radius: 100rem;
             }
 
@@ -130,6 +130,10 @@ $input-shdw-b: rgba(2,32,71,0.1);
                 width: 100%;
                 gap: 2rem;
 
+                .upload-status-display {
+                    min-width: 14rem;
+                }
+
                 input[type="file"] {
                     display: none;
                 }
@@ -144,7 +148,7 @@ $input-shdw-b: rgba(2,32,71,0.1);
                     color: #4c6ce2;
                     transition: 0.5s;
                     text-decoration: none;
-                    padding: 2rem 0rem;
+                    // padding: 2rem 0rem;
                     text-align: start;
                 }
 
@@ -153,7 +157,10 @@ $input-shdw-b: rgba(2,32,71,0.1);
                     font-weight: 400;
                     color: #707B95;
                     padding: 0.5rem 0rem;
+                }
 
+                #img-preview.invalid {
+                    color: $error-red;
                 }
 
                 button {

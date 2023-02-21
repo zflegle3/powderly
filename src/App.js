@@ -31,10 +31,7 @@ import defaultImg from "./images/test/IMG_8078.jpg";
 function App() {
   // const [user, setUser] = useState(null);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
-  console.log(process.env.REACT_APP_GOOGLE_MAPS_API);
-  console.log(process.env.NODE_ENV);
   const [profileImage, setProfileImage] = useState(defaultImg)
 
 
@@ -53,7 +50,6 @@ function App() {
   }, [user])
 
   if (user) {
-    console.log(user);
     return (
       <Router>
         <Routes>

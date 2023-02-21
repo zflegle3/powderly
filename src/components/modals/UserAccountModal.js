@@ -4,12 +4,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import {closeModal} from "../../features/modals/modalSlice"
 import { update, logout, reset, remove, updateImage } from '../../features/auth/authSlice';
 import { FaRegMoon, FaSun  } from 'react-icons/fa';
-import {checkNewUserName, checkFirstName, checkLastName, checkNewEmail, checkNewPass, checkPassDb} from "../../features/auth/validation";
+import {checkNewUserName, checkFirstName, checkLastName, checkNewEmail, checkNewPass, checkPassDb, checkFileSize} from "../../features/auth/validation";
 import { addFocus, removeFocus} from '../../custom-styles/style';
 //Componenets
 import PasswordChange from './PasswordChange';
 //Images
-import defaultUserPic from "../../images/test/IMG_8078.jpg";
 
 
 function UserAccountModal({profileImage}) {
@@ -28,15 +27,9 @@ function UserAccountModal({profileImage}) {
     const [favoritesIn, setFavoritesIn] = useState(user.favorites);
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
-    // const [profileImage, setProfileImage] = useState(defaultUserPic)
 
 
-    const close = (e) => {
-        //closes modal by setting redux state to false
-        e.preventDefault();
-        dispatch(closeModal())
-    }
-
+    //DATA SUBMISSION & STATE CHANGE FUNCTIONS
     const deleteUser = (e) => {
         e.preventDefault();
         //send alert to confirm
@@ -45,11 +38,9 @@ function UserAccountModal({profileImage}) {
             dispatch(closeModal()); //sets modal state to false
             // navigate("/"); //navigates to login
             //state reset handled in app.js
-        } else {
-            console.log("keep user");
-        }   
+        };
     }
-
+    //Logout User
     const onLogout = () => {
         //logs out user using redux state and navigates to login page
         dispatch(logout()); //sets user in auth state to null and removes user from local storage
@@ -57,22 +48,17 @@ function UserAccountModal({profileImage}) {
         navigate("/login"); //navigates to login
         //state reset handled in app.js
     }
-
-    const togglePasswordChange = (e) => {
-        //toggles pass status to hide/show password form
+    //Profile Image Form
+    const submitImage = (e) => {
         e.preventDefault();
-        console.log("change password")
-        if (passStatus) {
-            setPassStatus(false)
-        } else {
-            setPassStatus(true)
-        }
+        let images = document.getElementById("image-upload").files;
+        if (checkFileSize(images[0])) {
+            dispatch(updateImage({image: images[0], id: user._id}))
+        } 
     }
-
-
+    //Profile Details & Preferences Form
     const submitChanges = async (e) => {
         e.preventDefault();
-        console.log("submit account changes");
         //Reset any error text values
         resetErrors();
         //VALIDATE INPUTS
@@ -126,7 +112,6 @@ function UserAccountModal({profileImage}) {
         //if all conditions are met, dispatch update
         //create new user payload
         if (firstNameValid && lastNameValid && usernameValid && emailValid && currentPasswordValid && newPasswordValid) {
-            console.log("updating user...");
             let newUserPayload;
             if (passStatus) {
                 newUserPayload = {
@@ -154,12 +139,64 @@ function UserAccountModal({profileImage}) {
                 }
             }
             //dispatch user update put call
-            console.log(newUserPayload);
             dispatch(update(newUserPayload));
         }
     }
 
 
+    //FORM CONDITIONAL RENDERING FUNCTIONS
+    //Modal Display
+    const close = (e) => {
+        //closes modal by setting redux state to false
+        e.preventDefault();
+        dispatch(closeModal())
+    }
+    //Password Form
+    const togglePasswordChange = (e) => {
+        //toggles pass status to hide/show password form
+        e.preventDefault();
+        if (passStatus) {
+            setPassStatus(false)
+        } else {
+            setPassStatus(true)
+        }
+    }
+    let passChange = <div className='btn-container'>
+            <button onClick={togglePasswordChange}>Change Password</button>
+            <button onClick={deleteUser}>Delete Account</button>
+        </div>;
+    if (passStatus) {
+        passChange = <PasswordChange currentPassword={currentPassword} setCurrentPassword={setCurrentPassword} newPassword={newPassword} setNewPassword={setNewPassword} togglePasswordChange={togglePasswordChange}/>;
+    }
+    //Favorite buttons
+    let favorites = <p>You have not selected any favorite resorts yet.</p>
+    if (favoritesIn.length >0) {
+        favorites = favoritesIn.map(favorite => {
+            <button>
+                <p>X</p>
+                <p>Breckenridge</p>
+            </button>
+        })
+    };
+    //Radio Button checked
+    useEffect(() => {
+        if (themeIn === "light") {
+            document.getElementById("light").checked = true;
+        } else {
+            document.getElementById("dark").checked = true;
+        }
+    },[]);
+    //Image File Name
+    const displayFile = (e) => {
+        e.preventDefault();
+        let preview = document.getElementById("img-preview")
+        preview.className = "";
+        let images = document.getElementById("image-upload").files;
+        if (images.length > 0) {
+            preview.textContent = images[0].name;
+        }
+    }
+    //Input Errors reset
     const resetErrors = () => {
         let userFirstNameItem = document.querySelector(".form-item-container.name-first");
         if (userFirstNameItem.classList.contains("invalid")) {
@@ -196,75 +233,14 @@ function UserAccountModal({profileImage}) {
     }
 
 
-    //FORM CONDITIONAL RENDERING FUNCTIONS
-    //Password Form
-    let passChange = <div className='btn-container'>
-            <button onClick={togglePasswordChange}>Change Password</button>
-            <button onClick={deleteUser}>Delete Account</button>
-        </div>;
-    if (passStatus) {
-        passChange = <PasswordChange currentPassword={currentPassword} setCurrentPassword={setCurrentPassword} newPassword={newPassword} setNewPassword={setNewPassword} togglePasswordChange={togglePasswordChange}/>;
-    }
-    //Favorite buttons
-    let favorites = <p>You have not selected any favorite resorts yet.</p>
-    if (favoritesIn.length >0) {
-        favorites = favoritesIn.map(favorite => {
-            <button>
-                <p>X</p>
-                <p>Breckenridge</p>
-            </button>
-        })
-    };
-    //Radio Button checked
-    useEffect(() => {
-        if (themeIn === "light") {
-            document.getElementById("light").checked = true;
-        } else {
-            document.getElementById("dark").checked = true;
-        }
-    },[]);
-
-    const submitImage = (e) => {
-        e.preventDefault();
-        let images = document.getElementById("image-upload").files;
-        console.log(images);
-        dispatch(updateImage({image: images[0], id: user._id}))
-    }
-
-    const displayFile = (e) => {
-        e.preventDefault();
-        let preview = document.getElementById("img-preview")
-        let images = document.getElementById("image-upload").files;
-        if (images.length > 0) {
-            preview.textContent = images[0].name;
-        }
-    }
-
-    console.log(profileImage);
-    let imageSrc;
-    if (profileImage) {
-        imageSrc = "http://localhost:8080/image/"+user.profileImage;
-    } else {
-        imageSrc = defaultUserPic;
-    }
-
     useEffect(() => {
         //alerts message on update success or error
         if(isError || isSuccess) {
             alert(message);
         };
-
         //resets state values other than user
         // dispatch(reset());
-
     }, [user, isError, isSuccess, message, navigate, dispatch])
-
-
-    // useEffect(() => {
-    //     if (user.profileImage) {
-    //         setProfileImage("http://localhost:8080/image/"+user.profileImage);
-    //     }
-    // }, [user])
 
     return (
         <div className="user-account-modal" >
@@ -287,13 +263,13 @@ function UserAccountModal({profileImage}) {
 
                 <div className="image-upload-container">
                     <h2>Update your profile picture</h2>
-                    <p>Upload a photo under 2 MB</p>
+                    <p>Upload a photo under 500 KB</p>
 
                     <div className='upload-controls-container'> 
 
-                        <div>
+                        <div className='upload-status-display'>
                             <label htmlFor="image-upload" className="custom-file-upload">
-                                <input id="image-upload" type="file" onChange={displayFile}/>
+                                <input id="image-upload" type="file" accept=".png, .jpg, .jpeg" onChange={displayFile}/>
                                 Choose a File
                             </label>
                             <p id="img-preview">No File Selected</p>
