@@ -65,13 +65,7 @@ function SignUp() {
             alert(message);
         };
         //Navigation and state reset handled in app.js
-
-        //Navigate to home on register
-        // if(isSuccess && user) {
-        //     navigate("/")
-        // };
-        //resets state
-        // dispatch(reset());
+        //Alternate nav and reset reference in login.js
     }, [user, isError, isSuccess, message, navigate, dispatch])
 
     if (isLoading) {

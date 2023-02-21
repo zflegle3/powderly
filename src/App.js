@@ -25,6 +25,9 @@ import PasswordReset from "./components/auth/PasswordReset";
 import Reset from "./components/auth/Reset";
 import ModalContainer from './components/modals/ModalContainer';
 
+//Images
+import defaultImg from "./images/test/IMG_8078.jpg";
+
 function App() {
   // const [user, setUser] = useState(null);
   const dispatch = useDispatch();
@@ -32,6 +35,7 @@ function App() {
   const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
   console.log(process.env.REACT_APP_GOOGLE_MAPS_API);
   console.log(process.env.NODE_ENV);
+  const [profileImage, setProfileImage] = useState(defaultImg)
 
 
   useEffect(() => {
@@ -40,6 +44,14 @@ function App() {
   }, [user, isError, isSuccess, message, dispatch])
 
 
+  useEffect(() => {
+    if (user) {
+      if (user.profileImage) {
+        setProfileImage("http://localhost:8080/image/"+user.profileImage);
+      };
+    }
+  }, [user])
+
   if (user) {
     console.log(user);
     return (
@@ -47,8 +59,8 @@ function App() {
         <Routes>
           <Route exact path="/" element={
             <>
-              <Home/>  
-              <ModalContainer/>
+              <Home />  
+              <ModalContainer profileImage={profileImage}/>
             </>
           }/>
           <Route path="*" element={<Navigate to="/" replace={true} />}/>

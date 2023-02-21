@@ -32,34 +32,38 @@ const logout = async() => {
 //Update existing user
 const update= async(userData) => {
     const response = await axios.put("http://localhost:8080/user/update/id", userData);
-
     if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
     }
-
+    //returns user to update auth state
     return response.data;
 };
 
 //Delete existing user
 const remove = async(userId) => {
     const response = await axios.delete("http://localhost:8080/user/delete/" + userId);
+    localStorage.removeItem("user");
 };
 
 
 //Update existing user Image
 const updateImage= async(userData) => {
+    //sends userData.image as form data and userData.id as parameter 
     const formData = new FormData();
-    formData.append("profileImage", userData.image)
-
+    formData.append("profileImage", userData.image);
     const response = await axios.post("http://localhost:8080/upload/"+userData.id, formData,{
         headers: {
             'Content-Type': 'multipart/form-data'
-            // an encoding type that allows files to be sent through a POST
+            // an encoding type that allows files to be sent through a POST req.
         }
     });
-
     console.log(response.data);
-
+    //updated user data returned as a response
+    if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+    }
+    //returns user to update auth state
+    return response.data;
 };
 
 

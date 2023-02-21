@@ -10,7 +10,7 @@ import SidePanel from "./SidePanel.js";
 import Sheet from 'react-modal-sheet';
 
 
-function Home() {
+function Home({avatarImg}) {
     const [ libraries ] = useState(['places']);
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
@@ -78,7 +78,7 @@ function Home() {
             return (
                 <div className="home-dash">
                     {/* <SearchBar/> */}
-                    <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults} setSort={setSort}/>
+                    <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults} setSort={setSort} avatarImg={avatarImg}/>
                     <SidePanel searchResults={searchResults} sortData={sort}/>
                 </div>
             );

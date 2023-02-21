@@ -12,7 +12,7 @@ import PasswordChange from './PasswordChange';
 import defaultUserPic from "../../images/test/IMG_8078.jpg";
 
 
-function UserAccountModal() {
+function UserAccountModal({profileImage}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
@@ -28,24 +28,23 @@ function UserAccountModal() {
     const [favoritesIn, setFavoritesIn] = useState(user.favorites);
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
-    const [profileImage, setProfileImage] = useState(user.profileImage)
+    // const [profileImage, setProfileImage] = useState(defaultUserPic)
 
 
     const close = (e) => {
-        //open/close modal via redux state
+        //closes modal by setting redux state to false
         e.preventDefault();
         dispatch(closeModal())
     }
 
     const deleteUser = (e) => {
         e.preventDefault();
-        //send alert to conform
+        //send alert to confirm
         if (window.confirm("Are you sure you want to delete your account?")) {
-            console.log("delete user", user._id);
-            dispatch(remove(user._id)); //deletes user from db
-            dispatch(logout()); //removes user from local storage
-            dispatch(closeModal()); //resets redux state
-            navigate("/"); //navigates to login
+            dispatch(remove(user._id)); //deletes user from db, sets user in auth state to null and removes user from local storage
+            dispatch(closeModal()); //sets modal state to false
+            // navigate("/"); //navigates to login
+            //state reset handled in app.js
         } else {
             console.log("keep user");
         }   
@@ -53,9 +52,10 @@ function UserAccountModal() {
 
     const onLogout = () => {
         //logs out user using redux state and navigates to login page
-        dispatch(logout());
-        dispatch(closeModal());
-        navigate("/login");
+        dispatch(logout()); //sets user in auth state to null and removes user from local storage
+        dispatch(closeModal()); //sets modal state to false
+        navigate("/login"); //navigates to login
+        //state reset handled in app.js
     }
 
     const togglePasswordChange = (e) => {
@@ -243,27 +243,28 @@ function UserAccountModal() {
     console.log(profileImage);
     let imageSrc;
     if (profileImage) {
-        imageSrc = "http://localhost:8080/"+profileImage;
+        imageSrc = "http://localhost:8080/image/"+user.profileImage;
     } else {
         imageSrc = defaultUserPic;
     }
 
     useEffect(() => {
-
-        if(isError) {
+        //alerts message on update success or error
+        if(isError || isSuccess) {
             alert(message);
         };
-
-        // if(isSuccess) {
-        //     //alerts error message on success of update
-        //     alert(message);
-        // };
 
         //resets state values other than user
         // dispatch(reset());
 
     }, [user, isError, isSuccess, message, navigate, dispatch])
 
+
+    // useEffect(() => {
+    //     if (user.profileImage) {
+    //         setProfileImage("http://localhost:8080/image/"+user.profileImage);
+    //     }
+    // }, [user])
 
     return (
         <div className="user-account-modal" >
@@ -281,7 +282,7 @@ function UserAccountModal() {
 
                 <div className='image-display-container'> 
                     {/* <div className='account-img'></div> */}
-                    <img src={imageSrc} alt="profils pic" className='account-img'/>
+                    <img src={profileImage} alt="profile avatar" className='account-img'/>
                 </div>
 
                 <div className="image-upload-container">
