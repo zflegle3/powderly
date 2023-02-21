@@ -82,6 +82,108 @@ $input-shdw-b: rgba(2,32,71,0.1);
         }
     }
 
+    .profile-image-form {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        .image-display-container {
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .account-img {
+                width: 10rem;
+                height: 10rem;
+                background-color: rebeccapurple;
+                border-radius: 100rem;
+            }
+
+        }
+
+        .image-upload-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            width: 60%;
+
+            h2 {
+                margin-top: 2rem;
+                font-size: 1.6rem;
+                color: $txt-auth-main;
+            }
+
+            p {
+                font-size: 1.2rem;
+                font-weight: 400;
+                color: #707B95;
+                padding: 0.5rem 0rem;
+            }
+
+            .upload-controls-container {
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                width: 100%;
+                gap: 2rem;
+
+                input[type="file"] {
+                    display: none;
+                }
+
+                .custom-file-upload {
+                    // width: 50%;
+                    background-color: transparent;
+                    border: none;
+                    font-size: 1.6rem;
+                    font-weight: bold;
+                    cursor: pointer;
+                    color: #4c6ce2;
+                    transition: 0.5s;
+                    text-decoration: none;
+                    padding: 2rem 0rem;
+                    text-align: start;
+                }
+
+                #img-preview {
+                    font-size: 1.2rem;
+                    font-weight: 400;
+                    color: #707B95;
+                    padding: 0.5rem 0rem;
+
+                }
+
+                button {
+                    // width: 100%;
+                    font-weight: 600;
+                    padding: 1.25rem 3rem;
+                    margin: 2rem 0rem;
+                    border: none;
+                    border-radius: 10rem;
+                    font-size: 1.6rem;
+                    cursor: pointer;
+                    transition: 0.5s;
+                    background: linear-gradient(315deg, #4cc1e2,#4c6ce2);
+                    color: #fff;
+                    transition: all 0.2s;
+                }
+            
+                button:hover {
+                    box-shadow: 5px 5px 10px 0 rgba(2,32,71,0.1) ;
+                    transform: scale(1.05);
+                    background: linear-gradient(100deg,#4cc1e2,#4c6ce2);
+                    transition: transform 0.2s;
+                }
+
+
+
+            }
+        }
+    }
+
     .account-settings-form {
         display: flex;
         flex-direction: column;
@@ -100,80 +202,6 @@ $input-shdw-b: rgba(2,32,71,0.1);
             font-weight: 600;
             color: $txt-auth-main;
             border-bottom: 1px solid $txt-auth-main;
-        }
-
-        .profile-image-container {
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
-            align-items: center;
-            padding: 2rem;
-
-            .account-img {
-                width: 10rem;
-                height: 10rem;
-                background-color: rebeccapurple;
-                border-radius: 100rem;
-            }
-
-            .account-img-upload {
-                display: flex;
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: flex-start;
-
-                h2 {
-                    margin-top: 2rem;
-                    font-size: 1.6rem;
-                    color: $txt-auth-main;
-                }
-
-                p {
-                    font-size: 1.2rem;
-                    font-weight: 400;
-                    color: #707B95;
-                    padding: 0.5rem 0rem;
-                }
-
-                input[type="file"] {
-                    display: none;
-                }
-
-                .custom-file-upload {
-                    // width: 50%;
-                    background-color: transparent;
-                    border: none;
-                    font-size: 1.6rem;
-                    font-weight: bold;
-                    cursor: pointer;
-                    color: #4c6ce2;
-                    transition: 0.5s;
-                    text-decoration: none;
-                    padding: 2rem 0rem;
-                    text-align: start;
-
-
-                    // font-weight: 600;
-                    // padding: 1.25rem 3rem;
-                    // margin: 1rem 0rem;
-                    // border: none;
-                    // border-radius: 10rem;
-                    // font-size: 1.4rem;
-                    // cursor: pointer;
-                    // transition: 0.5s;
-                    // background: linear-gradient(315deg, #4cc1e2,#4c6ce2);
-                    // color: #fff;
-                    // transition: all 0.2s;
-                }
-
-                // .custom-file-upload:hover {
-                //         box-shadow: 5px 5px 10px 0 rgba(2,32,71,0.1) ;
-                //         transform: scale(1.05);
-                //         background: linear-gradient(100deg,#4cc1e2,#4c6ce2);
-                //         transition: transform 0.2s;
-                // }
-            }
         }
 
         .names-container {
