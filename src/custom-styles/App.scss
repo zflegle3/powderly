@@ -51,10 +51,11 @@ table {
 // Variables
 $bg-auth-main: #e3edfe;
 $bg-auth-sub: #fff;
-$txt-auth-main: #000;
+$txt-auth-main: #151d3d;
 $txt-auth-sub: #707b95;
 $txt-auth-hl: #4c6ce2;
 $error-red: #ff2b6d;
+$fav-gold: #FBAF00;
 $input-shdw-a: rgba(0,0,0,0.1);
 $input-shdw-b: rgba(2,32,71,0.1);
 
@@ -173,8 +174,20 @@ $input-shdw-b: rgba(2,32,71,0.1);
         svg {
           height: 2.5rem;
           width: 2.5rem;
-          // width: 100%;
-          // height: 100%;
+          fill: $txt-auth-main;
+          transition: all 0.3s;
+        }
+      }
+
+      .header-icon.favorite {
+        svg {
+          fill: $fav-gold;
+        }
+      }
+
+      .header-icon:hover {
+        svg {
+          scale: 1.2;
         }
       }
 
