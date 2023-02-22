@@ -1,14 +1,17 @@
-import Timeline from "./calendar/Timeline";
-import ConditionsDetail from "./ConditionsDetail";
 import { useSelector, useDispatch } from 'react-redux';
 import { FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaSearchLocation, FaCrosshairs } from 'react-icons/fa';
 import { useState } from "react";
 import gsap from "gsap";
+//Components
+import ConditionsDetail from "./ConditionsDetail";
+import FavoriteIcon from "./FavoriteIcon";
 
 
-function ConditionsDisplay({resortData}) {
+function ConditionsDisplay({resortData, favoriteStatus}) {
     const [displayStatus, setDisplayStatus]  = useState(false);
     const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+
+    console.log(resortData.name, favoriteStatus);
 
     let cmToIn = 2.54;
     //format data for display
@@ -75,15 +78,6 @@ function ConditionsDisplay({resortData}) {
         ratingVal = "bad";
     } 
 
-    const toggleFavorite = () => {
-        console.log(resortData._id);
-        if (user.favorites.includes(resortData._refId)) {
-            //remove favorite
-        } else {
-            //add favorite
-        }
-    }
-
     const focusLocation = () => {
         console.log(resortData.name, resortData.location.lat,resortData.location.lng,)
     }
@@ -112,15 +106,9 @@ function ConditionsDisplay({resortData}) {
                         <FaSearchLocation/>
                     </div>
 
-                    <div className="header-icon" onClick={toggleFavorite}>
-                        <FaRegStar/>
-                    </div>
+                    <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
     
                 </div>
-
-                {/* <div className="resort-conditions-calendar">
-                    <Timeline dataIn={resortData.conditions.history}/>
-                </div> */}
 
                 <ConditionsDetail resortData={resortData} />
 
@@ -150,9 +138,7 @@ function ConditionsDisplay({resortData}) {
                         <FaSearchLocation/>
                     </div>
 
-                    <div className="header-icon" onClick={toggleFavorite}>
-                        <FaRegStar/>
-                    </div>
+                    <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
     
                 </div>
 

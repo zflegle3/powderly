@@ -1,4 +1,4 @@
-import Timeline from "./calendar/Timeline";
+import Timeline from "../calendar/Timeline";
 import { FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaCrosshairs } from 'react-icons/fa';
 import { useState } from "react";
 
@@ -35,8 +35,6 @@ function ConditionsDetail({resortData}) {
 
 
 
-
-    
 
 
     return (

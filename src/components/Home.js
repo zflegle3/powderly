@@ -6,7 +6,7 @@ import { useLoadScript} from "@react-google-maps/api";
 //Components
 import Map from "./Map.js"
 import DataDash from "./DataDash.js"
-import SidePanel from "./SidePanel.js";
+import SidePanel from "./results-panel/SidePanel.js";
 import Sheet from 'react-modal-sheet';
 import ModalContainer from './modals/ModalContainer';
 

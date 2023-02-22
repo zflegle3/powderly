@@ -1,10 +1,13 @@
 import { FaSort, FaPlus } from 'react-icons/fa';
 import ConditionsDisplay from './ConditionsDisplay';
 import { useEffect, useState } from 'react';
+import userEvent from '@testing-library/user-event';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 function SidePanel({searchResults, sortData, resorts}) {
     const [sortedResults, setSortedResults] = useState(searchResults);
+    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
     
     const trimResults = (filteredResults) => {
         // if (filteredResults.length > 10) {
@@ -91,8 +94,22 @@ function SidePanel({searchResults, sortData, resorts}) {
             }
         }
     },[searchResults, sortData]);
+
+
         
     if (sortedResults) {
+        console.log(sortedResults);
+        //conditionally renders Conditions display based on user favorite status
+        let resultsDisplay = sortedResults.map((resortData) => {
+            if(user.favorites.filter(favorite => favorite.refId === resortData.refId).length > 0) {
+                return <ConditionsDisplay key={resortData.refId} resortData={resortData} favoriteStatus={true}/>
+            } else {
+                return <ConditionsDisplay key={resortData.refId} resortData={resortData} favoriteStatus={false}/>
+            }
+
+        })
+
+
         return (
             <div className="side-panel-display">
                 <header>
@@ -105,8 +122,7 @@ function SidePanel({searchResults, sortData, resorts}) {
                     </div>
                 </header>
                 <div className='resorts-display'>
-                    {sortedResults.map((resortData) => <ConditionsDisplay key={resortData.refId} resortData={resortData}/>)}
-                    {/* <ConditionsDisplay key={sortedResults[0].refId} resortData={sortedResults[0]}/> */}
+                    {resultsDisplay}
                 </div>
 
             </div>

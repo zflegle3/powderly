@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { addFavorite, removeFavorite } from '../../features/auth/authSlice';
+import { removeFavorite } from '../../features/auth/authSlice';
 
 function FavoriteBtn({locationName, locationId}) {
     const dispatch = useDispatch();
@@ -17,9 +17,6 @@ function FavoriteBtn({locationName, locationId}) {
         }
         console.log(selected);
         dispatch(removeFavorite(selected));
-        // if (true) {
-        //     dispatch(removeFavorite(selected));
-        // }
     }
 
 

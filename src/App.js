@@ -32,7 +32,7 @@ function App() {
   // const [user, setUser] = useState(null);
   const dispatch = useDispatch();
   const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
-  const [profileImage, setProfileImage] = useState(defaultImg)
+  const [profileImage, setProfileImage] = useState(defaultImg);
 
 
   useEffect(() => {
@@ -45,7 +45,9 @@ function App() {
     if (user) {
       if (user.profileImage) {
         setProfileImage("http://localhost:8080/image/"+user.profileImage);
-      };
+      } else {
+        setProfileImage (defaultImg);
+      }
     }
   }, [user])
 
