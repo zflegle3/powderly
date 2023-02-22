@@ -1,5 +1,6 @@
 import Timeline from "./calendar/Timeline";
 import ConditionsDetail from "./ConditionsDetail";
+import { useSelector, useDispatch } from 'react-redux';
 import { FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaSearchLocation, FaCrosshairs } from 'react-icons/fa';
 import { useState } from "react";
 import gsap from "gsap";
@@ -7,6 +8,7 @@ import gsap from "gsap";
 
 function ConditionsDisplay({resortData}) {
     const [displayStatus, setDisplayStatus]  = useState(false);
+    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
     let cmToIn = 2.54;
     //format data for display
@@ -73,10 +75,23 @@ function ConditionsDisplay({resortData}) {
         ratingVal = "bad";
     } 
 
+    const toggleFavorite = () => {
+        console.log(resortData._id);
+        if (user.favorites.includes(resortData._refId)) {
+            //remove favorite
+        } else {
+            //add favorite
+        }
+    }
+
+    const focusLocation = () => {
+        console.log(resortData.name, resortData.location.lat,resortData.location.lng,)
+    }
+
 
     if (displayStatus) {
         return (
-            <div className="resort-conditions-display">
+            <div className="resort-conditions-display" >
                 <div className="resort-conditions-header">
 
                     <button className="expand-collapse-btn" onClick={expandCollapse}>
@@ -87,17 +102,17 @@ function ConditionsDisplay({resortData}) {
                             {/* <div className={`bar-3-${resortData.refId}`}></div> */}
                         </div>
         
-                        <p className={`rating-${ratingVal}`}>{resortData.conditions.forecast[0].rating}</p>
+                        <p className={`rating-${ratingVal}`}>{resortData.conditions.forecast[0].rating} </p>
         
                         <p className="resort-name">{resortData.name}</p>
 
                     </button>
 
-                    <div className="header-icon" onClick={expandCollapse}>
+                    <div className="header-icon" onClick={focusLocation}>
                         <FaSearchLocation/>
                     </div>
 
-                    <div className="header-icon" onClick={expandCollapse}>
+                    <div className="header-icon" onClick={toggleFavorite}>
                         <FaRegStar/>
                     </div>
     
@@ -131,11 +146,11 @@ function ConditionsDisplay({resortData}) {
 
                     </button>
 
-                    <div className="header-icon" onClick={expandCollapse}>
+                    <div className="header-icon" onClick={focusLocation}>
                         <FaSearchLocation/>
                     </div>
 
-                    <div className="header-icon" onClick={expandCollapse}>
+                    <div className="header-icon" onClick={toggleFavorite}>
                         <FaRegStar/>
                     </div>
     

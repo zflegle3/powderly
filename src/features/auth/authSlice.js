@@ -63,9 +63,32 @@ export const remove = createAsyncThunk("auth/remove", async (id, thunkAPI) => {
 
 //Update existing user image
 export const updateImage = createAsyncThunk("auth/updateImage", async (userData, thunkAPI) => {
-    console.log("updating user image", userData);
     try{
         return await authService.updateImage(userData);
+    } catch (error) {
+        console.log(error);
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+})
+
+//Update existing user image
+export const addFavorite = createAsyncThunk("auth/addFavorite", async (userData, thunkAPI) => {
+    console.log("adding user favorite", userData);
+    try{
+        return await authService.addFavorite(userData);
+    } catch (error) {
+        console.log(error);
+        const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
+        return thunkAPI.rejectWithValue(message);
+    }
+})
+
+//Update existing user image
+export const removeFavorite = createAsyncThunk("auth/removeFavorite", async (userData, thunkAPI) => {
+    console.log("removing user favorite", userData);
+    try{
+        return await authService.removeFavorite(userData);
     } catch (error) {
         console.log(error);
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
@@ -180,6 +203,42 @@ export const authSlice = createSlice({
                 state.isSuccess = false;
                 state.isError = true;
                 state.message = "We were unable to update your profile image";  
+            })
+
+            //ADDING FAVORITE TO USER
+            .addCase(addFavorite.pending, (state) => {
+                state.isLoading = true; 
+            })
+            .addCase(addFavorite.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.isError = false;
+                state.message = "Favorite successfully added";  
+                state.user = action.payload; //updated user data returned
+            })
+            .addCase(addFavorite.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = false;
+                state.isError = true;
+                state.message = "We were unable to add the favorite to user";  
+            })
+
+            //ADDING FAVORITE TO USER
+            .addCase(removeFavorite.pending, (state) => {
+                state.isLoading = true; 
+            })
+            .addCase(removeFavorite.fulfilled, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = true;
+                state.isError = false;
+                state.message = "Favorite successfully removed";  
+                state.user = action.payload; //updated user data returned
+            })
+            .addCase(removeFavorite.rejected, (state, action) => {
+                state.isLoading = false;
+                state.isSuccess = false;
+                state.isError = true;
+                state.message = "We were unable to remove the favorite from user";  
             })
     }
 })

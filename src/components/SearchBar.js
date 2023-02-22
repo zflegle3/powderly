@@ -7,7 +7,7 @@ import {openAccountModal} from "../features/modals/modalSlice";
 
 
 
-function SearchBar({setSelected, selected, editStatus, setEditStatus}) {
+function SearchBar({setSelected, selected, editStatus, setEditStatus, profileImage}) {
     const dispatch = useDispatch();
     const [location, setLocation] = useState("Search any Location...");
     const [date, setDate] = useState(new Date());
@@ -41,8 +41,8 @@ function SearchBar({setSelected, selected, editStatus, setEditStatus}) {
                         <p>{location}</p>
                         <p>{date.toDateString()}</p>
                     </div>
-                    <div className="help-submit" onClick={openAccount}>
-                        <FaRegUserCircle/>
+                    <div className="account-avatar" onClick={openAccount}>
+                        <img src={profileImage} alt="profile avatar" className='account-img'/>
                     </div>
                 </div>
             </div>
@@ -59,8 +59,8 @@ function SearchBar({setSelected, selected, editStatus, setEditStatus}) {
                         <PlacesAutocomplete setSelected={setSelected} setEditStatus={setEditStatus} setLocation={setLocation} />
                         {/* <input className="date-in" type="date" name="location"></input> */}
                     </form>
-                    <div className="help-submit" onClick={openAccount}>
-                        <FaRegUserCircle/>
+                    <div className="account-avatar" onClick={openAccount}>
+                        <img src={profileImage} alt="profile avatar" className='account-img'/>
                     </div>
                 </div>
             </div>

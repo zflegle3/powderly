@@ -8,9 +8,10 @@ import Map from "./Map.js"
 import DataDash from "./DataDash.js"
 import SidePanel from "./SidePanel.js";
 import Sheet from 'react-modal-sheet';
+import ModalContainer from './modals/ModalContainer';
 
 
-function Home({avatarImg}) {
+function Home({profileImage}) {
     const [ libraries ] = useState(['places']);
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
@@ -77,9 +78,9 @@ function Home({avatarImg}) {
         if (window.innerWidth > 760) {
             return (
                 <div className="home-dash">
-                    {/* <SearchBar/> */}
-                    <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults} setSort={setSort} avatarImg={avatarImg}/>
-                    <SidePanel searchResults={searchResults} sortData={sort}/>
+                    <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults} setSort={setSort} profileImage={profileImage}/>
+                    <SidePanel searchResults={searchResults} sortData={sort} resorts={resorts}/>
+                    <ModalContainer profileImage={profileImage} resorts={resorts}/>
                 </div>
             );
         //Mobile 
@@ -87,7 +88,7 @@ function Home({avatarImg}) {
             return (
                 <div className="home-dash">
                     {/* <SearchBar/> */}
-                    <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults}/>
+                    <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults} profileImage={profileImage}/>
                     <Sheet isOpen={isOpen} onClose={() => setOpen(false)}>
                         <Sheet.Container>
                             <Sheet.Header />

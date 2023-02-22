@@ -8,16 +8,19 @@ import {checkNewUserName, checkFirstName, checkLastName, checkNewEmail, checkNew
 import { addFocus, removeFocus} from '../../custom-styles/style';
 //Componenets
 import PasswordChange from './PasswordChange';
+import locationName from './FavoriteBtn';
+import FavoriteBtn from './FavoriteBtn';
 //Images
 
 
-function UserAccountModal({profileImage}) {
+function UserAccountModal({profileImage, resorts}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
     //passStatus determines if user is editing their password
     //true for editing, false for not editing 
     const [passStatus, setPassStatus] = useState(false);
+    const [favoritesData, setFavoritesData] = useState(user.favorites);
     //input variables from user 
     const [firstIn, setFirstIn] = useState(user.first_name);
     const [lastIn, setLastIn] = useState(user.family_name);
@@ -169,15 +172,14 @@ function UserAccountModal({profileImage}) {
         passChange = <PasswordChange currentPassword={currentPassword} setCurrentPassword={setCurrentPassword} newPassword={newPassword} setNewPassword={setNewPassword} togglePasswordChange={togglePasswordChange}/>;
     }
     //Favorite buttons
-    let favorites = <p>You have not selected any favorite resorts yet.</p>
-    if (favoritesIn.length >0) {
-        favorites = favoritesIn.map(favorite => {
-            <button>
-                <p>X</p>
-                <p>Breckenridge</p>
-            </button>
-        })
-    };
+    let favoritesDisplay;
+    if (user.favorites.length > 0) {
+        favoritesDisplay = user.favorites.map((favoriteResort) => 
+            <FavoriteBtn key={favoriteResort.refId} locationName={favoriteResort.name} locationId={favoriteResort.refId}/>
+        );
+    } else {
+        favoritesDisplay = <p>You have not selected any favorite resorts yet.</p>
+    }
     //Radio Button checked
     useEffect(() => {
         if (themeIn === "light") {
@@ -241,6 +243,22 @@ function UserAccountModal({profileImage}) {
         //resets state values other than user
         // dispatch(reset());
     }, [user, isError, isSuccess, message, navigate, dispatch])
+
+    // useEffect(() => {
+    //     //alerts message on update success or error
+    //     if(isError || isSuccess) {
+    //         alert(message);
+    //     };
+    //     //resets state values other than user
+    //     // dispatch(reset());
+    //     if (resorts) {
+    //         console.log(resorts);
+    //         let favoriteResorts = resorts.filter(location => user.favorites.includes(location.refId));
+    //         console.log(favoriteResorts)
+    //         setFavoritesData(favoriteResorts);
+    //     };
+
+    // }, [user])
 
     return (
         <div className="user-account-modal" >
@@ -357,7 +375,13 @@ function UserAccountModal({profileImage}) {
 
                 <p className="color-theme-label">favorites</p> 
                 <div className='favorites-container'>
-                    {favorites}
+                    {/* {user.favorites.map(favoriteResort => {
+                        <button>
+                            <p>X</p>
+                            <p>{favoriteResort.name}</p>
+                        </button>
+                    })} */}
+                    {favoritesDisplay}
                     {/* <button>
                         <p>X</p>
                         <p>Breckenridge</p>
