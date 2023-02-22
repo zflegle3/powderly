@@ -67,6 +67,26 @@ const updateImage= async(userData) => {
 };
 
 
+//Update existing user Image
+const addFavorite= async(userData) => {
+    const response = await axios.post("http://localhost:8080/user/add/favorite", userData);
+    if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+    }
+    //returns user to update auth state
+    return response.data;
+};
 
-const authService = { register, login, logout, update, remove, updateImage }
+//Update existing user Image
+const removeFavorite= async(userData) => {
+    const response = await axios.post("http://localhost:8080/user/remove/favorite", userData);
+    if (response.data) {
+        localStorage.setItem("user", JSON.stringify(response.data));
+    }
+    //returns user to update auth state
+    return response.data;
+};
+
+
+const authService = { register, login, logout, update, remove, updateImage, addFavorite, removeFavorite }
 export default authService;

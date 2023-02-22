@@ -3,7 +3,7 @@ import ConditionsDisplay from './ConditionsDisplay';
 import { useEffect, useState } from 'react';
 
 
-function SidePanel({searchResults, sortData}) {
+function SidePanel({searchResults, sortData, resorts}) {
     const [sortedResults, setSortedResults] = useState(searchResults);
     
     const trimResults = (filteredResults) => {

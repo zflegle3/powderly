@@ -26,7 +26,7 @@ import Reset from "./components/auth/Reset";
 import ModalContainer from './components/modals/ModalContainer';
 
 //Images
-import defaultImg from "./images/test/IMG_8078.jpg";
+import defaultImg from "./images/avatars/avatar.png";
 
 function App() {
   // const [user, setUser] = useState(null);
@@ -53,12 +53,7 @@ function App() {
     return (
       <Router>
         <Routes>
-          <Route exact path="/" element={
-            <>
-              <Home />  
-              <ModalContainer profileImage={profileImage}/>
-            </>
-          }/>
+          <Route exact path="/" element={<Home profileImage={profileImage}/> }/>
           <Route path="*" element={<Navigate to="/" replace={true} />}/>
         </Routes>
       </Router>

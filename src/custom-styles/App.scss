@@ -164,14 +164,17 @@ $input-shdw-b: rgba(2,32,71,0.1);
       }
 
       .header-icon {
-        height: 2rem;
-        width: 2rem;
+        // height: 2rem;
+        // width: 2rem;
+        padding: 0.5rem;
         margin-right: 1rem;
         cursor: pointer;
 
         svg {
-          width: 100%;
-          height: 100%;
+          height: 2.5rem;
+          width: 2.5rem;
+          // width: 100%;
+          // height: 100%;
         }
       }
 
@@ -351,13 +354,13 @@ $input-shdw-b: rgba(2,32,71,0.1);
   border-radius: 10rem;
   padding: 1.5rem;
 
-  .search-submit, .help-submit {
-    width: 2.5rem;
-    height: 2.5rem;
+  .search-submit {
+    width: 3.5rem;
+    height: 3.5rem;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 0.5rem;
+    margin: 0.5rem 1rem;
     cursor: pointer;
     
 
@@ -367,12 +370,19 @@ $input-shdw-b: rgba(2,32,71,0.1);
     }
   }
 
-  .help-submit {
-    width: 3rem;
-    height: 3rem;
-    // padding: 0.5rem;
-    // border-radius: 10rem;
-    // border: 1px solid black;
+  .account-avatar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0.5rem;
+    cursor: pointer;
+
+
+    img {
+      width: 5rem;
+      height: 5rem;
+      border-radius: 10rem;
+    }
   }
 
 
@@ -492,6 +502,7 @@ $input-shdw-b: rgba(2,32,71,0.1);
     padding: 0.5rem 1.2rem;
     font-size: 1.5rem;
     font-weight: 300;
+    white-space: nowrap;
     cursor: pointer;
   }
 }

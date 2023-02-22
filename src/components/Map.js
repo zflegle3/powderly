@@ -15,7 +15,7 @@ import {
 } from "@reach/combobox";
 // import LocationMarker from "./LocationMarker";
 
-function Map({resorts, lat, lng, setSearchResults, setSort}) {
+function Map({resorts, lat, lng, setSearchResults, setSort, profileImage}) {
     //props.resorts
     const [myMap, setMyMap] = useState(null);
     const [selected, setSelected] = useState({lat, lng});
@@ -116,7 +116,7 @@ function Map({resorts, lat, lng, setSearchResults, setSort}) {
 
             <div className="google-map">
                 <div className="controls-container">
-                    <SearchBar setSelected={setSelected} selected={selected} editStatus={editStatus} setEditStatus={setEditStatus}/>
+                    <SearchBar setSelected={setSelected} selected={selected} editStatus={editStatus} setEditStatus={setEditStatus} profileImage={profileImage}/>
                     <FilterBar setSort={setSort}/>
                 </div>
 
