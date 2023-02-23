@@ -10,6 +10,7 @@ import SidePanel from "./results-panel/SidePanel.js";
 import Sheet from 'react-modal-sheet';
 import ModalContainer from './modals/ModalContainer';
 import LoadingSpinner from "./LoadingSpinner.js";
+import { FaLocationArrow } from 'react-icons/fa';
 
 
 function Home({profileImage}) {
@@ -66,6 +67,15 @@ function Home({profileImage}) {
     useEffect(() => {
         getData(); 
     },[]);
+
+    const recenterMap = (e) => {
+        // e.preventDefault();
+        // setLng(resortData.location.lng);
+        // setLat(resortData.location.lat);
+        console.log("recenter");
+        // myMap.panTo(selected);
+        // myMap.setZoom(9);
+    };
 
 
     if (!isLoaded || !resorts || !lat || !lng ) {
