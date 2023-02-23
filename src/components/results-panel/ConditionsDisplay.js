@@ -7,11 +7,9 @@ import ConditionsDetail from "./ConditionsDetail";
 import FavoriteIcon from "./FavoriteIcon";
 
 
-function ConditionsDisplay({resortData, favoriteStatus}) {
+function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat}) {
     const [displayStatus, setDisplayStatus]  = useState(false);
     const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
-
-    console.log(resortData.name, favoriteStatus);
 
     let cmToIn = 2.54;
     //format data for display
@@ -79,7 +77,8 @@ function ConditionsDisplay({resortData, favoriteStatus}) {
     } 
 
     const focusLocation = () => {
-        console.log(resortData.name, resortData.location.lat,resortData.location.lng,)
+        setLng(resortData.location.lng);
+        setLat(resortData.location.lat);
     }
 
 

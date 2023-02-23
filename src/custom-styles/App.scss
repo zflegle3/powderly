@@ -465,6 +465,23 @@ $input-shdw-b: rgba(2,32,71,0.1);
   }
 }
 
+.recenter-btn {
+  height: 4.5rem;
+  width: 4.5rem;
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  z-index: 100;
+  border-radius: 0.4rem;
+  padding: 1rem;
+
+  svg {
+    height: 100%;
+    width: 100%;
+    fill: rgb(96, 96, 96);
+  }
+}
+
 
 .marker-icon {
   height: 1rem;

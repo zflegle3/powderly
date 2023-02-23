@@ -4,6 +4,9 @@ import { useState, useEffect, useRef } from "react";
 import mapStyles from "../custom-styles/mapStyles";
 import SearchBar from "./SearchBar"
 import FilterBar from "./FilterBar"
+import { FaLocationArrow } from 'react-icons/fa';
+
+
 
 import usePlacesAutocomplete, { getGeocode, getLatLng} from "use-places-autocomplete"
 import {
@@ -15,7 +18,7 @@ import {
 } from "@reach/combobox";
 // import LocationMarker from "./LocationMarker";
 
-function Map({resorts, lat, lng, setSearchResults, setSort, profileImage}) {
+function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, profileImage}) {
     //props.resorts
     const [myMap, setMyMap] = useState(null);
     const [selected, setSelected] = useState({lat, lng});
@@ -23,8 +26,8 @@ function Map({resorts, lat, lng, setSearchResults, setSort, profileImage}) {
     //controls search bar display, set true for edit mode and false for display only
 
 
-    const handleClick = () => {
-        console.log("SHREEEED IT DUUUUUUDE!!!")
+    const handleClick = (id) => {
+        console.log("SHREEEED IT DUUUUUUDE!!!", id)
     }
 
     const markers = resorts.map((resort) => {
@@ -34,7 +37,8 @@ function Map({resorts, lat, lng, setSearchResults, setSort, profileImage}) {
             return (
                 <Marker 
                     key={resort.refId} 
-                    onClick={handleClick} 
+                    id={resort.refId} 
+                    onClick={e => handleClick(resort.refId)} 
                     optimized={true} 
                     icon={{url:"https://i.imgur.com/PR6meRZ.png", scaledSize: new window.google.maps.Size(50, 50)}}  
                     position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
@@ -43,8 +47,9 @@ function Map({resorts, lat, lng, setSearchResults, setSort, profileImage}) {
         } else if (rating > 5) {
             return (
                 <Marker 
-                    key={resort.refId} 
-                    onClick={handleClick} 
+                    key={resort.refId}
+                    id={resort.refId}  
+                    onClick={e => handleClick(resort.refId)} 
                     optimized={true} 
                     icon={{url:"https://i.imgur.com/QBGAEs4.png", scaledSize: new window.google.maps.Size(40, 40)}}  
                     position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
@@ -54,17 +59,19 @@ function Map({resorts, lat, lng, setSearchResults, setSort, profileImage}) {
             return (
                 <Marker 
                     key={resort.refId} 
-                    onClick={handleClick} 
+                    id={resort.refId} 
+                    onClick={e => handleClick(resort.refId)} 
                     optimized={true} 
                     icon={{url:"https://i.imgur.com/j1V6upn.png", scaledSize: new window.google.maps.Size(30, 30)}}  
                     position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
+                    labelContent= "ABCD"
                 />
             )
         } else if (rating > 0) {
             return (
                 <Marker 
                     key={resort.refId} 
-                    onClick={handleClick} 
+                    onClick={e => handleClick(resort.refId)} 
                     optimized={true} 
                     icon={{url:"https://i.imgur.com/pJYtoxS.png", scaledSize: new window.google.maps.Size(20, 20)}}  
                     position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
@@ -73,11 +80,12 @@ function Map({resorts, lat, lng, setSearchResults, setSort, profileImage}) {
         } else {
             return (
                 <Marker 
-                    key={resort.refId} 
-                    onClick={handleClick} 
+                    key={resort.refId}
+                    id={resort.refId} 
+                    onClick={e => handleClick(resort.refId)} 
                     optimized={true} 
                     icon={{url:"https://i.imgur.com/d9hNHHW.png", scaledSize: new window.google.maps.Size(20, 20)}}  
-                    position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
+                    position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng)}}
                 />
             )
         }
@@ -101,14 +109,32 @@ function Map({resorts, lat, lng, setSearchResults, setSort, profileImage}) {
     };
 
     const handleMapClick = () => {
-        // console.log("Map being clicked");
+        console.log("Map being clicked");
         if (editStatus) {
             setEditStatus(false);
         }
-    }
+    };
+
+    const recenterMap = (e) => {
+        e.preventDefault();
+        // setLng(resortData.location.lng);
+        // setLat(resortData.location.lat);
+        console.log("recenter")
+        myMap.panTo(selected);
+        myMap.setZoom(9);
+    };
 
     
-
+    useEffect(() => {
+        console.log("coords changed")
+        //pan to new 
+        if(myMap) {
+            console.log(myMap)
+            console.log(lat,lng);
+            myMap.panTo({lat: Number(lat), lng: Number(lng)})
+            myMap.setZoom(9);
+        };
+    },[lat,lng]);
 
     if (lng && lat) {
         // console.log("map loaded");
@@ -121,7 +147,7 @@ function Map({resorts, lat, lng, setSearchResults, setSort, profileImage}) {
                 </div>
 
                 <GoogleMap
-                    // ref={testMap} 
+                    // ref={mapRef} 
                     zoom={9}
                     center={selected}
                     mapContainerClassName="map-container"
@@ -139,6 +165,10 @@ function Map({resorts, lat, lng, setSearchResults, setSort, profileImage}) {
                     {selected && <Marker position={selected} icon={{url:"https://cdn-icons-png.flaticon.com/512/2503/2503562.png", scaledSize: new window.google.maps.Size(50, 50),}}/>}
 
                 </GoogleMap>
+
+                <button className="recenter-btn" onCLick={recenterMap}>
+                    <FaLocationArrow />
+                </button>
             </div>
         );
     } else {
