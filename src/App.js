@@ -15,6 +15,7 @@ import "./custom-styles/app.scss";
 import "./custom-styles/calendar.scss";
 import "./custom-styles/auth.scss";
 import "./custom-styles/modal.scss";
+import "./custom-styles/loading.scss";
 
 //Components
 import Home from "./components/Home"

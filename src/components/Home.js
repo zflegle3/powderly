@@ -9,6 +9,7 @@ import DataDash from "./DataDash.js"
 import SidePanel from "./results-panel/SidePanel.js";
 import Sheet from 'react-modal-sheet';
 import ModalContainer from './modals/ModalContainer';
+import LoadingSpinner from "./LoadingSpinner.js";
 
 
 function Home({profileImage}) {
@@ -70,7 +71,7 @@ function Home({profileImage}) {
     if (!isLoaded || !resorts || !lat || !lng ) {
         // console.log("loading map and resort data")
         return (
-              <div>Loading Screen</div>
+              <LoadingSpinner />
             //   Add loading component here
           );
     } else {
@@ -79,7 +80,7 @@ function Home({profileImage}) {
             return (
                 <div className="home-dash">
                     <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults} setSort={setSort} profileImage={profileImage}/>
-                    <SidePanel searchResults={searchResults} sortData={sort} resorts={resorts}/>
+                    <SidePanel searchResults={searchResults} sortData={sort} resorts={resorts} setLng={setLng} setLat={setLat}/>
                     <ModalContainer profileImage={profileImage} resorts={resorts}/>
                 </div>
             );
@@ -88,7 +89,7 @@ function Home({profileImage}) {
             return (
                 <div className="home-dash">
                     {/* <SearchBar/> */}
-                    <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults} profileImage={profileImage}/>
+                    <Map lat={lat} setLat={setLat} setLng={setLng} lng={lng} resorts={resorts} setSearchResults={setSearchResults} profileImage={profileImage}/>
                     <Sheet isOpen={isOpen} onClose={() => setOpen(false)}>
                         <Sheet.Container>
                             <Sheet.Header />

@@ -5,7 +5,7 @@ import userEvent from '@testing-library/user-event';
 import { useSelector, useDispatch } from 'react-redux';
 
 
-function SidePanel({searchResults, sortData, resorts}) {
+function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
     const [sortedResults, setSortedResults] = useState(searchResults);
     const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
     
@@ -102,9 +102,9 @@ function SidePanel({searchResults, sortData, resorts}) {
         //conditionally renders Conditions display based on user favorite status
         let resultsDisplay = sortedResults.map((resortData) => {
             if(user.favorites.filter(favorite => favorite.refId === resortData.refId).length > 0) {
-                return <ConditionsDisplay key={resortData.refId} resortData={resortData} favoriteStatus={true}/>
+                return <ConditionsDisplay key={resortData.refId} resortData={resortData} favoriteStatus={true} setLng={setLng} setLat={setLat}/>
             } else {
-                return <ConditionsDisplay key={resortData.refId} resortData={resortData} favoriteStatus={false}/>
+                return <ConditionsDisplay key={resortData.refId} resortData={resortData} favoriteStatus={false} setLng={setLng} setLat={setLat}/>
             }
 
         })
