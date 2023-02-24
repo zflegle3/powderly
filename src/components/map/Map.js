@@ -1,9 +1,9 @@
 import { GoogleMap, MarkerF, getBounds, Marker, Size, InfoWindow } from "@react-google-maps/api"
 import { useMemo } from "react";
 import { useState, useEffect, useRef } from "react";
-import mapStyles from "../custom-styles/mapStyles";
-import SearchBar from "./SearchBar"
-import FilterBar from "./FilterBar"
+import mapStyles from "../../custom-styles/mapStyles";
+import SearchBar from "../SearchBar"
+import FilterBar from "../FilterBar"
 import { FaLocationArrow } from 'react-icons/fa';
 import InfoPanel from "./InfoPanel"
 

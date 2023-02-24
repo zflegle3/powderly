@@ -4,7 +4,7 @@ import axios from 'axios';
 import { useLoadScript} from "@react-google-maps/api";
 // import {sortData} from "../features/sort.js";
 //Components
-import Map from "./Map.js"
+import Map from "./map/Map.js"
 import DataDash from "./DataDash.js"
 import SidePanel from "./results-panel/SidePanel.js";
 import Sheet from 'react-modal-sheet';
