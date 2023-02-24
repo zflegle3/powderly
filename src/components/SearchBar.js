@@ -30,42 +30,46 @@ function SearchBar({setSelected, selected, editStatus, setEditStatus, profileIma
         dispatch(openAccountModal());
     }
 
-    if (!editStatus) {
+    // if (!editStatus) {
+    //     return (
+    //         <div className="search-container">
+    //             <div className="search-bar">
+    //                 <div className="search-submit" onClick={handleSearchBtn}>
+    //                     <FaSearch />
+    //                 </div>
+    //                 <div className="search-display" onClick={editSearch}>
+    //                     <p>{location}</p>
+    //                     <p>{date.toDateString()}</p>
+    //                 </div>
+    //                 <div className="account-avatar" onClick={openAccount}>
+    //                     <img src={profileImage} alt="profile avatar" className='account-img'/>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     );
+    // } else {
         return (
             <div className="search-container">
                 <div className="search-bar">
                     <div className="search-submit" onClick={handleSearchBtn}>
                         <FaSearch />
                     </div>
-                    <div className="search-display" onClick={editSearch}>
-                        <p>{location}</p>
-                        <p>{date.toDateString()}</p>
-                    </div>
-                    <div className="account-avatar" onClick={openAccount}>
-                        <img src={profileImage} alt="profile avatar" className='account-img'/>
-                    </div>
-                </div>
-            </div>
-        );
-    } else {
-        return (
-            <div className="search-container">
-                <div className="search-bar">
-                    <div className="search-submit" onClick={handleSearchBtn}>
-                        <FaSearch />
-                    </div>
+                    <div className="search-display">
                     <form className="search-form" onClick={editSearch}>
                         {/* <input className="location-in" type="text" name="location" onChange={ e => setLocation(e.target.value)}></input> */}
                         <PlacesAutocomplete setSelected={setSelected} setEditStatus={setEditStatus} setLocation={setLocation} />
                         {/* <input className="date-in" type="date" name="location"></input> */}
                     </form>
+                    <p>{date.toDateString()}</p>
+                    </div >
+
                     <div className="account-avatar" onClick={openAccount}>
                         <img src={profileImage} alt="profile avatar" className='account-img'/>
                     </div>
                 </div>
             </div>
         );
-    }
+    // }
 }
 
 export default SearchBar;

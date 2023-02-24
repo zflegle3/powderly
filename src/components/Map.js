@@ -28,13 +28,8 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
     const [selectedMarker, setSelectedMarker] = useState(null);
     //controls search bar display, set true for edit mode and false for display only
 
-    // let infoWindowTest;
-
     const handleClick = (id, position) => {
-        console.log("SHREEEED IT DUUUUUUDE!!!")
         let selectedInfo = resorts.filter(resort => resort.refId === id)[0];
-
-
         setSelectedMarker({
             pos: position,
             name: selectedInfo.name,
@@ -44,11 +39,6 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
             wind: selectedInfo.conditions.forecast[0].windMax,
             date: new Date(selectedInfo.conditions.forecast[0].date),
         })
-        // infoWindowTest.open({
-        //     anchor: position,
-        //     myMap,
-        // });
-
     }
 
     const handleHover = () => {
@@ -126,7 +116,6 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
     }
 
     const onMapLoad = (map) => {
-
         //sets myMap state with map object
         setMyMap(map);
     };
@@ -148,6 +137,7 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
     };
 
     const handleBtnClick = (e) => {
+        //recenters map to searched location or user default location
         e.preventDefault();
         console.log("Clicked")
         myMap.panTo(selected);
@@ -163,11 +153,6 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
             console.log(lat,lng);
             myMap.panTo({lat: Number(lat), lng: Number(lng)})
             myMap.setZoom(9);
-
-            // infoWindowTest = new myMap.infoWindow({
-            //     content: "Test window",
-            //     position: selected
-            // })
         };
     },[lat,lng]);
 

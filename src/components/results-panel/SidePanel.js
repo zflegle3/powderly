@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from 'react-redux';
 function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
     const [sortedResults, setSortedResults] = useState(searchResults);
     const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+
+    console.log(searchResults)
     
     const trimResults = (filteredResults) => {
         // if (filteredResults.length > 10) {
@@ -17,8 +19,8 @@ function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
     }
 
     const sortAtoZ = () => {
-        let filteredResults = [...searchResults];
-        filteredResults.sort((a, b) => {
+        let sortedResults = [...searchResults];
+        sortedResults.sort((a, b) => {
             const itemA = a.name.toUpperCase(); // ignore upper and lowercase
             const itemB = b.name.toUpperCase(); // ignore upper and lowercase
             if (itemA < itemB) {
@@ -29,12 +31,12 @@ function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
             }
             return 0;
         });
-        trimResults(filteredResults)
+        trimResults(sortedResults)
     }
 
     const sortZtoA = () => {
-        let filteredResults = [...searchResults];
-        filteredResults.sort((a, b) => {
+        let sortedResults = [...searchResults];
+        sortedResults.sort((a, b) => {
             const itemA = a.name.toUpperCase(); // ignore upper and lowercase
             const itemB = b.name.toUpperCase(); // ignore upper and lowercase
             if (itemA < itemB) {
@@ -45,12 +47,29 @@ function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
             }
             return 0;
         });
+        trimResults(sortedResults)
+    }
+
+    const filterFavorites = () => {
+        let filteredResults = searchResults.filter((searchResult) => {
+            return user.favorites.some((favorite) => {
+                return searchResult.refId === favorite.refId;
+            });
+        } );
+        console.log(filteredResults)
         trimResults(filteredResults)
     }
 
+
     const sortSnow = (property) => {
         let filteredResults = [...searchResults];
-        filteredResults.sort((a, b) => Number(a[`${property}`]) - Number(b[`${property}`]));
+        filteredResults.sort((a, b) => Number(b.conditions.current[`${property}`]) - Number(a.conditions.current[`${property}`]));
+        trimResults(filteredResults)
+    }
+
+    const sortRating = () => {
+        let filteredResults = [...searchResults];
+        filteredResults.sort((a, b) => Number(b.conditions.forecast[0].rating) - Number(a.conditions.forecast[0].rating));
         trimResults(filteredResults)
     }
 
@@ -69,7 +88,7 @@ function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
                     sortZtoA();
                     break;
                 case 3:
-                    sortZtoA();
+                    sortRating();
                     break;
                 case 4:
                     sortSnow("freshSnow");
@@ -78,16 +97,16 @@ function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
                     sortSnow("snow24");
                     break;
                 case 6:
-                    sortZtoA();
+                    sortSnow("snow74");
                     break;
                 case 7:
-                    sortZtoA();
+                    sortSnow("topDepth");
                     break;
                 case 8:
-                    sortZtoA();
+                    sortSnow("baseDepth");
                     break;
                 case 9:
-                    sortZtoA();
+                    filterFavorites();
                     break;
                 default:
                     // code block
