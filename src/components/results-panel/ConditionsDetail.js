@@ -1,7 +1,7 @@
 import Timeline from "../calendar/Timeline";
-import { FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaCrosshairs } from 'react-icons/fa';
+import { FaTemperatureLow, FaTint, FaSnowflake, FaWind, FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaCrosshairs } from 'react-icons/fa';
 import { useState } from "react";
-
+import ForecastDateItem from "./ForecastDateItem";
 
 function ConditionsDetail({resortData}) {
     const [displayStatus, setDisplayStatus]  = useState(false);
@@ -33,65 +33,76 @@ function ConditionsDetail({resortData}) {
         }
     }
 
-
+    let forecast = resortData.conditions.forecast.map(forecast => {
+        return <ForecastDateItem forecastData={forecast}/>
+    })
 
 
 
     return (
         <div className="resort-conditions-detail">
 
-            <div className="snow-condition">
-                <p>Snow Condition:</p>
-                <p>{desc}</p>
-            </div>
+            <p className="section-title">current:</p>
 
             <div className="resort-conditions-current">
 
-                <div className="twenty-four-hr-snow">
-                    <p>{fresh}"</p>
-                    <p>Fresh Snow</p>
+                <div className="info-window-detail-item">
+                    <div className="detail-item-icon">
+                            <FaSnowflake />
+                        </div>
+                    <div className="detail-item-header">
+                        <p>Fresh Snow</p>
+                        <p>{fresh} in.</p>
+                    </div>
                 </div>
 
-                <div className="twenty-four-hr-snow">
-                    <p>{snow24}"</p>
-                    <p>24 hrs</p>
+                <div className="info-window-detail-item">
+                    <div className="detail-item-icon">
+                            <FaSnowflake />
+                        </div>
+                    <div className="detail-item-header">
+                        <p>24 hrs.</p>
+                        <p>{snow24} in.</p>
+                    </div>
                 </div>
 
-                <div className="seventy-two-hr-snow">
-                    <p>{snow72}"</p>
-                    <p>72 hrs</p>
+                <div className="info-window-detail-item">
+                    <div className="detail-item-icon">
+                            <FaSnowflake />
+                        </div>
+                    <div className="detail-item-header">
+                        <p>72 hrs.</p>
+                        <p>{snow72} in.</p>
+                    </div>
                 </div>
 
-                <div className="conditions-detail">
-                    <p>{baseDepth}"</p>
-                    <p>Base Depth</p>
+                <div className="info-window-detail-item">
+                    <div className="detail-item-icon">
+                            <FaSnowflake />
+                        </div>
+                    <div className="detail-item-header">
+                        <p>Base/Peak</p>
+                        <p>{baseDepth}/{topDepth} in.</p>
+                    </div>
                 </div>
 
-                <div className="conditions-detail">
-                    <p>{topDepth}"</p>
-                    <p>Peak Depth</p>
-                </div>
-
-                {/* <div className="conditions-detail">
-                    <p>{baseDepth}" - {topDepth}"</p>
-                    <p>{desc}</p>
-                </div> */}
-
-                <div className="lifts-detail">
+                {/* <div className="lifts-detail">
                     <p>{resortData.lifts.open}/{resortData.lifts.total}</p>
                     <p>Lifts Open</p>
-                </div>
+                </div> */}
 
             </div>
 
-
+            <p className="section-title">history:</p>
 
             <div className="resort-conditions-calendar">
                 <Timeline dataIn={resortData.conditions.history}/>
             </div>
 
+            <p className="section-title">forecast:</p>
+
             <div className="resort-conditions-forecast">
-                Add Forecast Data Here
+                {forecast}
             </div>
 
 
