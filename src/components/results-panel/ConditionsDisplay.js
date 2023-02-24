@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaSearchLocation, FaCrosshairs } from 'react-icons/fa';
+import { FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaSearchLocation, FaCrosshairs, FaMapMarkerAlt } from 'react-icons/fa';
 import { useState } from "react";
 import gsap from "gsap";
 //Components
@@ -56,6 +56,7 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat}) {
 
     const expandCollapse = (e) => {
         e.preventDefault();
+        e.stopPropagation();
         if (displayStatus) {
             minusToPlus();
             setDisplayStatus(false);
@@ -76,7 +77,8 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat}) {
         ratingVal = "bad";
     } 
 
-    const focusLocation = () => {
+    const focusLocation = (e) => {
+        e.stopPropagation();
         setLng(resortData.location.lng);
         setLat(resortData.location.lat);
     }
@@ -84,28 +86,37 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat}) {
 
     if (displayStatus) {
         return (
-            <div className="resort-conditions-display" >
+            <div className="resort-conditions-display" onClick={expandCollapse}>
+
                 <div className="resort-conditions-header">
+                    <div className="resort-conditions-header-content">
+
+                        <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
+                        {/* <div className='title'>
+                            <p className="resort-name">{resortData.name}</p>
+                            <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
+                        </div> */}
+
+                        <div className='location' onClick={focusLocation}>
+                            <div className="header-icon" >
+                                <FaMapMarkerAlt/>
+                            </div>
+                            <p>{resortData.location.region}, {resortData.location.country}</p>
+                        </div>
+
+                        <div className='rating'>
+                            <p className={`rating-${ratingVal} value`}>{resortData.conditions.forecast[0].rating} </p>
+                            <p className={`rating-${ratingVal} desc`}>{desc}</p>
+                        </div>
+
+                    </div>
 
                     <button className="expand-collapse-btn" onClick={expandCollapse}>
-
                         <div className="expand-collapse-icon">
                             <div className={`bar-1-${resortData.refId}`}></div>
                             <div className={`bar-2-${resortData.refId}`}></div>
-                            {/* <div className={`bar-3-${resortData.refId}`}></div> */}
                         </div>
-        
-                        <p className={`rating-${ratingVal}`}>{resortData.conditions.forecast[0].rating} </p>
-        
-                        <p className="resort-name">{resortData.name}</p>
-
                     </button>
-
-                    <div className="header-icon" onClick={focusLocation}>
-                        <FaSearchLocation/>
-                    </div>
-
-                    <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
     
                 </div>
 
@@ -116,31 +127,39 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat}) {
 
     } else {
         return (
-            <div className="resort-conditions-display">
-                <div className="resort-conditions-header">
-    
-                    <button className="expand-collapse-btn" onClick={expandCollapse}>
+            <div className="resort-conditions-display" onClick={expandCollapse}>
 
-                        <div className="expand-collapse-icon" >
-                            <div className={`bar-1-${resortData.refId}`}></div>
-                            <div className={`bar-2-${resortData.refId}`}></div>
-                            {/* <div className={`bar-3-${resortData.refId}`}></div> */}
+                <div className="resort-conditions-header">
+                    <div className="resort-conditions-header-content">
+
+                        <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
+                        {/* <div className='title'>
+                            <p className="resort-name">{resortData.name}</p>
+                            <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
+                        </div> */}
+
+                        <div className='location' onClick={focusLocation}>
+                            <div className="header-icon">
+                                <FaMapMarkerAlt/>
+                            </div>
+                            <p>{resortData.location.region}, {resortData.location.country}</p>
                         </div>
 
-                        <p className={`rating-${ratingVal}`}>{resortData.conditions.forecast[0].rating}</p>
+                        <div className='rating'>
+                            <p className={`rating-${ratingVal} value`}>{resortData.conditions.forecast[0].rating} </p>
+                            <p className={`rating-${ratingVal} desc`}>{desc}</p>
+                        </div>
 
-                        <p className="resort-name">{resortData.name}</p>
-
-                    </button>
-
-                    <div className="header-icon" onClick={focusLocation}>
-                        <FaSearchLocation/>
                     </div>
 
-                    <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
+                    <button className="expand-collapse-btn" onClick={expandCollapse}>
+                        <div className="expand-collapse-icon">
+                            <div className={`bar-1-${resortData.refId}`}></div>
+                            <div className={`bar-2-${resortData.refId}`}></div>
+                        </div>
+                    </button>
     
                 </div>
-
 
             </div>
         );

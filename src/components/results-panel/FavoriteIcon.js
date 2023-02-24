@@ -7,7 +7,9 @@ function FavoriteIcon({resortData, favoriteStatus}) {
     const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
 
-    const toggleFavorite = () => {
+    const toggleFavorite = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         let selected = {
             locId: resortData.refId,
             userId: user._id
@@ -23,14 +25,20 @@ function FavoriteIcon({resortData, favoriteStatus}) {
 
     if (favoriteStatus) {
         return (
-                <div className="header-icon favorite" onClick={toggleFavorite}>
+            <div className='title favorite' onClick={toggleFavorite}>
+                <p className="resort-name">{resortData.name}</p>
+                <div className="header-icon favorite" >
                     <FaStar/>
                 </div>
+            </div>
         )
     } else {
         return (
-            <div className="header-icon" onClick={toggleFavorite}>
-                <FaRegStar/>
+            <div className='title' onClick={toggleFavorite}>
+                <p className="resort-name">{resortData.name}</p>
+                <div className="header-icon" >
+                    <FaRegStar/>
+                </div>
             </div>
         )
     }
