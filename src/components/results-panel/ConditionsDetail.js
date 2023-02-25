@@ -2,6 +2,7 @@ import Timeline from "../calendar/Timeline";
 import { FaTemperatureLow, FaTint, FaSnowflake, FaWind, FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaCrosshairs } from 'react-icons/fa';
 import { useState } from "react";
 import ForecastDateItem from "./ForecastDateItem";
+import ForecastDisplay from "./ForecastDisplay"
 
 function ConditionsDetail({resortData}) {
     const [displayStatus, setDisplayStatus]  = useState(false);
@@ -32,12 +33,6 @@ function ConditionsDetail({resortData}) {
             setDisplayStatus(true);
         }
     }
-
-    let forecast = resortData.conditions.forecast.map(forecast => {
-        return <ForecastDateItem forecastData={forecast}/>
-    })
-
-
 
     return (
         <div className="resort-conditions-detail">
@@ -101,10 +96,7 @@ function ConditionsDetail({resortData}) {
 
             <p className="section-title">forecast:</p>
 
-            <div className="resort-conditions-forecast">
-                {forecast}
-            </div>
-
+            <ForecastDisplay forecastData={resortData.conditions.forecast}/>
 
         </div>
     );

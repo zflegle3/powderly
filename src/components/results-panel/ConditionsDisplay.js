@@ -83,6 +83,12 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat}) {
         setLat(resortData.location.lat);
     }
 
+    const hideHover = (e) => {
+        console.log("hover");
+        e.stopPropagation();
+        console.log(e.target)
+    }
+
 
     if (displayStatus) {
         return (
@@ -97,7 +103,7 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat}) {
                             <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
                         </div> */}
 
-                        <div className='location' onClick={focusLocation}>
+                        <div className='location' onMouseOver={hideHover} onClick={focusLocation}>
                             <div className="header-icon" >
                                 <FaMapMarkerAlt/>
                             </div>

@@ -1,10 +1,8 @@
 import { FaTemperatureLow, FaTint, FaSnowflake, FaWind } from 'react-icons/fa';
+import {cToF, kphToMph, cmToIn} from "../../features/units";
 
 
 function InfoPanel({selectedMarker}) {
-
-    let hiF = ((selectedMarker.hi*9/5)+32).toFixed(1);
-    let loF = ((selectedMarker.lo*9/5)+32).toFixed(1);
 
     return (
         <div className="info-window">
@@ -19,7 +17,7 @@ function InfoPanel({selectedMarker}) {
                         </div>
                     <div className="detail-item-header">
                         <p>High/Low</p>
-                        <p>{hiF}/{loF}°F</p>
+                        <p>{cToF(selectedMarker.hi)}/{cToF(selectedMarker.lo)}°F</p>
                     </div>
                 </div>
 
@@ -29,7 +27,7 @@ function InfoPanel({selectedMarker}) {
                     </div>
                     <div className="detail-item-header">
                         <p>Wind</p>
-                        <p>{(selectedMarker.wind*0.621371).toFixed(1)} mph</p>
+                        <p>{kphToMph(selectedMarker.wind)} mph</p>
                     </div>
                 </div>
 
@@ -39,7 +37,7 @@ function InfoPanel({selectedMarker}) {
                     </div>
                     <div className="detail-item-header">
                         <p>Snowfall</p>
-                        <p>{(selectedMarker.snow*0.393701).toFixed(1)} in.</p>
+                        <p>{cmToIn(selectedMarker.snow)} in.</p>
                     </div>
                 </div>
 
