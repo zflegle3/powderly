@@ -214,7 +214,7 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
                     mapContainerClassName="map-container"
                     id={"a5b17b69dbe1a9d9"}
                     options={{
-                        styles: mapStyles.darkStyle,
+                        styles: mapStyles.lightStyle,
                         disableDefaultUI: true,
                         zoomControl: true,
                     }}

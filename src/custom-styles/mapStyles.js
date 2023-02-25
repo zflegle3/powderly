@@ -504,104 +504,11 @@ const darkStyle = [
 
 const lightStyle = [
     {
-        "featureType": "administrative.country",
-        "elementType": "geometry",
+        "featureType": "administrative",
+        "elementType": "labels.text.fill",
         "stylers": [
             {
-                "lightness": "0"
-            },
-            {
-                "weight": "0.33"
-            },
-            {
-                "color": "#646464"
-            },
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.country",
-        "elementType": "labels.text",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.country",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.province",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "color": "#969696"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.locality",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.locality",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.locality",
-        "elementType": "geometry.stroke",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.locality",
-        "elementType": "labels",
-        "stylers": [
-            {
-                "visibility": "simplified"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.locality",
-        "elementType": "labels.text",
-        "stylers": [
-            {
-                "weight": "1.69"
-            },
-            {
-                "color": "#5f5c5c"
-            }
-        ]
-    },
-    {
-        "featureType": "administrative.locality",
-        "elementType": "labels.icon",
-        "stylers": [
-            {
-                "visibility": "simplified"
+                "color": "#444444"
             }
         ]
     },
@@ -615,32 +522,20 @@ const lightStyle = [
         ]
     },
     {
-        "featureType": "administrative.land_parcel",
-        "elementType": "geometry",
+        "featureType": "landscape",
+        "elementType": "all",
+        "stylers": [
+            {
+                "color": "#f2f2f2"
+            }
+        ]
+    },
+    {
+        "featureType": "landscape.natural",
+        "elementType": "all",
         "stylers": [
             {
                 "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.natural.landcover",
-        "elementType": "geometry",
-        "stylers": [
-            {
-                "saturation": "6"
-            },
-            {
-                "weight": "1.25"
-            }
-        ]
-    },
-    {
-        "featureType": "landscape.natural.terrain",
-        "elementType": "geometry.fill",
-        "stylers": [
-            {
-                "saturation": "8"
             }
         ]
     },
@@ -649,79 +544,43 @@ const lightStyle = [
         "elementType": "all",
         "stylers": [
             {
+                "visibility": "on"
+            },
+            {
+                "color": "#052366"
+            },
+            {
+                "saturation": "-70"
+            },
+            {
+                "lightness": "85"
+            }
+        ]
+    },
+    {
+        "featureType": "poi",
+        "elementType": "labels",
+        "stylers": [
+            {
                 "visibility": "simplified"
+            },
+            {
+                "lightness": "-53"
+            },
+            {
+                "weight": "1.00"
+            },
+            {
+                "gamma": "0.98"
             }
         ]
     },
     {
-        "featureType": "poi.attraction",
-        "elementType": "all",
+        "featureType": "poi",
+        "elementType": "labels.icon",
         "stylers": [
             {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.business",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.government",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.medical",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.park",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "on"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.place_of_worship",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.school",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
-        "featureType": "poi.sports_complex",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
+                "visibility": "simplified"
             }
         ]
     },
@@ -730,7 +589,13 @@ const lightStyle = [
         "elementType": "all",
         "stylers": [
             {
-                "visibility": "off"
+                "saturation": -100
+            },
+            {
+                "lightness": 45
+            },
+            {
+                "visibility": "on"
             }
         ]
     },
@@ -739,7 +604,16 @@ const lightStyle = [
         "elementType": "geometry",
         "stylers": [
             {
-                "visibility": "on"
+                "saturation": "-18"
+            }
+        ]
+    },
+    {
+        "featureType": "road",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
             }
         ]
     },
@@ -748,7 +622,34 @@ const lightStyle = [
         "elementType": "all",
         "stylers": [
             {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
+            }
+        ]
+    },
+    {
+        "featureType": "road.arterial",
+        "elementType": "labels.icon",
+        "stylers": [
+            {
                 "visibility": "off"
+            }
+        ]
+    },
+    {
+        "featureType": "road.local",
+        "elementType": "all",
+        "stylers": [
+            {
+                "visibility": "on"
             }
         ]
     },
@@ -762,33 +663,47 @@ const lightStyle = [
         ]
     },
     {
-        "featureType": "transit.station",
-        "elementType": "all",
-        "stylers": [
-            {
-                "visibility": "off"
-            }
-        ]
-    },
-    {
         "featureType": "water",
         "elementType": "all",
         "stylers": [
             {
-                "saturation": "-39"
+                "color": "#57677a"
             },
             {
-                "gamma": "0.83"
-            },
-            {
-                "hue": "#00cdff"
-            },
-            {
-                "lightness": "-2"
+                "visibility": "on"
             }
         ]
     }
 ]
 
+let testStyle2 = [
+    {
+        "stylers": [
+            {
+                "hue": "#007fff"
+            },
+            {
+                "saturation": 89
+            }
+        ]
+    },
+    {
+        "featureType": "water",
+        "stylers": [
+            {
+                "color": "#ffffff"
+            }
+        ]
+    },
+    {
+        "featureType": "administrative.country",
+        "elementType": "labels",
+        "stylers": [
+            {
+                "visibility": "off"
+            }
+        ]
+    }
+]
 
-export default { testStyle, darkStyle, lightStyle }
+export default { testStyle, darkStyle, lightStyle, testStyle2 }
