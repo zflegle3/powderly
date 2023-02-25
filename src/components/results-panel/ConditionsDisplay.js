@@ -95,26 +95,23 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat}) {
             <div className="resort-conditions-display" onClick={expandCollapse}>
 
                 <div className="resort-conditions-header">
-                    <div className="resort-conditions-header-content">
 
+                    <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
+                    {/* <div className='title'>
+                        <p className="resort-name">{resortData.name}</p>
                         <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
-                        {/* <div className='title'>
-                            <p className="resort-name">{resortData.name}</p>
-                            <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
-                        </div> */}
+                    </div> */}
 
-                        <div className='location' onMouseOver={hideHover} onClick={focusLocation}>
-                            <div className="header-icon" >
-                                <FaMapMarkerAlt/>
-                            </div>
-                            <p>{resortData.location.region}, {resortData.location.country}</p>
+                    <div className='location' onMouseOver={hideHover} onClick={focusLocation}>
+                        <div className="header-icon" >
+                            <FaMapMarkerAlt/>
                         </div>
+                        <p>{resortData.location.region}, {resortData.location.country}</p>
+                    </div>
 
-                        <div className='rating'>
-                            <p className={`rating-${ratingVal} value`}>{resortData.conditions.forecast[0].rating} </p>
-                            <p className={`rating-${ratingVal} desc`}>{desc}</p>
-                        </div>
-
+                    <div className='rating'>
+                        <p className={`rating-${ratingVal} value`}>{resortData.conditions.forecast[0].rating} </p>
+                        <p className={`rating-${ratingVal} desc`}>{desc}</p>
                     </div>
 
                     <button className="expand-collapse-btn" onClick={expandCollapse}>
@@ -136,26 +133,23 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat}) {
             <div className="resort-conditions-display" onClick={expandCollapse}>
 
                 <div className="resort-conditions-header">
-                    <div className="resort-conditions-header-content">
 
+                    <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
+                    {/* <div className='title'>
+                        <p className="resort-name">{resortData.name}</p>
                         <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
-                        {/* <div className='title'>
-                            <p className="resort-name">{resortData.name}</p>
-                            <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
-                        </div> */}
+                    </div> */}
 
-                        <div className='location' onClick={focusLocation}>
-                            <div className="header-icon">
-                                <FaMapMarkerAlt/>
-                            </div>
-                            <p>{resortData.location.region}, {resortData.location.country}</p>
+                    <div className='location' onClick={focusLocation}>
+                        <div className="header-icon">
+                            <FaMapMarkerAlt/>
                         </div>
+                        <p>{resortData.location.region}, {resortData.location.country}</p>
+                    </div>
 
-                        <div className='rating'>
-                            <p className={`rating-${ratingVal} value`}>{resortData.conditions.forecast[0].rating} </p>
-                            <p className={`rating-${ratingVal} desc`}>{desc}</p>
-                        </div>
-
+                    <div className='rating'>
+                        <p className={`rating-${ratingVal} value`}>{resortData.conditions.forecast[0].rating} </p>
+                        <p className={`rating-${ratingVal} desc`}>{desc}</p>
                     </div>
 
                     <button className="expand-collapse-btn" onClick={expandCollapse}>

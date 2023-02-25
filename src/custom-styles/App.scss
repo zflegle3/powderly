@@ -158,190 +158,186 @@ $input-shdw-b: rgba(2,32,71,0.1);
         width: 100%;
         display: flex;
         flex-grow: 1;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
         align-items: flex-start;
         padding: 0.5rem 0rem;
+        position: relative;
 
-        .resort-conditions-header-content{
-          // flex-grow: 1 ;
+        .title {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          cursor: pointer;
+          z-index: 1;
 
-          .title {
-            display: flex;
-            flex-direction: row;
-            align-items: center;
+          .resort-name {
+            font-size: 2rem;
+            font-weight: 800;
+            color: $txt-auth-main;
+            // max-width: 25rem;
+            // max-width: 60%;
+            // overflow: hidden;
+            white-space: nowrap;
+            text-align: start;
+            text-overflow: ellipsis;        
+            padding-right: 1.2rem;
+          }
+
+          .header-icon {
+            padding: 0.5rem;
+            margin-right: 1rem;
             cursor: pointer;
-            z-index: 1;
+    
+            svg {
+              height: 2.5rem;
+              width: 2.5rem;
+              fill: $txt-auth-main;
+              transition: all 0.3s;
+            }
+          }
+    
+          .header-icon.favorite {
+            svg {
+              fill: $fav-gold;
+            }
+          }
+    
+          .header-icon:hover {
+            svg {
+              scale: 1.2;
+            }
+          }
+        }
 
-            .resort-name {
-              font-size: 2rem;
-              font-weight: 800;
-              color: $txt-auth-main;
-              // max-width: 25rem;
-              // max-width: 60%;
-              // overflow: hidden;
-              white-space: nowrap;
-              text-align: start;
-              text-overflow: ellipsis;        
-              padding-right: 1.2rem;
-            }
+        .title.favorite {
 
-            .header-icon {
-              padding: 0.5rem;
-              margin-right: 1rem;
-              cursor: pointer;
-      
-              svg {
-                height: 2.5rem;
-                width: 2.5rem;
-                fill: $txt-auth-main;
-                transition: all 0.3s;
-              }
-            }
-      
-            .header-icon.favorite {
-              svg {
-                fill: $fav-gold;
-              }
-            }
-      
-            .header-icon:hover {
-              svg {
-                scale: 1.2;
-              }
+          .resort-name {
+            // color: $fav-gold;
+          }
+    
+          .header-icon {
+            svg {
+              fill: $fav-gold;
             }
           }
 
-          .title.favorite {
+        }
 
-            .resort-name {
-              // color: $fav-gold;
-            }
-      
-            .header-icon {
-              svg {
-                fill: $fav-gold;
-              }
-            }
-
-          }
-
-          .title:hover {
-            .header-icon {
-              svg {
-                scale: 1.2;
-              }
+        .title:hover {
+          .header-icon {
+            svg {
+              scale: 1.2;
             }
           }
+        }
 
-          .location {
-            display: flex;
-            flex-direction: row;
-            align-items: baseline;
-            cursor: pointer;
-            z-index: 1;
+        .location {
+          display: flex;
+          flex-direction: row;
+          align-items: baseline;
+          cursor: pointer;
+          z-index: 1;
 
-            p {
-              font-size: 1.5rem;
-              font-weight: 400;
-              color: $txt-auth-sub;
-              padding-right: 1rem;
-            }
-
-            .header-icon {
-              // padding: 0.5rem;
-              margin-right: 0.5rem;
-
-      
-              svg {
-                height: 1.5rem;
-                width: 1.5rem;
-                fill: $txt-auth-sub;
-                transition: all 0.3s;
-              }
-            }
+          p {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: $txt-auth-sub;
+            padding-right: 1rem;
           }
 
-          .location:hover {
-            p {
-              color: $txt-auth-hl;
+          .header-icon {
+            // padding: 0.5rem;
+            margin-right: 0.5rem;
+
+    
+            svg {
+              height: 1.5rem;
+              width: 1.5rem;
+              fill: $txt-auth-sub;
+              transition: all 0.3s;
             }
-            .header-icon {
-              svg {
-                scale: 1.2;
-                fill: $txt-auth-hl;
-              }
+          }
+        }
+
+        .location:hover {
+          p {
+            color: $txt-auth-hl;
+          }
+          .header-icon {
+            svg {
+              scale: 1.2;
+              fill: $txt-auth-hl;
             }
-            
+          }
+          
+        }
+
+        .rating {
+          display: flex;
+          align-items: center;
+          flex-direction: flex-start;
+          margin-top: 0.5rem;
+
+          p:nth-child(1) {
+            font-weight: 600;
           }
 
-          .rating {
-            display: flex;
-            align-items: center;
-            flex-direction: flex-start;
-            margin-top: 0.5rem;
+          p:nth-child(2) {
+            font-weight: 400;
+          }
 
-            p:nth-child(1) {
-              font-weight: 600;
-            }
+          p[class*="rating"] { 
+            font-size: 1.5rem;
+            // font-weight: 600;
+            color: white;
+            text-align: center;
+            padding: 0.5rem;
+            border-radius: 0.5rem;
+            margin-right: 0.5rem;
+          }
+    
+          .rating-best.value {
+            background-color: #067411;
+          }
+    
+          .rating-good.value {
+            background-color: #799210;
+          }
+    
+          .rating-ok.value {
+            background-color: #BC8F2A;
+          }
+    
+          .rating-bad.value {
+            background-color: #A15533;
+          }
+    
+          .rating-na.value {
+            background-color: #3B3E49;
+          }
 
-            p:nth-child(2) {
-              font-weight: 400;
-            }
+          .rating-best.desc {
+            color: #067411;
+          }
+    
+          .rating-good.desc {
+            color: #799210;
+          }
+    
+          .rating-ok.desc {
+            color: #BC8F2A;
+          }
+    
+          .rating-bad.desc {
+            color: #A15533;
+          }
+    
+          .rating-na.desc {
+            color: #3B3E49;
+          }
 
-            p[class*="rating"] { 
-              font-size: 1.5rem;
-              // font-weight: 600;
-              color: white;
-              text-align: center;
-              padding: 0.5rem;
-              border-radius: 0.5rem;
-              margin-right: 0.5rem;
-            }
-      
-            .rating-best.value {
-              background-color: #067411;
-            }
-      
-            .rating-good.value {
-              background-color: #799210;
-            }
-      
-            .rating-ok.value {
-              background-color: #BC8F2A;
-            }
-      
-            .rating-bad.value {
-              background-color: #A15533;
-            }
-      
-            .rating-na.value {
-              background-color: #3B3E49;
-            }
-
-            .rating-best.desc {
-              color: #067411;
-            }
-      
-            .rating-good.desc {
-              color: #799210;
-            }
-      
-            .rating-ok.desc {
-              color: #BC8F2A;
-            }
-      
-            .rating-bad.desc {
-              color: #A15533;
-            }
-      
-            .rating-na.desc {
-              color: #3B3E49;
-            }
-
-            p:nth-child(1) {
-
-            }
+          p:nth-child(1) {
           }
         }
 
@@ -354,38 +350,42 @@ $input-shdw-b: rgba(2,32,71,0.1);
           border: none;
           background-color: transparent;
           cursor: pointer;
+          position: absolute;
+          top: 0rem;
+          right: 0rem;
+
+          .expand-collapse-icon {
+            z-index: 1;
+            width: 3rem;
+            height: 3rem;
+            padding: 0.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: cener;
+            position: relative;
+            // margin-right: 1rem;
+            cursor: pointer;
+    
+            div[class*="bar-1"] {
+              width: 100%;
+              border-bottom: 3px solid $txt-auth-sub;
+              transition: border-bottom 0.3s;
+              transform: translateY(2px)
+            }
+    
+            div[class*="bar-2"] {
+              width: 100%;
+              border-bottom: 3px solid $txt-auth-sub;
+              transition: border-bottom 0.3s;
+              transform: rotate(90deg);
+            }
+          }
         }
 
       }
 
-      .expand-collapse-icon {
-				z-index: 1;
-				width: 3rem;
-				height: 3rem;
-				padding: 0.5rem;
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				align-items: cener;
-        position: relative;
-        margin-right: 1rem;
-        cursor: pointer;
 
-				div[class*="bar-1"] {
-					width: 100%;
-					border-bottom: 3px solid black;
-          transition: border-bottom 0.3s;
-          transform: translateY(2px)
-				}
-
-				div[class*="bar-2"] {
-					width: 100%;
-					border-bottom: 3px solid black;
-          transition: border-bottom 0.3s;
-          transform: rotate(90deg);
-				}
-
-			}
 
       .resort-conditions-detail {
         width: 100%;
