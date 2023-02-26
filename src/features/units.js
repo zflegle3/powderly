@@ -12,6 +12,6 @@ export const kphToMph = (kphIn) => {
 
 //CM to IN
 export const cmToIn = (cmIn) => {
-    let inOut = cmIn/44.704;
+    let inOut = cmIn/2.54;
     return(inOut.toFixed(1));
 }

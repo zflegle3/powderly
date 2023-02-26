@@ -8,8 +8,6 @@ import { useSelector, useDispatch } from 'react-redux';
 function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
     const [sortedResults, setSortedResults] = useState(searchResults);
     const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
-
-    console.log(searchResults)
     
     const trimResults = (filteredResults) => {
         // if (filteredResults.length > 10) {
@@ -56,7 +54,6 @@ function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
                 return searchResult.refId === favorite.refId;
             });
         } );
-        console.log(filteredResults)
         trimResults(filteredResults)
     }
 
@@ -75,7 +72,6 @@ function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
 
 
     useEffect(() => {
-        console.log("sorting data...")
         if (searchResults) {
             switch(sortData.id) {
                 case 0:
@@ -117,7 +113,6 @@ function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
 
         
     if (sortedResults) {
-        console.log(sortedResults);
         //conditionally renders Conditions display based on user favorite status
         let resultsDisplay = sortedResults.map((resortData) => {
             if(user.favorites.filter(favorite => favorite.refId === resortData.refId).length > 0) {
