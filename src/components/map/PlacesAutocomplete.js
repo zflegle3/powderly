@@ -9,7 +9,7 @@ import {
 import { useState, useEffect, createRef } from "react";
 
 
-const PlacesAutocomplete = ({ setSelected, setEditStatus, setLocation }) => {
+const PlacesAutocomplete = ({ setSelected,setLocation }) => {
     const textInput = createRef();
     const {
         ready,
@@ -27,22 +27,9 @@ const PlacesAutocomplete = ({ setSelected, setEditStatus, setLocation }) => {
         const {lat,lng} = await getLatLng(results[0]);
         //sets new map location
         setSelected({lat, lng});
-        //updates search bar status
-        setEditStatus(false);
         //updates search bar text
         setLocation(address);
     }
-
-    // useEffect(() => {
-    //     console.log("focus input...");
-    //     let input = document.querySelector(".combo-box-input");
-    //     console.log(input);
-    //     input.setAttribute('autoFocus', true);
-    //     // input.focus();
-    //     // textInput.current.focus();
-    // },[]);
-
-
 
     return(
         <Combobox className="combo-box" onSelect={handleSelect}>

@@ -14,7 +14,7 @@ function ForecastDisplay({forecastData}) {
         if (position === expandSelected) {
             expandStatus = true;
         };
-        return <ForecastDateItem position={position} expandStatus={expandStatus} forecastData={forecast} setExpandSelected={setExpandSelected}/>
+        return <ForecastDateItem key={forecast.date} position={position} expandStatus={expandStatus} forecastData={forecast} setExpandSelected={setExpandSelected}/>
     })
 
 
