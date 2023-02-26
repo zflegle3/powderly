@@ -79,8 +79,8 @@ function Timeline({dataIn}) {
           <div 
             className="timeline-cells" 
             style={{
-                gridTemplateRows: `repeat(${7},16px)`,
-                gridTemplateColumns: `repeat(${weeksNum}, 16px)`
+                gridTemplateRows: `repeat(${7},14px)`,
+                gridTemplateColumns: `repeat(${weeksNum}, 14px)`
             }} 
           >
             {cells.map((_, index) => {

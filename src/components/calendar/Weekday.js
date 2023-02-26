@@ -8,7 +8,7 @@ function WeekDay({ index }) {
     // console.log(index);
 
     return (
-      <div className='timeline-weekdays-weekday'>
+      <div className={`timeline-weekdays-weekday ${DayNames[index]}`}>
         {DayNames[index]}
       </div>
     )

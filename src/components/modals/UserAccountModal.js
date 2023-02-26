@@ -272,134 +272,140 @@ function UserAccountModal({profileImage, resorts}) {
                 </button>
             </div>
 
-            <form className='profile-image-form' >
+            <div className='settings-container'>
+                <form className='profile-image-form' >
 
-                <div className='image-display-container'> 
-                    {/* <div className='account-img'></div> */}
-                    <img src={profileImage} alt="profile avatar" className='account-img'/>
-                </div>
+                    <div className='image-display-container'> 
+                        {/* <div className='account-img'></div> */}
+                        <img src={profileImage} alt="profile avatar" className='account-img'/>
+                    </div>
 
-                <div className="image-upload-container">
-                    <h2>Update your profile picture</h2>
-                    <p>Upload a photo under 500 KB</p>
+                    <div className="image-upload-container">
+                        <h2>Update your profile picture</h2>
+                        <p>Upload a photo under 500 KB</p>
 
-                    <div className='upload-controls-container'> 
+                        <div className='upload-controls-container'> 
 
-                        <div className='upload-status-display'>
-                            <label htmlFor="image-upload" className="custom-file-upload">
-                                <input id="image-upload" type="file" accept=".png, .jpg, .jpeg" onChange={displayFile}/>
-                                Choose a File
+                            <div className='upload-status-display'>
+                                <label htmlFor="image-upload" className="custom-file-upload">
+                                    <input id="image-upload" type="file" accept=".png, .jpg, .jpeg" onChange={displayFile}/>
+                                    Choose a File
+                                </label>
+                                <p id="img-preview">No File Selected</p>
+                            </div>
+
+
+                            <button onClick={submitImage}>Submit</button>
+
+                        </div>
+                        
+                    </div>
+                    </form>
+
+                    <form className='account-settings-form'>
+
+                    <h2 className='modal-section-header'>Profile Details</h2>
+
+                    <div className='form-input-container'>
+
+                        <div className='names-container'>
+
+                            <div className="form-item-container name-first">
+                                <label htmlFor="name-first">first name</label>
+                                <div className="input-container">
+                                    <input type="text" id="name-first" name="name-first" value={firstIn} onFocus={addFocus} onBlur={removeFocus} onChange={e => setFirstIn(e.target.value)}></input>
+                                </div>
+                                <p id="name-first-error">first name error</p>
+                            </div>
+
+                            <div className="form-item-container name-last">
+                                <label htmlFor="name-last">last name</label>
+                                <div className="input-container">
+                                    <input type="text" id="name-last" name="name-last" value={lastIn} onFocus={addFocus} onBlur={removeFocus} onChange={e => setLastIn(e.target.value)} ></input>
+                                </div>
+                                <p id="name-last-error">last name error</p>
+                            </div>
+
+                        </div>
+
+                        <div className="form-item-container user-name-in">
+                            <label htmlFor="user-name-in">username</label>
+                            <div className="input-container">
+                                <input type="text" id="user-name-in" name="user-name-in" value={usernameIn} onFocus={addFocus} onBlur={removeFocus} onChange={e => setUsernameIn(e.target.value)} ></input>
+                            </div>
+                            <p id="user-name-error">username error</p>
+                        </div>
+
+                        <div className="form-item-container email-in">
+                            <label htmlFor="email-in">email</label>
+                            <div className="input-container">
+                                <input type="email-in" id="email" name="email-in" value={emailIn} onFocus={addFocus} onBlur={removeFocus} onChange={e => setEmailIn(e.target.value)} ></input>
+                            </div>
+                            <p id="email-error">email error</p>
+                        </div>
+
+
+                        <div className='password-container'>
+                            {passChange}
+                        </div>
+
+                    </div>
+
+                    <h2 className='modal-section-header'>Preferences</h2>
+                    <p className="color-theme-label">map color theme</p> 
+                    <ul className='color-theme-container'> 
+                        <li>
+                            <input type="radio" id="light" value="light" name="color-theme"></input>
+                            <label htmlFor="light">
+                                <div>
+                                    <FaSun/>
+                                </div>
+                                <p>Light Mode</p>
                             </label>
-                            <p id="img-preview">No File Selected</p>
-                        </div>
+                        </li>
+                        <li>
+                            <input type="radio" id="dark" value="dark" name="color-theme"></input>
+                            <label htmlFor="dark">
+                                <div>
+                                    <FaRegMoon/>
+                                </div>
+                                <p>Dark Mode</p>
+                            </label>
+                        </li>
+                    </ul>
 
-
-                        <button onClick={submitImage}>Submit</button>
-
-                    </div>
-                    
-                </div>
-            </form>
-
-            <form className='account-settings-form'>
-
-                <h2 className='modal-section-header'>Profile Details</h2>
-
-                <div className='form-input-container'>
-
-                    <div className='names-container'>
-
-                        <div className="form-item-container name-first">
-                            <label htmlFor="name-first">first name</label>
-                            <div className="input-container">
-                                <input type="text" id="name-first" name="name-first" value={firstIn} onFocus={addFocus} onBlur={removeFocus} onChange={e => setFirstIn(e.target.value)}></input>
-                            </div>
-                            <p id="name-first-error">first name error</p>
-                        </div>
-
-                        <div className="form-item-container name-last">
-                            <label htmlFor="name-last">last name</label>
-                            <div className="input-container">
-                                <input type="text" id="name-last" name="name-last" value={lastIn} onFocus={addFocus} onBlur={removeFocus} onChange={e => setLastIn(e.target.value)} ></input>
-                            </div>
-                            <p id="name-last-error">last name error</p>
-                        </div>
-
-                    </div>
-
-                    <div className="form-item-container user-name-in">
-                        <label htmlFor="user-name-in">username</label>
-                        <div className="input-container">
-                            <input type="text" id="user-name-in" name="user-name-in" value={usernameIn} onFocus={addFocus} onBlur={removeFocus} onChange={e => setUsernameIn(e.target.value)} ></input>
-                        </div>
-                        <p id="user-name-error">username error</p>
-                    </div>
-
-                    <div className="form-item-container email-in">
-                        <label htmlFor="email-in">email</label>
-                        <div className="input-container">
-                            <input type="email-in" id="email" name="email-in" value={emailIn} onFocus={addFocus} onBlur={removeFocus} onChange={e => setEmailIn(e.target.value)} ></input>
-                        </div>
-                        <p id="email-error">email error</p>
-                    </div>
-
-
-                    <div className='password-container'>
-                        {passChange}
-                    </div>
-
-                </div>
-
-                <h2 className='modal-section-header'>Preferences</h2>
-                <p className="color-theme-label">map color theme</p> 
-                <ul className='color-theme-container'> 
-                    <li>
-                        <input type="radio" id="light" value="light" name="color-theme"></input>
-                        <label htmlFor="light">
-                            <div>
-                                <FaSun/>
-                            </div>
-                            <p>Light Mode</p>
-                        </label>
-                    </li>
-                    <li>
-                        <input type="radio" id="dark" value="dark" name="color-theme"></input>
-                        <label htmlFor="dark">
-                            <div>
-                                <FaRegMoon/>
-                            </div>
-                            <p>Dark Mode</p>
-                        </label>
-                    </li>
-                </ul>
-
-                <p className="color-theme-label">favorites</p> 
-                <div className='favorites-container'>
-                    {/* {user.favorites.map(favoriteResort => {
+                    <p className="color-theme-label">favorites</p> 
+                    <div className='favorites-container'>
+                        {/* {user.favorites.map(favoriteResort => {
+                            <button>
+                                <p>X</p>
+                                <p>{favoriteResort.name}</p>
+                            </button>
+                        })} */}
+                        {favoritesDisplay}
+                        {/* <button>
+                            <p>X</p>
+                            <p>Breckenridge</p>
+                        </button>
                         <button>
                             <p>X</p>
-                            <p>{favoriteResort.name}</p>
+                            <p>Steamboat</p>
                         </button>
-                    })} */}
-                    {favoritesDisplay}
-                    {/* <button>
-                        <p>X</p>
-                        <p>Breckenridge</p>
-                    </button>
-                    <button>
-                        <p>X</p>
-                        <p>Steamboat</p>
-                    </button>
-                    <button>
-                        <p>X</p>
-                        <p>Copper Mountain</p>
-                    </button> */}
-                    
-                </div>
+                        <button>
+                            <p>X</p>
+                            <p>Copper Mountain</p>
+                        </button> */}
+                        
+                    </div>
 
-                <button className='submit-form' onClick={submitChanges}>Submit</button>
+                    <button className='submit-form' onClick={submitChanges}>Submit</button>
 
-            </form>
+                </form>
+
+
+            </div>
+
+            
 
             <button className='user-logout' onClick={onLogout}>Logout</button>
         </div>
