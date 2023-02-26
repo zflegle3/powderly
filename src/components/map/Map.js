@@ -2,8 +2,8 @@ import { GoogleMap, MarkerF, getBounds, Marker, Size, InfoWindow } from "@react-
 import { useMemo } from "react";
 import { useState, useEffect, useRef } from "react";
 import mapStyles from "../../custom-styles/mapStyles";
-import SearchBar from "../SearchBar"
-import FilterBar from "../FilterBar"
+import SearchBar from "./SearchBar"
+import FilterBar from "./FilterBar"
 import { FaLocationArrow } from 'react-icons/fa';
 import InfoPanel from "./InfoPanel"
 
@@ -20,13 +20,10 @@ import {
 // import LocationMarker from "./LocationMarker";
 
 function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, profileImage}) {
-    //props.resorts
-    const [myMap, setMyMap] = useState(null);
-    const [selected, setSelected] = useState({lat, lng});
-    const [editStatus, setEditStatus] = useState(false);
-    const [infoPos, setInfoPos] = useState({lat, lng})
-    const [selectedMarker, setSelectedMarker] = useState(null);
-    //controls search bar display, set true for edit mode and false for display only
+    const [myMap, setMyMap] = useState(null); //map reference instance
+    const [selected, setSelected] = useState({lat, lng}); //User or searched location
+    const [selectedMarker, setSelectedMarker] = useState(null); //Places info window on selected marker
+
 
     const handleClick = (id, position) => {
         let selectedInfo = resorts.filter(resort => resort.refId === id)[0];
@@ -41,9 +38,9 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
         })
     }
 
-    const handleHover = () => {
-        console.log("hover");
-    }
+    // const handleHover = () => {
+    //     console.log("hover");
+    // }
 
     const markers = resorts.map((resort) => {
         let rating = resort.conditions.forecast[0].rating;
@@ -58,8 +55,8 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
                     icon={{url:"https://i.imgur.com/PR6meRZ.png", scaledSize: new window.google.maps.Size(50, 50)}}  
                     position={{lat: Number(resort.location.lat), lng: Number(resort.location.lng,)}}
                     showInfo={false}
-                    onMouseover={e => handleHover()}
-                    onMouseEnter={handleHover}
+                    // onMouseover={e => handleHover()}
+                    // onMouseEnter={handleHover}
                 >
                 </Marker>
             );
@@ -127,10 +124,6 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
     };
 
     const handleMapClick = () => {
-        console.log("Map being clicked");
-        if (editStatus) {
-            setEditStatus(false);
-        }
         if (selectedMarker) {
             setSelectedMarker(null);
         }
@@ -139,22 +132,25 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
     const handleBtnClick = (e) => {
         //recenters map to searched location or user default location
         e.preventDefault();
-        console.log("Clicked")
         myMap.panTo(selected);
         myMap.setZoom(9);
     };
 
     
     useEffect(() => {
-        console.log("coords changed")
-        //pan to new 
+        //Updates map focus and zoom on recenter button
         if(myMap) {
-            console.log(myMap)
-            console.log(lat,lng);
             myMap.panTo({lat: Number(lat), lng: Number(lng)})
             myMap.setZoom(9);
         };
     },[lat,lng]);
+
+    useEffect(() => {
+        //resets zoom on searched location
+        if(myMap) {
+            myMap.setZoom(9);
+        };
+    },[selected]);
 
 
     let infoMarkerTest = null;
@@ -166,28 +162,6 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
         options={{ pixelOffset: new window.google.maps.Size(0, -20) }}
         >
             <InfoPanel selectedMarker={selectedMarker}/>
-            {/* <div className="info-window"  style={{
-                background: `transparent`,
-                border: `1px solid #ccc`,
-                padding: 15
-            }}>
-                <h2>{selectedMarker.name}</h2>
-                <p>{selectedMarker.date.toDateString()}</p>
-                <p>Snow Showers</p>
-                <div className="info-window-detail">
-
-                    <div className="info-window-detail-item">
-                        <div className="detail-item-header">
-                            <div className="detail-item-icon">
-
-                            </div>
-                            <p>High/Low</p>
-                        </div>
-
-                    </div>
-
-                </div>
-            </div> */}
         </InfoWindow>
     }
 
@@ -199,7 +173,7 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
 
             <div className="google-map">
                 <div className="controls-container">
-                    <SearchBar setSelected={setSelected} selected={selected} editStatus={editStatus} setEditStatus={setEditStatus} profileImage={profileImage}/>
+                    <SearchBar setSelected={setSelected} selected={selected} profileImage={profileImage}/>
                     <FilterBar setSort={setSort}/>
                 </div>
 
@@ -232,7 +206,6 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
             </div>
         );
     } else {
-        console.log("loading");
 
         return (
             <div className="google-map">

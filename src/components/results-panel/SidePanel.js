@@ -87,22 +87,22 @@ function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
                     sortRating();
                     break;
                 case 4:
-                    sortSnow("freshSnow");
+                    filterFavorites();
                     break;
                 case 5:
-                    sortSnow("snow24");
+                    sortSnow("freshSnow");
                     break;
                 case 6:
-                    sortSnow("snow74");
+                    sortSnow("snow24");
                     break;
                 case 7:
-                    sortSnow("topDepth");
+                    sortSnow("snow74");
                     break;
                 case 8:
-                    sortSnow("baseDepth");
+                    sortSnow("topDepth");
                     break;
                 case 9:
-                    filterFavorites();
+                    sortSnow("baseDepth");
                     break;
                 default:
                     // code block

@@ -1,15 +1,13 @@
-
-import { useEffect, useState, useMemo } from "react";
 import axios from 'axios';
+import { useEffect, useState, useMemo } from "react";
 import { useLoadScript} from "@react-google-maps/api";
-// import {sortData} from "../features/sort.js";
 //Components
 import Map from "./map/Map.js"
-import DataDash from "./DataDash.js"
 import SidePanel from "./results-panel/SidePanel.js";
 import Sheet from 'react-modal-sheet';
 import ModalContainer from './modals/ModalContainer';
 import LoadingSpinner from "./LoadingSpinner.js";
+//Images
 import { FaLocationArrow } from 'react-icons/fa';
 
 
@@ -52,7 +50,6 @@ function Home({profileImage}) {
     function getLocation() {
         //attempts to pull users location and set as lat/lng states
         //if err, sets default as denver lat/lng
-        // console.log("getting location")
         navigator.geolocation.getCurrentPosition(showPosition, defaultPosition);
     }
 
@@ -68,21 +65,10 @@ function Home({profileImage}) {
         getData(); 
     },[]);
 
-    const recenterMap = (e) => {
-        // e.preventDefault();
-        // setLng(resortData.location.lng);
-        // setLat(resortData.location.lat);
-        console.log("recenter");
-        // myMap.panTo(selected);
-        // myMap.setZoom(9);
-    };
-
 
     if (!isLoaded || !resorts || !lat || !lng ) {
-        // console.log("loading map and resort data")
         return (
               <LoadingSpinner />
-            //   Add loading component here
           );
     } else {
         //Desktop 
@@ -109,12 +95,9 @@ function Home({profileImage}) {
                         <Sheet.Backdrop />
                     </Sheet>
                     <button onClick={() => setOpen(true)}>Open sheet</button>
-                    <DataDash/>
                 </div>
             );
-          
         }
-
     }
 }
 
