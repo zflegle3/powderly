@@ -30,8 +30,12 @@ const logout = async() => {
 };
 
 //Update existing user
-const update= async(userData) => {
-    const response = await axios.put("http://localhost:8080/user/update/id", userData);
+const update= async(userData, token) => {
+    let config = {
+        headers: {
+            authorization: `Bearer ${token}`
+    }}//required for protected routes
+    const response = await axios.put("http://localhost:8080/user/update/id", userData, config);
     if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
     }
@@ -40,24 +44,27 @@ const update= async(userData) => {
 };
 
 //Delete existing user
-const remove = async(userId) => {
-    const response = await axios.delete("http://localhost:8080/user/delete/" + userId);
+const remove = async(userId, token) => {
+    let config = {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    }//required for protected routes
+    const response = await axios.delete("http://localhost:8080/user/delete/"+userId, config);
     localStorage.removeItem("user");
 };
 
 
 //Update existing user Image
-const updateImage= async(userData) => {
-    //sends userData.image as form data and userData.id as parameter 
+const updateImage= async(userData, token) => {
     const formData = new FormData();
     formData.append("profileImage", userData.image);
-    const response = await axios.post("http://localhost:8080/upload/"+userData.id, formData,{
+    const response = await axios.post("http://localhost:8080/upload/"+userData.id+"/"+token, formData,{
         headers: {
             'Content-Type': 'multipart/form-data'
             // an encoding type that allows files to be sent through a POST req.
         }
     });
-    console.log(response.data);
     //updated user data returned as a response
     if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
@@ -67,9 +74,14 @@ const updateImage= async(userData) => {
 };
 
 
-//Update existing user Image
-const addFavorite= async(userData) => {
-    const response = await axios.post("http://localhost:8080/user/add/favorite", userData);
+//Update user, Add new favorite
+const addFavorite= async(userData, token) => {
+    let config = {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    };//required for protected routes
+    const response = await axios.post("http://localhost:8080/user/add/favorite", userData, config);
     if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
     }
@@ -77,9 +89,14 @@ const addFavorite= async(userData) => {
     return response.data;
 };
 
-//Update existing user Image
-const removeFavorite= async(userData) => {
-    const response = await axios.post("http://localhost:8080/user/remove/favorite", userData);
+//Update user, Remove favorite
+const removeFavorite= async(userData, token) => {
+    let config = {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    };//required for protected routes
+    const response = await axios.post("http://localhost:8080/user/remove/favorite", userData, config);
     if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
     }

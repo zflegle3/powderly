@@ -28,7 +28,7 @@ export const login = createAsyncThunk("auth/login", async (user, thunkAPI) => {
     try{
         return await authService.login(user);
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
     }
@@ -42,20 +42,22 @@ export const logout = createAsyncThunk("auth/logout", async () => {
 //Update existing user
 export const update = createAsyncThunk("auth/update", async (user, thunkAPI) => {
     try{
-        return await authService.update(user);
+        const token = thunkAPI.getState().auth.user.token; //token required b/c protected route
+        return await authService.update(user,token);
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
     }
 })
 
-//Update existing user
+//Delete existing user
 export const remove = createAsyncThunk("auth/remove", async (id, thunkAPI) => {
     try{
-        return await authService.remove(id); 
+        const token = thunkAPI.getState().auth.user.token; //token required b/c protected route
+        return await authService.remove(id, token); 
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
     }
@@ -64,33 +66,34 @@ export const remove = createAsyncThunk("auth/remove", async (id, thunkAPI) => {
 //Update existing user image
 export const updateImage = createAsyncThunk("auth/updateImage", async (userData, thunkAPI) => {
     try{
-        return await authService.updateImage(userData);
+        const token = thunkAPI.getState().auth.user.token; //token required b/c protected route
+        return await authService.updateImage(userData, token);
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
     }
 })
 
-//Update existing user image
+//Update user, Add new favorite
 export const addFavorite = createAsyncThunk("auth/addFavorite", async (userData, thunkAPI) => {
-    console.log("adding user favorite", userData);
     try{
-        return await authService.addFavorite(userData);
+        const token = thunkAPI.getState().auth.user.token; //token required b/c protected route
+        return await authService.addFavorite(userData, token);
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
     }
 })
 
-//Update existing user image
+//Update user, Remove favorite
 export const removeFavorite = createAsyncThunk("auth/removeFavorite", async (userData, thunkAPI) => {
-    console.log("removing user favorite", userData);
     try{
-        return await authService.removeFavorite(userData);
+        const token = thunkAPI.getState().auth.user.token; //token required b/c protected route
+        return await authService.removeFavorite(userData, token);
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         const message = (error.response && error.response.data && error.response.data.message) || error.message || error.toString();
         return thunkAPI.rejectWithValue(message);
     }

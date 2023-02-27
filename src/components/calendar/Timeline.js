@@ -10,8 +10,8 @@ function Timeline({dataIn}) {
     let data =[]
     dataIn.forEach(item => {
         data.push({
-        date: DateTime.fromISO(item.date),
-        value: item.snowfall
+        date: DateTime.fromISO(item.snowDate),
+        value: item.snowVal
       })
     })
 
