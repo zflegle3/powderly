@@ -47,7 +47,7 @@ function InfoPanel({selectedMarker}) {
                     </div>
                     <div className="detail-item-header">
                         <p>Humidity</p>
-                        <p>{80}%</p>
+                        <p>{selectedMarker.humidity}%</p>
                     </div>
                 </div>
 

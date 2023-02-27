@@ -31,10 +31,11 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
             pos: position,
             name: selectedInfo.name,
             hi: selectedInfo.conditions.forecast[0].tempHigh,
-            lo: selectedInfo.conditions.forecast[0].tempsLow,
+            lo: selectedInfo.conditions.forecast[0].tempLow,
             snow: selectedInfo.conditions.forecast[0].snowfall,
             wind: selectedInfo.conditions.forecast[0].windMax,
             date: new Date(selectedInfo.conditions.forecast[0].date),
+            humidity: selectedInfo.conditions.forecast[0].humidity,
         })
     }
 
@@ -168,7 +169,6 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
 
 
     if (lng && lat) {
-        // console.log("map loaded");
         return (
 
             <div className="google-map">

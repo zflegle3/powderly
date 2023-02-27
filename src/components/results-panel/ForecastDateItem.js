@@ -1,13 +1,35 @@
 import { FaTemperatureLow, FaTint, FaSnowflake, FaWind, FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaCrosshairs } from 'react-icons/fa';
 import { useState } from "react";
 import { DateTime } from 'luxon'
-import { ReactComponent as PartlyCloudy } from "../../images/weather-icons/static/cloudy-day-1.svg";
 import {cToF, kphToMph, cmToIn} from "../../features/units"
+//Images
+import { ReactComponent as PartlyCloudy } from "../../images/weather-icons/static/cloudy-day-3.svg";
+import { ReactComponent as Cloudy } from "../../images/weather-icons/static/cloudy.svg";
+import { ReactComponent as Thunder } from "../../images/weather-icons/static/cloudy.svg";
+
+import { ReactComponent as SnowShowers } from "../../images/weather-icons/static/snowy-1.svg";
+import { ReactComponent as LightSnow } from "../../images/weather-icons/static/snowy-4.svg";
+import { ReactComponent as ModSnow } from "../../images/weather-icons/static/snowy-5.svg";
+import { ReactComponent as HeavySnow } from "../../images/weather-icons/static/snowy-6.svg";
+
+import { ReactComponent as RainShowers } from "../../images/weather-icons/static/rainy-1.svg";
+import { ReactComponent as LightRain } from "../../images/weather-icons/static/rainy-4.svg";
+import { ReactComponent as ModRain } from "../../images/weather-icons/static/rainy-5.svg";
+import { ReactComponent as HeavyRain } from "../../images/weather-icons/static/rainy-6.svg";
+
+import { ReactComponent as Clear } from "../../images/weather-icons/static/day.svg";
+import { ReactComponent as Bug } from "../../images/weather-icons/static/night.svg";
+import { ReactComponent as Default } from "../../images/weather-icons/static/cloudy-day-1.svg";
+
+
+
+
 
 
 function ForecastDateItem({forecastData, expandStatus, position, setExpandSelected}) {
-    const [dateOut, setDateOut] = useState(DateTime.fromISO(forecastData.date));
+    const [dateOut, setDateOut] = useState(DateTime.fromISO(forecastData.date, { zone: "UTC"}));
     // const [dateOut, setDateOut] = useState(DateTime.fromISO(forecastData.date.toISOString()));
+    console.log(forecastData.date);
 
     const weekdayShort = (day) => {
         switch (day) {
@@ -69,23 +91,70 @@ function ForecastDateItem({forecastData, expandStatus, position, setExpandSelect
         setExpandSelected(position);
     };
 
+    const getImage = (weatherDesc) => {
+        switch (weatherDesc) {
+            case 'light snow':
+                return <LightSnow/>;
+                break;
+            case 'mod. snow':
+                return <ModSnow/>;
+                break;
+            case 'snow shwrs':
+                return <SnowShowers/>;
+                break;
+            case 'heavy snow':
+                return <HeavySnow/>;
+                break;
+            case 'cloudy':
+                return <Cloudy/>;
+                break;
+            case 'some clouds':
+                return <PartlyCloudy/>;
+                break;
+            case 'light rain':
+                return <LightRain/>;
+                break;
+            case 'mod. rain':
+                return <ModRain/>;
+                break;
+            case 'heavy rain':
+                return <HeavyRain/>;
+                break;
+            case 'rain shwrs':
+                return <RainShowers/>;
+                break;
+            case 'risk thun- der':
+                return <Thunder/>;
+                break;
+            case 'clear':
+                return <Clear/>;
+                break;
+            case '':
+                return <Bug/>;
+                break;
+            default:
+              return <Default/>;
+          }
+
+    }
 
 
+    console.log(forecastData);
     if (expandStatus) {
+        console.log(dateOut);
         return (
             <div className="forecast-item expanded" id={`date-item-${position}`} onClick={expandForecastDisplay}>
                 <div className="forecast-header">
-                    <p className='forecast-date'>{weekdayLong(dateOut.weekday)}</p>
+                    <p className='forecast-date'>{dateOut.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}</p>
                     <div className='forecast-primary'>
-                        <PartlyCloudy />
-                        {/* <p>{cToF(forecastData.snowfall)}"</p> */}
-                        <p>{6.9}"</p>
+                        {getImage(forecastData.descriptions[1])}
+                        <p>{cmToIn(forecastData.snowfall)}"</p>
                     </div>
                     <div className='forecast-secondary'>
 
                         <div className='forecast-detail-item'>
                             <p>High/Low:</p>
-                            <p>{cToF(forecastData.tempHigh)} / {cToF(forecastData.tempsLow)} °F</p>
+                            <p>{cToF(forecastData.tempHigh)} / {cToF(forecastData.tempLow)} °F</p>
                         </div>
 
                         <div className='forecast-detail-item'>
@@ -100,7 +169,7 @@ function ForecastDateItem({forecastData, expandStatus, position, setExpandSelect
 
                         <div className='forecast-detail-item'>
                             <p>Humidity:</p>
-                            <p>{50}%</p>
+                            <p>{forecastData.humidity}%</p>
                         </div>
 
                     </div>
@@ -111,10 +180,10 @@ function ForecastDateItem({forecastData, expandStatus, position, setExpandSelect
         return (
             <div className="forecast-item compact" id={`date-item-${position}`} onClick={expandForecastDisplay}>
                 <div className="forecast-header">
-                <p className='forecast-date'>{weekdayShort(dateOut.weekday)}</p>
+                <p className='forecast-date'>{weekdayShort(dateOut.toUTC().weekday)}</p>
                     <div className='forecast-primary'>
-                        <PartlyCloudy />
-                        <p>{4.1}"</p>
+                        {getImage(forecastData.descriptions[1])}
+                        <p>{cmToIn(forecastData.snowfall)}"</p>
                     </div>
                 </div>
             </div>
