@@ -45,7 +45,7 @@ function App() {
   useEffect(() => {
     if (user) {
       if (user.profileImage) {
-        setProfileImage("http://localhost:8080/image/"+user.profileImage);
+        setProfileImage(process.env.REACT_APP_API_URL+"/image/"+user.profileImage);
       } else {
         setProfileImage (defaultImg);
       }

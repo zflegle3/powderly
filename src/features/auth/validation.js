@@ -8,7 +8,7 @@ const validateUserNameFormat = (userName) => {
 //ACTIVE USER DB VALIDATION BY USERNAME
 export const checkUserDb = async (userIn) => {
     //checks for user in db and returns true if found, false if not found
-    const responseEmail = await axios.post("http://localhost:8080/user/read/username", {username: userIn});
+    const responseEmail = await axios.post(process.env.REACT_APP_API_URL+"/user/read/username", {username: userIn});
     if (responseEmail.data.username === userIn) {
         return true;
     } else {
@@ -18,7 +18,7 @@ export const checkUserDb = async (userIn) => {
 
 //ACTIVE USER DB VALIDATION BY EMAIL
 export const checkEmailDb = async (userEmail) => {
-    const response = await axios.post("http://localhost:8080/user/read/email", {email: userEmail});
+    const response = await axios.post(process.env.REACT_APP_API_URL+"/user/read/email", {email: userEmail});
     if (response.data.email === userEmail) {
         return true;
     } else {
@@ -121,7 +121,7 @@ export const checkNewEmail = async(emailIn) => {
 
 //CURRENT PASSWORD VALIDATION
 export const checkPassDb = async (idIn, passIn, tokenIn) => {
-    const responsePass = await axios.post("http://localhost:8080/user/read/password", {id: idIn, password: passIn, token: tokenIn});
+    const responsePass = await axios.post(process.env.REACT_APP_API_URL+"/user/read/password", {id: idIn, password: passIn, token: tokenIn});
     //returns false if passwords match, true if not matching 
     return responsePass.data.passMatch;
 };

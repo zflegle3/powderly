@@ -20,7 +20,7 @@ function PasswordReset() {
                 //validate email in db {
                     if (await checkEmailDb(resetEmail)) {
                         //send email and await confirmation 
-                        const responseSend = await axios.post("http://localhost:8080/user/forgetpass", {email: resetEmail});
+                        const responseSend = await axios.post(process.env.REACT_APP_API_URL+"/user/forgetpass", {email: resetEmail});
                         if (responseSend.data.sendStatus) {
                             //update userEmail state to conditionally render confirmation
                             setUserEmail(resetEmail);

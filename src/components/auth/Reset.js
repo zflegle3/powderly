@@ -32,7 +32,7 @@ function Reset() {
                     token: token,
                     password: passwordIn
                 };
-                let responseUpdate = await axios.post("http://localhost:8080/user/resetpass", payload);
+                let responseUpdate = await axios.post(process.env.REACT_APP_API_URL+"/user/resetpass", payload);
                 if (responseUpdate.data.updateStatus) {
                     //submit status conditionally renders confirmation once complete
                     setSubmitStatus(true);
