@@ -61,7 +61,8 @@ function Home({profileImage}) {
                 headers: {
                     authorization: `Bearer ${user.token}`
             }}//required for protected routes
-            const dataIn = await axios.get("http://localhost:8080/conditions/all",config)
+            console.log(process.env.REACT_APP_API_URL);
+            const dataIn = await axios.get(process.env.REACT_APP_API_URL+"/conditions/all",config)
                 .catch(function (err) {
                     console.log("ERROR WITH MARKER DATA,", err)
                 });

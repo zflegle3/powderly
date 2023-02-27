@@ -1,11 +1,11 @@
 //used for making http requests, sending data back, setting data to local storage
 import axios from "axios";
 
-const API_URL = "http://localhost:8080";
+// const API_URL = "http://localhost:8080";
 
 //Register new user
 const register = async(userData) => {
-    const response = await axios.post(API_URL+"/user/create", userData);
+    const response = await axios.post(process.env.REACT_APP_API_URL+"/user/create", userData);
     if (response.data) {
         //sets local storage for protected routes
         localStorage.setItem("user", JSON.stringify(response.data));
@@ -15,7 +15,7 @@ const register = async(userData) => {
 
 //Login existing user
 const login = async(userData) => {
-    const response = await axios.post("http://localhost:8080/user/login", userData);
+    const response = await axios.post(process.env.REACT_APP_API_URL+"/user/login", userData);
 
     if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
@@ -35,7 +35,7 @@ const update= async(userData, token) => {
         headers: {
             authorization: `Bearer ${token}`
     }}//required for protected routes
-    const response = await axios.put("http://localhost:8080/user/update/id", userData, config);
+    const response = await axios.put(process.env.REACT_APP_API_URL+"/user/update/id", userData, config);
     if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
     }
@@ -50,7 +50,7 @@ const remove = async(userId, token) => {
             authorization: `Bearer ${token}`
         }
     }//required for protected routes
-    const response = await axios.delete("http://localhost:8080/user/delete/"+userId, config);
+    const response = await axios.delete(process.env.REACT_APP_API_URL+"/user/delete/"+userId, config);
     localStorage.removeItem("user");
 };
 
@@ -59,7 +59,7 @@ const remove = async(userId, token) => {
 const updateImage= async(userData, token) => {
     const formData = new FormData();
     formData.append("profileImage", userData.image);
-    const response = await axios.post("http://localhost:8080/upload/"+userData.id+"/"+token, formData,{
+    const response = await axios.post(process.env.REACT_APP_API_URL+"/upload/"+userData.id+"/"+token, formData,{
         headers: {
             'Content-Type': 'multipart/form-data'
             // an encoding type that allows files to be sent through a POST req.
@@ -81,7 +81,7 @@ const addFavorite= async(userData, token) => {
             authorization: `Bearer ${token}`
         }
     };//required for protected routes
-    const response = await axios.post("http://localhost:8080/user/add/favorite", userData, config);
+    const response = await axios.post(process.env.REACT_APP_API_URL+"/user/add/favorite", userData, config);
     if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
     }
@@ -96,7 +96,7 @@ const removeFavorite= async(userData, token) => {
             authorization: `Bearer ${token}`
         }
     };//required for protected routes
-    const response = await axios.post("http://localhost:8080/user/remove/favorite", userData, config);
+    const response = await axios.post(process.env.REACT_APP_API_URL+"/user/remove/favorite", userData, config);
     if (response.data) {
         localStorage.setItem("user", JSON.stringify(response.data));
     }
