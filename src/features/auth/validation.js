@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 //USERNAME FORMAT VALIDATION
 const validateUserNameFormat = (userName) => {
     return userName.match(/^[a-zA-Z0-9]+$/);
@@ -121,11 +120,11 @@ export const checkNewEmail = async(emailIn) => {
 }
 
 //CURRENT PASSWORD VALIDATION
-export const checkPassDb = async (idIn, passIn) => {
-    const responsePass = await axios.post("http://localhost:8080/user/read/password", {id: idIn, password: passIn});
+export const checkPassDb = async (idIn, passIn, tokenIn) => {
+    const responsePass = await axios.post("http://localhost:8080/user/read/password", {id: idIn, password: passIn, token: tokenIn});
     //returns false if passwords match, true if not matching 
     return responsePass.data.passMatch;
-}
+};
 
 
 //NEW PASSWORD VALIDATION

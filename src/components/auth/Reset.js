@@ -25,13 +25,13 @@ function Reset() {
         //validate password meets criteria
         if (checkNewPass(passwordIn)) {
             //validate password is different from previous
-            if (await checkPassDb(id, passwordIn)) {
+            if (await checkPassDb(id, passwordIn, token)) {
                 //update user data with new password in db
                 let payload = {
                     id: id,
                     token: token,
                     password: passwordIn
-                }
+                };
                 let responseUpdate = await axios.post("http://localhost:8080/user/resetpass", payload);
                 if (responseUpdate.data.updateStatus) {
                     //submit status conditionally renders confirmation once complete
@@ -39,21 +39,21 @@ function Reset() {
                 } else {
                     document.querySelector(".form-item-container.pass-in").classList.add("invalid");
                     document.getElementById("pass-error").textContent = "There was an error updating the password. Please try again.";
-                }
+                };
             } else {
                 document.querySelector(".form-item-container.pass-in").classList.add("invalid");
                 document.getElementById("pass-error").textContent = "New password must not match a previous password";
-            }
-        }
-    }
+            };
+        };
+    };
 
     const resetErrors = () => {
         let passItem = document.querySelector(".form-item-container.pass-in");
         if (passItem.classList.contains("invalid")) {
             passItem.classList.remove("invalid");
             document.getElementById("pass-error").textContent = "Password Error";
-        }
-    }
+        };
+    };
 
     if (!submitStatus) {
         return(
@@ -114,7 +114,7 @@ function Reset() {
             </div>
         </div>
         )
-    }
+    };
     return(
         <div className="auth-container">
         <div className="auth-left-reset"></div>
@@ -141,6 +141,6 @@ function Reset() {
         </div>
     </div>
     ) 
-} 
+};
 
 export default Reset;

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState, useMemo } from "react";
 import { useLoadScript} from "@react-google-maps/api";
+import { useSelector, useDispatch } from 'react-redux';
 //Components
 import Map from "./map/Map.js"
 import SidePanel from "./results-panel/SidePanel.js";
@@ -12,6 +13,7 @@ import { FaLocationArrow } from 'react-icons/fa';
 
 
 function Home({profileImage}) {
+    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
     const [ libraries ] = useState(['places']);
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
@@ -54,12 +56,18 @@ function Home({profileImage}) {
     }
 
     const getData = async () => {
-        const dataIn = await axios.get("http://localhost:8080/conditions/all")
-            .catch(function (err) {
-                console.log("ERROR WITH MARKER DATA,", err)
-            });
-        setResorts(dataIn.data);
-    }
+        if (user) {
+            let config = {
+                headers: {
+                    authorization: `Bearer ${user.token}`
+            }}//required for protected routes
+            const dataIn = await axios.get("http://localhost:8080/conditions/all",config)
+                .catch(function (err) {
+                    console.log("ERROR WITH MARKER DATA,", err)
+                });
+            setResorts(dataIn.data);
+        }
+    };
 
     useEffect(() => {
         getData(); 
