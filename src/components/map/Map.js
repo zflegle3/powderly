@@ -7,6 +7,7 @@ import FilterBar from "./FilterBar"
 import { FaLocationArrow } from 'react-icons/fa';
 import InfoPanel from "./InfoPanel"
 import { DateTime } from 'luxon';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 
@@ -24,6 +25,7 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
     const [myMap, setMyMap] = useState(null); //map reference instance
     const [selected, setSelected] = useState({lat, lng}); //User or searched location
     const [selectedMarker, setSelectedMarker] = useState(null); //Places info window on selected marker
+    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
 
     const handleClick = (id, position) => {
@@ -167,7 +169,10 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
         </InfoWindow>
     }
 
-
+    let mapTheme = mapStyles.lightStyle;
+    if (user.theme === "dark") {
+        mapTheme = mapStyles.darkStyle;
+    };
 
     if (lng && lat) {
         return (
@@ -189,7 +194,7 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
                     mapContainerClassName="map-container"
                     id={"a5b17b69dbe1a9d9"}
                     options={{
-                        styles: mapStyles.lightStyle,
+                        styles: mapTheme,
                         disableDefaultUI: true,
                         zoomControl: true,
                     }}

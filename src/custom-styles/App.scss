@@ -25,7 +25,7 @@
   box-sizing: border-box;
 }
 
-#app {
+#root {
   width: 100vw;
   height: 100vh;
   box-sizing: border-box;
@@ -33,10 +33,16 @@
 
   --bg-auth-main: #e3edfe;
   --bg-auth-sub: rgba(76, 193, 226,0.35);
+  --bg-alt: #ffffff;
+  --bg-search: #ffffff;
+  --bg-btn-filter: rgb(194, 207, 255);
+  --bg-unselected: rgba(112, 123, 149, 0.55);
   --txt-auth-main: #151d3d;
   --txt-auth-sub: #707b95;
-  --txt-auth-hl: #4c6ce2;
-  --txt-auth-hl2: #4cc1e2;
+  --txt-auth-alt: #e3edfe;
+  --txt-auth-hl: #58a6ff;
+  --txt-auth-hl2: rgb(76, 193, 226);
+  --text-calendar: #000000;
   --error-red: #ff2b6d;
   --fav-gold: #FBAF00;
   --input-text: rgb(61, 61, 63);
@@ -48,28 +54,38 @@
   --ok-orange: #BC8F2A;
   --bad-red: #A15533;
   --na-grey: #3B3E49;
+  --border-default: #b2cae6;
+
 }
 
-#app.dark {
-
-  --bg-auth-main: #e3edfe;
-  --bg-auth-sub: rgba(76, 193, 226,0.35);
-  --txt-auth-main: #151d3d;
-  --txt-auth-sub: #707b95;
+#root.dark {
+  --bg-auth-main: rgb(33, 38, 45);
+  --bg-auth-sub: rgb(28, 49, 74);
+  --bg-alt: rgb(13, 17, 23);
+  --bg-search: #161b22;
+  --bg-btn-filter: rgb(194, 207, 255);
+  --bg-unselected: #161b22;
+  --txt-auth-main: #f0f6fc;
+  --txt-auth-sub: #8b949e;
+  --txt-auth-alt: #c9d1d9;
   --txt-auth-hl: #4c6ce2;
   --txt-auth-hl2: #4cc1e2;
+  --text-calendar: #ffffff;
   --error-red: #ff2b6d;
   --fav-gold: #FBAF00;
-  --input-text: rgb(61, 61, 63);
+  --input-text: #c9d1d9;
   --input-shdw-a: rgba(0,0,0,0.1);
   --input-shdw-b: rgba(2,32,71,0.1);
-  --box-shadow: rgba(61, 61, 63, 0.25);
+  --box-shadow: rgba(25, 25, 26, 0.55);
   --best-green: #067411;
   --good-green: #799210;
   --ok-orange: #BC8F2A;
   --bad-red: #A15533;
-  --na-grey: #3B3E49;
+  --na-grey: #8b949e;
+  --border-default: #30363d;
 }
+
+
 
 .home-dash {
   background-color: aqua;
@@ -94,6 +110,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  border-left: 1px solid var(--border-default);
 
   header {
     width: 100%;
@@ -104,10 +121,14 @@
     align-items: center;
     border-bottom: 1px solid black;
     box-shadow: 0px 5px 5px var(--box-shadow);
+    background-color: var(--bg-search);
+    // border-radius: 0.4rem;
+    border-bottom: 1px solid var(--border-default);
 
     h2{
       font-size: 2.5rem;
       font-weight: 600;
+      color: var(--input-text);
     }
 
     .sort-control {
@@ -123,12 +144,14 @@
         svg {
           width: 100%;
           height: 100%;
+          fill: var(--input-text);
         }
       }
 
       p {
         font-size: 1.5rem;
         font-weight: 400;
+        color: var(--input-text);
       }
     }
   }
@@ -139,6 +162,7 @@
     height: 100%;
     overflow-y: scroll;
     overflow-x: hidden;
+    background-color: var(--bg-alt);
 
     .resort-conditions-display {
       display: flex;
@@ -152,6 +176,7 @@
       background-color: var(--bg-auth-main);
       border-radius: 0.4rem;
       box-shadow: 0px 5px 5px var(--box-shadow);
+      border: 1px solid var(--border-default);
 
       .resort-conditions-header {
         width: 100%;
@@ -423,13 +448,13 @@
           flex-direction: column;
           justify-content: flex-start;
           align-items: center;
-          background-color: rgba(112, 123, 149, 0.55);
+          background-color: var(--bg-unselected);
           padding: 1rem 1rem;
           border-radius: 0.4rem;
 
           .forecast-date {
             text-align: center;
-            color: var(--bg-auth-main);
+            color: var(--txt-auth-alt);
             font-size: 1.6rem;
             font-weight: 400;
             padding: 1rem 0rem;
@@ -447,7 +472,7 @@
 
             p {
               text-align: center;
-              color: var(--bg-auth-main);
+              color: var(--txt-auth-alt);
               font-size: 2.5rem;
               font-weight: 800;
               padding: 1rem 0rem 2rem 0rem;
@@ -457,7 +482,7 @@
         }
 
         .forecast-item.expanded {
-          background-color: rgba(76, 193, 226, 0.35);
+          background-color: var(--bg-auth-sub);
 
           p:nth-child(1) {
             color: var(--txt-auth-sub);
@@ -474,7 +499,7 @@
               color: var(--txt-auth-hl);
               font-size: 2.5rem;
               font-weight: 800;
-              padding: 1rem 0rem 2rem 0rem;
+              padding: 1rem 0rem 1rem 0rem;
             }
           }
 
@@ -589,10 +614,11 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
+  background-color: var(--bg-search);
   border-radius: 10rem;
   padding: 1.5rem;
   box-shadow: 0px 5px 5px var(--box-shadow);
+  // border: 1px solid var(--border-default);
 
   .search-submit {
     width: 3.5rem;
@@ -630,7 +656,6 @@
     justify-content: center;
     align-items: flex-start;
     flex-grow: 1;
-    cursor: pointer;
     margin-left: 1rem;
     margin-right: 1rem;
     border-right: 1px solid var(--input-text);
@@ -650,7 +675,7 @@
     justify-content: center;
     align-items: center;
     flex-grow: 1;
-    // cursor: pointer;
+    cursor: pointer;
     margin-right: 1rem;
     
     .combo-box-input {
@@ -661,35 +686,44 @@
       width: 100%;
       padding: 0.5rem;
       color: var(--input-text);
+      background-color: var(--bg-search);
     }
   }
-
 }
 
 //Misc Map Items
-.combo-box-list {
-  background-color: #ffffff;
-  position: relative;
-  // padding-top: 2rem;
-  z-index: 100;
-  border-radius: 0.5rem;
-  padding: 1rem;
-}
-
 .combo-box {
   width: 100%;
   padding-right: 2rem;
 }
-.combo-box-option {
-  // background-color: #ffffff;
-  padding-top: 1rem;
-  cursor: pointer;
-  span {
-    font-size: 1.5rem;
-  }
+
+.combo-box-list {
+  background-color: #ffffff;;
+  position: relative;
+  // padding-top: 2rem;
+  z-index: 100;
   border-radius: 0.5rem;
+  padding: 1rem; 
+
+  .combo-box-option {
+    padding-top: 1rem;
+    color: rgb(61, 61, 63);
+    cursor: pointer;
+
+    span {
+      font-size: 1.5rem;
+    }
+  }
 }
 
+.combo-box-list.dark {
+  background-color: #161b22;
+
+  .combo-box-option {
+    padding-top: 1rem;
+    color: #c9d1d9;
+  }
+}
 
 .filter-bar {
   width: 100%;
@@ -703,20 +737,20 @@
 
   button {
     margin: 0rem 2rem;
-    background-color: #ffffff;
+    background-color: var(--bg-search);
     border: none;
     border-radius: 10rem;
     padding: 0.5rem 1.2rem;
     font-size: 1.5rem;
     font-weight: 300;
     white-space: nowrap;
+    color: var(--input-text);
     cursor: pointer;
     box-shadow: 0px 5px 5px var(--box-shadow);
-    border: 2px solid transparent;
   }
 
   button.selected {
-    background-color: rgb(194, 207, 255);
+    background-color: var(--bg-btn-filter);
     color: var(--txt-auth-hl);
     font-weight: 600;
     border: 2px solid var(--txt-auth-hl);
@@ -734,7 +768,7 @@
     font-size: 2rem;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
-    color: var(--txt-auth-main);
+    color: #151d3d;
     max-width: 25rem;
   }
 
@@ -762,7 +796,7 @@
   justify-self: center;
   padding: 0.75rem;
   gap: 1rem;
-  background-color: var(bg-auth-sub);
+  background-color: var(--bg-auth-sub);
   width: 100%;
   height: 100%;
   border-radius: 0.5rem;
@@ -829,7 +863,7 @@ input:-webkit-autofill:hover,
 input:-webkit-autofill:focus, 
 input:-webkit-autofill:active{
   background-color: transparent !important;
-  -webkit-box-shadow: 0 0 0 50px white inset;
+  -webkit-box-shadow: 0 0 0 50px var(--bg-search) inset;
   font-family: 'muli', sans-serif;
   width: 100%;
   font-size: 1.8rem;
