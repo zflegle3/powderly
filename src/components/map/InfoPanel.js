@@ -1,5 +1,6 @@
 import { FaTemperatureLow, FaTint, FaSnowflake, FaWind } from 'react-icons/fa';
 import {cToF, kphToMph, cmToIn} from "../../features/units";
+import { DateTime } from 'luxon';
 
 
 function InfoPanel({selectedMarker}) {
@@ -7,8 +8,7 @@ function InfoPanel({selectedMarker}) {
     return (
         <div className="info-window">
             <h2>{selectedMarker.name}</h2>
-            <p>{selectedMarker.date.toDateString()}</p>
-            <p>Snow Showers</p>
+            <p>{selectedMarker.date.toLocaleString(DateTime.DATE_MED_WITH_WEEKDAY)}</p>
             <div className="info-window-detail">
                 
                 <div className="info-window-detail-item">

@@ -6,6 +6,7 @@ import SearchBar from "./SearchBar"
 import FilterBar from "./FilterBar"
 import { FaLocationArrow } from 'react-icons/fa';
 import InfoPanel from "./InfoPanel"
+import { DateTime } from 'luxon';
 
 
 
@@ -34,7 +35,7 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
             lo: selectedInfo.conditions.forecast[0].tempLow,
             snow: selectedInfo.conditions.forecast[0].snowfall,
             wind: selectedInfo.conditions.forecast[0].windMax,
-            date: new Date(selectedInfo.conditions.forecast[0].date),
+            date: DateTime.fromISO(selectedInfo.conditions.forecast[0].date, { zone: "UTC"}),
             humidity: selectedInfo.conditions.forecast[0].humidity,
         })
     }
