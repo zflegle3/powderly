@@ -61,7 +61,6 @@ function Home({profileImage}) {
                 headers: {
                     authorization: `Bearer ${user.token}`
             }}//required for protected routes
-            console.log(process.env.REACT_APP_API_URL);
             const dataIn = await axios.get(process.env.REACT_APP_API_URL+"/conditions/all",config)
                 .catch(function (err) {
                     console.log("ERROR WITH MARKER DATA,", err)
@@ -81,7 +80,7 @@ function Home({profileImage}) {
           );
     } else {
         //Desktop 
-        if (window.innerWidth > 760) {
+        if (window.innerWidth > 950) {
             return (
                 <div className="home-dash">
                     <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults} setSort={setSort} profileImage={profileImage}/>

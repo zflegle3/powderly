@@ -29,7 +29,6 @@ import { ReactComponent as Default } from "../../images/weather-icons/static/clo
 function ForecastDateItem({forecastData, expandStatus, position, setExpandSelected}) {
     const [dateOut, setDateOut] = useState(DateTime.fromISO(forecastData.date, { zone: "UTC"}));
     // const [dateOut, setDateOut] = useState(DateTime.fromISO(forecastData.date.toISOString()));
-    console.log(forecastData.date);
 
     const weekdayShort = (day) => {
         switch (day) {
@@ -138,10 +137,7 @@ function ForecastDateItem({forecastData, expandStatus, position, setExpandSelect
 
     }
 
-
-    console.log(forecastData);
     if (expandStatus) {
-        console.log(dateOut);
         return (
             <div className="forecast-item expanded" id={`date-item-${position}`} onClick={expandForecastDisplay}>
                 <div className="forecast-header">

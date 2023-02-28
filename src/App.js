@@ -11,6 +11,7 @@ import {reset} from "./features/auth/authSlice";
 import { useSelector, useDispatch } from 'react-redux';
 
 //Styles
+import "./custom-styles/reset.scss";
 import "./custom-styles/app.scss";
 import "./custom-styles/calendar.scss";
 import "./custom-styles/auth.scss";
@@ -54,24 +55,29 @@ function App() {
 
   if (user) {
     return (
-      <Router>
-        <Routes>
-          <Route exact path="/" element={<Home profileImage={profileImage}/> }/>
-          <Route path="*" element={<Navigate to="/" replace={true} />}/>
-        </Routes>
-      </Router>
+      <div id="app" className={user.theme}>
+        <Router>
+          <Routes>
+            <Route exact path="/" element={<Home profileImage={profileImage}/> }/>
+            <Route path="*" element={<Navigate to="/" replace={true} />}/>
+          </Routes>
+        </Router>
+      </div>
+
     );
   } else {
     return (
-      <Router>
-        <Routes>
-          <Route exact path="/login" element={<Login />}/>
-          <Route exact path="/signup" element={<SignUp/>}/>
-          <Route exact path="/forgot" element={<PasswordReset/>}/>
-          <Route exact path="/reset/:email/:id/:token" element={<Reset/>}/>
-          <Route path="*" element={<Navigate to="/login" replace={true} />}/>
-        </Routes>
-      </Router>
+      <div id="app" className={user.theme}>
+        <Router>
+          <Routes>
+            <Route exact path="/login" element={<Login />}/>
+            <Route exact path="/signup" element={<SignUp/>}/>
+            <Route exact path="/forgot" element={<PasswordReset/>}/>
+            <Route exact path="/reset/:email/:id/:token" element={<Reset/>}/>
+            <Route path="*" element={<Navigate to="/login" replace={true} />}/>
+          </Routes>
+        </Router>
+      </div>
     );
   };
 };
