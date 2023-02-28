@@ -45,29 +45,43 @@ function App() {
 
   useEffect(() => {
     if (user) {
+      //set profile image
       if (user.profileImage) {
         setProfileImage(process.env.REACT_APP_API_URL+"/image/"+user.profileImage);
       } else {
         setProfileImage (defaultImg);
       }
     }
+
+    let root = document.getElementById('root')
+    let comboList = document.querySelector('.combo-box-list')
+    if (user) {
+      //set color theme
+      root.classList = (user.theme)
+      comboList.classList = `combo-box-list ${user.theme}`
+    } else {
+      //set default theme
+      root.classList = ("")
+      comboList.classList = `combo-box-list`
+    }
+
   }, [user])
 
   if (user) {
     return (
-      <div id="app" className={user.theme}>
+      // <div id="app" className={user.theme}>
         <Router>
           <Routes>
             <Route exact path="/" element={<Home profileImage={profileImage}/> }/>
             <Route path="*" element={<Navigate to="/" replace={true} />}/>
           </Routes>
         </Router>
-      </div>
+      // </div>
 
     );
   } else {
     return (
-      <div id="app" className={user.theme}>
+      // <div id="app" >
         <Router>
           <Routes>
             <Route exact path="/login" element={<Login />}/>
@@ -77,7 +91,7 @@ function App() {
             <Route path="*" element={<Navigate to="/login" replace={true} />}/>
           </Routes>
         </Router>
-      </div>
+      // </div>
     );
   };
 };

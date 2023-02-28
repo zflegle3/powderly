@@ -2,8 +2,10 @@ import Cell from "./Cell";
 import WeekDay from "./Weekday";
 import Month from "./Month";
 import { DateTime } from 'luxon';
+import { useSelector, useDispatch } from 'react-redux';
 
 function Timeline({dataIn}) {
+    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
     //Component takes in historical data as an array of objects
     //each object should be {date: DateObject, snowfall: number}
 
@@ -24,7 +26,20 @@ function Timeline({dataIn}) {
     }
 
     const colorFunc= (alpha) => {
-        return `rgba(5, 5,  200, ${alpha})`;
+      if (user.theme === "light") {
+        if (alpha === 0) {
+          return `rgba(0, 0, 0, 0.05)`;
+        } else {
+          return `rgba(5, 5, 200, ${alpha})`;
+        }
+      } else {
+        if (alpha === 0) {
+          return `rgba(13, 17, 23, 0.5)`;
+        } else {
+          return `rgba(76, 193, 226, ${alpha})`;
+        }
+      }
+
     }
 
     //creates an array of two DateTime object entries to represent the range of dates

@@ -5,6 +5,7 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.65);
+    testcolor: rgb(0, 0, 0);
     z-index: 1000;
 }
 
@@ -77,8 +78,9 @@
 
     .settings-container {
         border-radius: 0.4rem;
-        box-shadow: inset 2px 2px 5px rgba(61, 61, 63, 0.25);
+        box-shadow: inset 2px 2px 5px var(--box-shadow);
         overflow-y: scroll;
+        padding-bottom: 1rem;
     }
 
     .profile-image-form {
@@ -388,6 +390,7 @@
             flex-direction: row;
             gap: 1rem;
             flex-wrap: wrap;
+            margin: 0.5rem 0rem;
 
             button {
                 border: 2px solid var(--txt-auth-sub);

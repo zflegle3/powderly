@@ -20,6 +20,7 @@ $desc-txt: #e3edfe;
 
     &-month {
       width: $cell-width;
+      color: var(--text-calendar);
       // margin: $cell-margin;
       // border: 1px solid transparent;
       font-size: 10px;
@@ -50,6 +51,7 @@ $desc-txt: #e3edfe;
     // flex-grow: 1;
 
     .timeline-weekdays {
+      color: var(--text-calendar);
       height: 100%;
       // flex-grow: 1;
       // display: inline-flex;
@@ -101,7 +103,7 @@ $desc-txt: #e3edfe;
         border: 1px solid rgba(0, 0, 0, 0.1);
         // margin: $cell-margin;
         border-radius: 2px;
-        background-color: rgba(0, 0, 0, 0.05);
+        // background-color: rgba(0, 0, 0, 0.05);
         position: relative;
 
         .cell-description {
