@@ -75,12 +75,16 @@ function Login() {
     }, [user, isError, isSuccess, message, navigate, dispatch])
 
 
+    let sideHero = null;
+    if (window.innerWidth > 950) {
+        sideHero = <div className="auth-left-login"></div>;
+    } 
     return(
         <div className="auth-container">
-            <div className="auth-left-login"></div>
+
             <div className="auth-right">
                 <div className="auth-content">
-
+                    {sideHero}
                     <div className="auth-header">
                         <div className="auth-header-main"> 
                               <h1>Login</h1>
@@ -98,7 +102,7 @@ function Login() {
                             <label htmlFor="email">email or username</label>
 
                             <div className="input-container">
-                                <input type="email" id="email-in" name="email" placeholder="Enter email or usernme" onFocus={addFocus} onBlur={removeFocus}></input>
+                                <input type="email" id="email-in" name="email" placeholder="Enter email or username" onFocus={addFocus} onBlur={removeFocus}></input>
                             </div>
 
                             <p id="email-error" >Email Error</p>

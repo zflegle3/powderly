@@ -72,9 +72,14 @@ function SignUp() {
         return(<LoadingSpinner/>)
     }
 
+
+    let sideHero = null;
+    if (window.innerWidth > 950) {
+        sideHero = <div className="auth-left-signup"></div>;
+    } 
     return (
         <div className="auth-container">
-            <div className="auth-left-signup"></div>
+            {sideHero}
             <div className="auth-right">
                 <div className="auth-content">
                     <div className="auth-header">
