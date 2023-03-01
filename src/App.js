@@ -17,6 +17,7 @@ import "./custom-styles/calendar.scss";
 import "./custom-styles/auth.scss";
 import "./custom-styles/modal.scss";
 import "./custom-styles/loading.scss";
+import "./custom-styles/mobile.scss"
 
 //Components
 import Home from "./components/Home"
@@ -54,15 +55,23 @@ function App() {
     }
 
     let root = document.getElementById('root')
-    let comboList = document.querySelector('.combo-box-list')
     if (user) {
       //set color theme
       root.classList = (user.theme)
-      comboList.classList = `combo-box-list ${user.theme}`
     } else {
       //set default theme
       root.classList = ("")
-      comboList.classList = `combo-box-list`
+    }
+
+    let comboList = document.querySelector('.combo-box-list')
+    if (comboList) {
+      if (user) {
+        //set color theme
+        comboList.classList = `combo-box-list ${user.theme}`
+      } else {
+        //set default theme
+        comboList.classList = `combo-box-list`
+      }
     }
 
   }, [user])

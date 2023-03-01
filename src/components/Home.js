@@ -8,6 +8,7 @@ import SidePanel from "./results-panel/SidePanel.js";
 import Sheet from 'react-modal-sheet';
 import ModalContainer from './modals/ModalContainer';
 import LoadingSpinner from "./LoadingSpinner.js";
+import BottomPanel from './results-panel/BottomPanel.js';
 //Images
 import { FaLocationArrow } from 'react-icons/fa';
 
@@ -21,7 +22,6 @@ function Home({profileImage}) {
     });
     const [resorts, setResorts] = useState(false);
     const [resortsSorted, setResortsSorted] = useState(false);
-    const [isOpen, setOpen] = useState(false);
     const [searchResults, setSearchResults] = useState(null);
     const [sort, setSort] = useState(
         {
@@ -93,16 +93,9 @@ function Home({profileImage}) {
             return (
                 <div className="home-dash">
                     {/* <SearchBar/> */}
-                    <Map lat={lat} setLat={setLat} setLng={setLng} lng={lng} resorts={resorts} setSearchResults={setSearchResults} profileImage={profileImage}/>
-                    <Sheet isOpen={isOpen} onClose={() => setOpen(false)}>
-                        <Sheet.Container>
-                            <Sheet.Header />
-                            <Sheet.Content>{/* Your sheet content goes here */}</Sheet.Content>
-                        </Sheet.Container>
-    
-                        <Sheet.Backdrop />
-                    </Sheet>
-                    <button onClick={() => setOpen(true)}>Open sheet</button>
+                    <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults} setSort={setSort} profileImage={profileImage}/>
+                    <BottomPanel searchResults={searchResults} sortData={sort} resorts={resorts} setLng={setLng} setLat={setLat}/>
+                    {/* <button onClick={() => setOpen(true)}>Open sheet</button> */}
                 </div>
             );
         }

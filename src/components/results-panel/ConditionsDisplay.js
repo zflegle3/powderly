@@ -7,7 +7,7 @@ import ConditionsDetail from "./ConditionsDetail";
 import FavoriteIcon from "./FavoriteIcon";
 
 
-function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat}) {
+function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat, setOpen}) {
     const [displayStatus, setDisplayStatus]  = useState(false);
     const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
@@ -81,6 +81,10 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat}) {
         e.stopPropagation();
         setLng(resortData.location.lng);
         setLat(resortData.location.lat);
+        //closes bottom panel for mobile devices
+        if (window.innerWidth < 950) {
+            setOpen(false);
+        }
     }
 
     const hideHover = (e) => {
