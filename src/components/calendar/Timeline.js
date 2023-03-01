@@ -17,9 +17,15 @@ function Timeline({dataIn}) {
       })
     })
 
-    //sets start date from today's date (default ~6 months)
+    //sets start date from today's date (default ~5 months)
     //if start date not a sunday, resets as next previous sunday for formatting
-    let dateStart = DateTime.now().minus({ days: (6*30) });
+    let renderMonths = 5;
+    //render months used to add responsive design to calendar display
+    //renders 5 or 3 months depending on window width
+    if (window.innerWidth < 600) {
+      renderMonths = 3;
+    };
+    let dateStart = DateTime.now().minus({ days: (renderMonths*30) });
     if (dateStart.weekday !== 0) {
         let newDate = dateStart.minus({days: dateStart.weekday})
         dateStart = newDate;
