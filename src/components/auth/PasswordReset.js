@@ -52,39 +52,44 @@ function PasswordReset() {
         }
     }
 
+    let sideHero = null;
+    if (window.innerWidth > 950) {
+        sideHero = <div className="auth-left-forgot"></div>;
+    } 
+
     if (userEmail) {
         return(
             <div className="auth-container">
-            <div className="auth-left-forgot"></div>
-            <div className="auth-right">
-                <div className="auth-content">
+                {sideHero}
+                <div className="auth-right">
+                    <div className="auth-content">
 
-                    <div className="auth-header">
-                        <div className="auth-header-main">
-                            <h1>Forgot Password?</h1>
+                        <div className="auth-header">
+                            <div className="auth-header-main">
+                                <h1>Forgot Password?</h1>
+                            </div>
+                            <div className="auth-header-sub">A reset link was sent to {userEmail}. Please follow the email instructions to reset your password.</div>
                         </div>
-                        <div className="auth-header-sub">A reset link was sent to {userEmail}. Please follow the email instructions to reset your password.</div>
+
+                        <form className="login-form">
+
+                            <div className="form-submit-container">
+
+                                <Link to="/" id="pass-reset">
+                                    Back to Login
+                                </Link>
+                            </div>
+
+                        </form>
                     </div>
-
-                    <form className="login-form">
-
-                        <div className="form-submit-container">
-
-                            <Link to="/" id="pass-reset">
-                                Back to Login
-                            </Link>
-                        </div>
-
-                    </form>
                 </div>
             </div>
-        </div>
         )
 
     }
     return(
         <div className="auth-container">
-            <div className="auth-left-forgot"></div>
+            {sideHero}
             <div className="auth-right">
                 <div className="auth-content">
 

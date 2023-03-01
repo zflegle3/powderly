@@ -95,6 +95,7 @@ function Home({profileImage}) {
                     {/* <SearchBar/> */}
                     <Map lat={lat} lng={lng} resorts={resorts} setSearchResults={setSearchResults} setSort={setSort} profileImage={profileImage}/>
                     <BottomPanel searchResults={searchResults} sortData={sort} resorts={resorts} setLng={setLng} setLat={setLat}/>
+                    <ModalContainer profileImage={profileImage} resorts={resorts}/>
                     {/* <button onClick={() => setOpen(true)}>Open sheet</button> */}
                 </div>
             );

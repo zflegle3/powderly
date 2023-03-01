@@ -7,16 +7,10 @@ import {openAccountModal} from "../../features/modals/modalSlice";
 
 
 
-function SearchBar({setSelected, selected, setEditStatus, profileImage}) {
+function SearchBar({setSelected, selected, profileImage}) {
     const dispatch = useDispatch();
     const [location, setLocation] = useState("Search any Location...");
     const [date, setDate] = useState(new Date());
-
-    const handleSearchBtn = () => {
-        //changes edit status to edit inputs
-        console.log("Close search edits");
-        setEditStatus(false);
-    }
 
     const openAccount = () => {
         //changes edit status to edit inputs
@@ -28,7 +22,7 @@ function SearchBar({setSelected, selected, setEditStatus, profileImage}) {
     return (
         <div className="search-container">
             <div className="search-bar">
-                <div className="search-submit" onClick={handleSearchBtn}>
+                <div className="search-submit">
                     <FaSearch />
                 </div>
                 <div className="search-display">

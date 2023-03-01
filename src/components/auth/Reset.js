@@ -55,10 +55,16 @@ function Reset() {
         };
     };
 
+
+    let sideHero = null;
+    if (window.innerWidth > 950) {
+        <div className="auth-left-reset"></div>;
+    } 
+    
     if (!submitStatus) {
         return(
             <div className="auth-container">
-            <div className="auth-left-reset"></div>
+            {sideHero}
             <div className="auth-right">
                 <div className="auth-content">
 
@@ -117,7 +123,7 @@ function Reset() {
     };
     return(
         <div className="auth-container">
-        <div className="auth-left-reset"></div>
+        {sideHero}
         <div className="auth-right">
             <div className="auth-content">
 
