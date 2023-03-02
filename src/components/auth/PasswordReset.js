@@ -75,7 +75,7 @@ function PasswordReset() {
 
                             <div className="form-submit-container">
 
-                                <Link to="/" id="pass-reset">
+                                <Link to="/login" id="pass-reset">
                                     Back to Login
                                 </Link>
                             </div>

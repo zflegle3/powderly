@@ -110,7 +110,7 @@ function Reset() {
                                     <button onClick={resetPassword}>SEND</button>
                                 </div>
 
-                                <Link to="/" id="pass-reset">
+                                <Link to="/login" id="pass-reset">
                                     Back to Login
                                 </Link>
                             </div>
@@ -137,7 +137,7 @@ function Reset() {
                     <form className="login-form">
 
                         <div className="form-submit-container">
-                            <Link to="/" id="pass-reset">
+                            <Link to="/login" id="pass-reset">
                                 Back to Login
                             </Link>
                         </div>

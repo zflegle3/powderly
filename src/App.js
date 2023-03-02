@@ -1,6 +1,7 @@
 import { useState, useEffect, useMemo } from 'react';
 import {
   BrowserRouter as Router,
+  HashRouter,
   Routes,
   Route,
   Link,
@@ -74,37 +75,24 @@ function App() {
       }
     }
 
-    if (window.innerWidth < 950) {
-      let bottomPanel = document.querySelector(".react-modal-sheet-container ");
-      if (bottomPanel) {
-        if (user) {
-          //set color theme
-          bottomPanel.classList = `react-modal-sheet-container  ${user.theme}`
-        } else {
-          //set default theme
-          bottomPanel.classList = `react-modal-sheet-container `
-        }
-      }
-    }
-
   }, [user])
 
   if (user) {
     return (
       // <div id="app" className={user.theme}>
-        <Router>
+        <HashRouter>
           <Routes>
-            <Route exact path="/" element={<Home profileImage={profileImage}/> }/>
-            <Route path="*" element={<Navigate to="/" replace={true} />}/>
+            <Route exact path="*" element={<Home profileImage={profileImage}/> }/>
+            {/* <Route path="*" element={<Navigate to="/powderly" replace={true} />}/> */}
           </Routes>
-        </Router>
+        </HashRouter>
       // </div>
 
     );
   } else {
     return (
       // <div id="app" >
-        <Router>
+        <HashRouter>
           <Routes>
             <Route exact path="/login" element={<Login />}/>
             <Route exact path="/signup" element={<SignUp/>}/>
@@ -112,7 +100,7 @@ function App() {
             <Route exact path="/reset/:email/:id/:token" element={<Reset/>}/>
             <Route path="*" element={<Navigate to="/login" replace={true} />}/>
           </Routes>
-        </Router>
+        </HashRouter>
       // </div>
     );
   };
