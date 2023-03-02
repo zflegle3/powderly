@@ -14,10 +14,6 @@ function Cell({ color, cellData, x, y }) {
 
     const handleCellClick = (e) => {
       e.stopPropagation();
-      // console.log(`${cmToIn(cellData.value)}" on ${cellData.date.toISO()}`);
-      // console.log(x,y);
-      // console.log(dateOut.toLocaleString(DateTime.DATE_MED));
-      console.log(cellData);
     }
   
 

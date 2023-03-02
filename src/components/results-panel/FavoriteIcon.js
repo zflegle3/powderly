@@ -14,7 +14,6 @@ function FavoriteIcon({resortData, favoriteStatus}) {
             locId: resortData.refId,
             userId: user._id
         }
-        console.log(selected);
         if (favoriteStatus) {
             dispatch(removeFavorite(selected));
         } else {

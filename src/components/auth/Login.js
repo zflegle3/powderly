@@ -81,10 +81,9 @@ function Login() {
     } 
     return(
         <div className="auth-container">
-
+            {sideHero}
             <div className="auth-right">
                 <div className="auth-content">
-                    {sideHero}
                     <div className="auth-header">
                         <div className="auth-header-main"> 
                               <h1>Login</h1>

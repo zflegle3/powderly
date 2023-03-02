@@ -119,9 +119,22 @@ export const checkNewEmail = async(emailIn) => {
     };
 }
 
-//CURRENT PASSWORD VALIDATION
+//CURRENT PASSWORD VALIDATION FOR UPDATE
 export const checkPassDb = async (idIn, passIn, tokenIn) => {
-    const responsePass = await axios.post(process.env.REACT_APP_API_URL+"/user/read/password", {id: idIn, password: passIn, token: tokenIn});
+    let config = {
+        headers: {
+            authorization: `Bearer ${tokenIn}`
+        }
+    };//required for protected routes
+    const responsePass = await axios.post(process.env.REACT_APP_API_URL+"/user/read/password", {id: idIn, password: passIn}, config);
+    //returns false if passwords match, true if not matching 
+    return responsePass.data.passMatch;
+};
+
+//CURRENT PASSWORD VALIDATION FOR RESET
+//Different jwt and authentication verification for reset
+export const checkPassDbReset = async (idIn, passIn, tokenIn) => {
+    const responsePass = await axios.post(process.env.REACT_APP_API_URL+"/user/read/reset", {id: idIn, password: passIn, token: tokenIn});
     //returns false if passwords match, true if not matching 
     return responsePass.data.passMatch;
 };

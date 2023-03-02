@@ -1,8 +1,5 @@
-import { FaTemperatureLow, FaTint, FaSnowflake, FaWind, FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaCrosshairs } from 'react-icons/fa';
 import { useState, useEffect } from "react";
-import { DateTime } from 'luxon'
 import ForecastDateItem from './ForecastDateItem';
-
 
 function ForecastDisplay({forecastData}) {
     const [expandSelected, setExpandSelected] = useState(0);

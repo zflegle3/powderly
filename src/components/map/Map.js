@@ -42,10 +42,6 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
         })
     }
 
-    // const handleHover = () => {
-    //     console.log("hover");
-    // }
-
     const markers = resorts.map((resort) => {
         let rating = resort.conditions.forecast[0].rating;
 

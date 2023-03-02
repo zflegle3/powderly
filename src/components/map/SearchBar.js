@@ -1,8 +1,7 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import { FaSearch, FaInfo, FaRegUserCircle } from 'react-icons/fa';
+import { useDispatch } from 'react-redux';
+import { FaSearch } from 'react-icons/fa';
 import PlacesAutocomplete from "./PlacesAutocomplete.js";
-import FilterBar from "./FilterBar"
 import {openAccountModal} from "../../features/modals/modalSlice";
 
 
@@ -14,10 +13,8 @@ function SearchBar({setSelected, selected, profileImage}) {
 
     const openAccount = () => {
         //changes edit status to edit inputs
-        console.log("Open Account Info");
         dispatch(openAccountModal());
     }
-
 
     return (
         <div className="search-container">
