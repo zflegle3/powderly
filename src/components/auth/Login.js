@@ -60,7 +60,7 @@ function Login() {
     }
 
     useEffect(() => {
-        //catches & displays errors fron failed credential logins
+        //catches & displays errors from failed credential logins
         if(isError) {
             document.querySelector(".form-item-container.pass-in").classList.add("invalid");
             document.getElementById("pass-error").textContent = message;

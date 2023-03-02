@@ -43,8 +43,7 @@ function Home({profileImage}) {
     
     function defaultPosition(err) {
         //if user declines geolocation, sets lat/lng to Denver, CO
-        console.log(err);
-        console.log("Geolocation is not supported by this browser.")
+        console.log("User chose to not allow location, Geolocation is not supported by this browser.")
         setLng(-104.9903);
         setLat(39.7392);
     }
