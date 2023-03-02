@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/powderly/static/css/main.d46611f8.css",
+    "main.js": "/powderly/static/js/main.886df462.js",
+    "static/media/plane1.jpeg": "/powderly/static/media/plane1.d98564ba169d3e4bde5f.jpeg",
+    "static/media/jeff2.jpeg": "/powderly/static/media/jeff2.301ad18678ff18b6bcbd.jpeg",
+    "static/media/valley.jpeg": "/powderly/static/media/valley.29daa34cc51dc20bd73c.jpeg",
+    "static/media/chalet.jpeg": "/powderly/static/media/chalet.d98dec56ce50f8ab3fc7.jpeg",
+    "static/media/avatar.png": "/powderly/static/media/avatar.a024db4373bbc490d3b1.png",
+    "static/media/snowy-1.svg": "/powderly/static/media/snowy-1.336b153420f179bf55caf6001010ca21.svg",
+    "static/media/rainy-1.svg": "/powderly/static/media/rainy-1.f0a18c18bae7dd93dc868bcdb4b371c4.svg",
+    "static/media/snowy-6.svg": "/powderly/static/media/snowy-6.abf211998f21d5289adb043ca67087ad.svg",
+    "static/media/cloudy-day-3.svg": "/powderly/static/media/cloudy-day-3.38f6349b79e1b2116001ab225ee149aa.svg",
+    "static/media/cloudy-day-1.svg": "/powderly/static/media/cloudy-day-1.b2e53053280396bfaa22d1c8501e3541.svg",
+    "static/media/snowy-5.svg": "/powderly/static/media/snowy-5.280aaba530372c1a192d45f7c6e40429.svg",
+    "static/media/day.svg": "/powderly/static/media/day.212e04206236caeb33f88e1c9dc942ad.svg",
+    "static/media/snowy-4.svg": "/powderly/static/media/snowy-4.738840804fea4bf9167415b59173c70b.svg",
+    "static/media/rainy-6.svg": "/powderly/static/media/rainy-6.cd7c6f534c492c7101a55c23911cfa07.svg",
+    "static/media/cloudy.svg": "/powderly/static/media/cloudy.22e97e837933a900837fe9c3eb090439.svg",
+    "static/media/rainy-5.svg": "/powderly/static/media/rainy-5.80388c1e00b466da06136c0074b82fc5.svg",
+    "static/media/night.svg": "/powderly/static/media/night.6a2ab5e9476789c627efd8f2f051442b.svg",
+    "static/media/rainy-4.svg": "/powderly/static/media/rainy-4.4a3f03de6a2d0d5402199c70a13441f7.svg",
+    "index.html": "/powderly/index.html",
+    "main.d46611f8.css.map": "/powderly/static/css/main.d46611f8.css.map",
+    "main.886df462.js.map": "/powderly/static/js/main.886df462.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d46611f8.css",
+    "static/js/main.886df462.js"
+  ]
+}
