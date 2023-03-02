@@ -4,7 +4,7 @@ import {
 } from "react-router-dom";
 import { useState, useEffect } from 'react';
 import axios from "axios";
-import {checkPassDb, checkNewPass } from "../../features/auth/validation";
+import {checkPassDbReset, checkNewPass } from "../../features/auth/validation";
 //Components
 import PasswordInput from "./PasswordInput"
 //Icons
@@ -25,7 +25,7 @@ function Reset() {
         //validate password meets criteria
         if (checkNewPass(passwordIn)) {
             //validate password is different from previous
-            if (await checkPassDb(id, passwordIn, token)) {
+            if (await checkPassDbReset(id, passwordIn, token)) {
                 //update user data with new password in db
                 let payload = {
                     id: id,
@@ -58,58 +58,85 @@ function Reset() {
 
     let sideHero = null;
     if (window.innerWidth > 950) {
-        <div className="auth-left-reset"></div>;
+        sideHero =<div className="auth-left-reset"></div>;
     } 
     
     if (!submitStatus) {
         return(
             <div className="auth-container">
+                {sideHero}
+                <div className="auth-right">
+                    <div className="auth-content">
+
+                        <div className="auth-header">
+                            <div className="auth-header-main">
+                                <h1>Reset password</h1>
+                            </div>
+                            <div className="auth-header-sub">Please enter a new password for {email}</div>
+                        </div>
+
+                        <form className="login-form">
+                            <PasswordInput passStatus={passStatus}/>
+
+                            <div className="pass-error-container">
+                                <div id="pass-error-signin-length">
+                                    <div>
+                                        <FaRegCheckCircle />
+                                    </div>
+                                    <p>have at least 8 characters</p>
+                                </div>
+                                <div id="pass-error-signin-upper">
+                                    <div>
+                                        <FaRegCheckCircle />
+                                    </div>
+                                    <p >have at least 1 Upper characters</p>
+                                </div>
+                                <div id="pass-error-signin-number">
+                                    <div>
+                                        <FaRegCheckCircle />
+                                    </div>
+                                    <p >have at least 1 number</p>
+                                </div>
+                                <div id="pass-error-signin-special">
+                                    <div>
+                                        <FaRegCheckCircle />
+                                    </div>
+                                    <p >have at least 1 special character (i.e. ! @ # $ % ^ & *)</p>
+                                </div>
+                            </div>
+
+                            <div className="form-submit-container">
+                                <div className="form-btn-container">
+                                    <button onClick={resetPassword}>SEND</button>
+                                </div>
+
+                                <Link to="/" id="pass-reset">
+                                    Back to Login
+                                </Link>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        )
+    };
+    return(
+        <div className="auth-container">
             {sideHero}
             <div className="auth-right">
                 <div className="auth-content">
 
                     <div className="auth-header">
                         <div className="auth-header-main">
-                            <h1>Reset password</h1>
+                            <h1>Reset Password</h1>
                         </div>
-                        <div className="auth-header-sub">Please enter a new password for {email}</div>
+                        <div className="auth-header-sub">Your password has been successfully udated.</div>
                     </div>
 
                     <form className="login-form">
-                        <PasswordInput passStatus={passStatus}/>
-
-                        <div className="pass-error-container">
-                            <div id="pass-error-signin-length">
-                                <div>
-                                    <FaRegCheckCircle />
-                                </div>
-                                <p>have at least 8 characters</p>
-                            </div>
-                            <div id="pass-error-signin-upper">
-                                <div>
-                                    <FaRegCheckCircle />
-                                </div>
-                                <p >have at least 1 Upper characters</p>
-                            </div>
-                            <div id="pass-error-signin-number">
-                                <div>
-                                    <FaRegCheckCircle />
-                                </div>
-                                <p >have at least 1 number</p>
-                            </div>
-                            <div id="pass-error-signin-special">
-                                <div>
-                                    <FaRegCheckCircle />
-                                </div>
-                                <p >have at least 1 special character (i.e. ! @ # $ % ^ & *)</p>
-                            </div>
-                        </div>
 
                         <div className="form-submit-container">
-                            <div className="form-btn-container">
-                                <button onClick={resetPassword}>SEND</button>
-                            </div>
-
                             <Link to="/" id="pass-reset">
                                 Back to Login
                             </Link>
@@ -119,33 +146,6 @@ function Reset() {
                 </div>
             </div>
         </div>
-        )
-    };
-    return(
-        <div className="auth-container">
-        {sideHero}
-        <div className="auth-right">
-            <div className="auth-content">
-
-                <div className="auth-header">
-                    <div className="auth-header-main">
-                        <h1>Reset Password</h1>
-                    </div>
-                    <div className="auth-header-sub">Your password has been successfully udated.</div>
-                </div>
-
-                <form className="login-form">
-
-                    <div className="form-submit-container">
-                        <Link to="/" id="pass-reset">
-                            Back to Login
-                        </Link>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    </div>
     ) 
 };
 

@@ -28,18 +28,6 @@ function ModalContainer({profileImage, resorts}) {
     } else {
         return null;
     }
-    // else if (status === "edit-settings") {
-    //     return ReactDom.createPortal(
-    //         <>  
-    //             <div className="modal-overlay" onClick={close}></div>
-    //             <EditSettingsModal />
-    //         </>,
-    //         document.getElementById("modal-portal")
-    //     );
-
-    // } 
-
-
 }
 
 export default ModalContainer;

@@ -5,20 +5,6 @@
   scroll-behavior: smooth;
 }
 
-
-// Variables
-// --bg-auth-main: #e3edfe;
-// $bg-auth-sub: rgba(76, 193, 226,0.35);
-// $txt-auth-main: #151d3d;
-// $txt-auth-sub: #707b95;
-// $txt-auth-hl: #4c6ce2;
-// $txt-auth-hl2: #4cc1e2;
-// $error-red: #ff2b6d;
-// $fav-gold: #FBAF00;
-// $input-shdw-a: rgba(0,0,0,0.1);
-// $input-shdw-b: rgba(2,32,71,0.1);
-// $box-shadow: rgba(61, 61, 63, 0.25);
-
 #root {
   width: 100vw;
   height: 100vh;
@@ -55,7 +41,6 @@
   --bad-red: #A15533;
   --na-grey: #3B3E49;
   --border-default: #b2cae6;
-
 }
 
 #root.dark {

@@ -8,16 +8,16 @@ function LoadingSpinner() {
     await loadFull(engine);
   }, []);
 
-  const particlesLoaded = useCallback(async container => {
-      // await console.log(container);
-  }, []);
+  // const particlesLoaded = useCallback(async container => {
+  //     // await console.log(container);
+  // }, []);
 
   return (
     <div className='loading-screen'>
       <Particles
           id="tsparticles"
           init={particlesInit}
-          loaded={particlesLoaded}
+          // loaded={particlesLoaded}
           options={
             
             {

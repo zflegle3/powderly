@@ -88,7 +88,7 @@ function UserAccountModal({profileImage, resorts}) {
         let currentPasswordValid = true;
         if (passStatus) {
             if (currentPassword.length > 0) {
-                if (await checkPassDb(user._id,currentPassword)) {
+                if (await checkPassDb(user._id, currentPassword, user.token)) {
                     //returns true if current password does not match id password
                     document.querySelector(".form-item-container.pass-current").classList.add("invalid");
                     document.getElementById("pass-error-current").textContent = "Invalid credentials";
@@ -188,6 +188,7 @@ function UserAccountModal({profileImage, resorts}) {
             document.getElementById("dark").checked = true;
         }
     },[]);
+
     //Image File Name
     const displayFile = (e) => {
         e.preventDefault();
@@ -240,25 +241,7 @@ function UserAccountModal({profileImage, resorts}) {
         if(isError || isSuccess) {
             alert(message);
         };
-        //resets state values other than user
-        // dispatch(reset());
     }, [user, isError, isSuccess, message, navigate, dispatch])
-
-    // useEffect(() => {
-    //     //alerts message on update success or error
-    //     if(isError || isSuccess) {
-    //         alert(message);
-    //     };
-    //     //resets state values other than user
-    //     // dispatch(reset());
-    //     if (resorts) {
-    //         console.log(resorts);
-    //         let favoriteResorts = resorts.filter(location => user.favorites.includes(location.refId));
-    //         console.log(favoriteResorts)
-    //         setFavoritesData(favoriteResorts);
-    //     };
-
-    // }, [user])
 
     return (
         <div className="user-account-modal" >
@@ -276,7 +259,6 @@ function UserAccountModal({profileImage, resorts}) {
                 <form className='profile-image-form' >
 
                     <div className='image-display-container'> 
-                        {/* <div className='account-img'></div> */}
                         <img src={profileImage} alt="profile avatar" className='account-img'/>
                     </div>
 
@@ -375,39 +357,19 @@ function UserAccountModal({profileImage, resorts}) {
                     </ul>
 
                     <p className="color-theme-label">favorites</p> 
+
                     <div className='favorites-container'>
-                        {/* {user.favorites.map(favoriteResort => {
-                            <button>
-                                <p>X</p>
-                                <p>{favoriteResort.name}</p>
-                            </button>
-                        })} */}
                         {favoritesDisplay}
-                        {/* <button>
-                            <p>X</p>
-                            <p>Breckenridge</p>
-                        </button>
-                        <button>
-                            <p>X</p>
-                            <p>Steamboat</p>
-                        </button>
-                        <button>
-                            <p>X</p>
-                            <p>Copper Mountain</p>
-                        </button> */}
-                        
                     </div>
 
                     <button className='submit-form' onClick={submitChanges}>Submit</button>
 
                 </form>
 
-
             </div>
 
-            
-
             <button className='user-logout' onClick={onLogout}>Logout</button>
+
         </div>
     );
     

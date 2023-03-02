@@ -1,5 +1,4 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaSearchLocation, FaCrosshairs, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaMapMarkerAlt } from 'react-icons/fa';
 import { useState } from "react";
 import gsap from "gsap";
 //Components
@@ -9,24 +8,11 @@ import FavoriteIcon from "./FavoriteIcon";
 
 function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat, setOpen}) {
     const [displayStatus, setDisplayStatus]  = useState(false);
-    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
-    let cmToIn = 2.54;
-    //format data for display
-    let baseDepth = (resortData.conditions.current.baseDepth/cmToIn).toFixed(1);
-    let topDepth = (resortData.conditions.current.topDepth/cmToIn).toFixed(1);
-    let snow24 = (resortData.conditions.current.snow24/cmToIn).toFixed(1);
-    let snow72 = (resortData.conditions.current.snow24/cmToIn).toFixed(1);
     let desc = resortData.conditions.current.description;
     if (desc.length < 1) {
         desc = "Snow Condition Unknown"
     };
-    let fresh = resortData.conditions.current.freshSnow;
-    if (fresh !== "-") {
-        fresh = fresh/cmToIn.toFixed(1);
-    } else {
-        fresh = (0).toFixed(1);
-    }
 
     const plusToMinus = () => {
         gsap.to(`.bar-1-${resortData.refId}`, {
@@ -87,12 +73,6 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat, setOpen}
         }
     }
 
-    const hideHover = (e) => {
-        console.log("hover");
-        e.stopPropagation();
-        console.log(e.target)
-    }
-
 
     if (displayStatus) {
         return (
@@ -101,12 +81,8 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat, setOpen}
                 <div className="resort-conditions-header">
 
                     <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
-                    {/* <div className='title'>
-                        <p className="resort-name">{resortData.name}</p>
-                        <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
-                    </div> */}
 
-                    <div className='location' onMouseOver={hideHover} onClick={focusLocation}>
+                    <div className='location' onClick={focusLocation}>
                         <div className="header-icon" >
                             <FaMapMarkerAlt/>
                         </div>
@@ -139,10 +115,6 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat, setOpen}
                 <div className="resort-conditions-header">
 
                     <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
-                    {/* <div className='title'>
-                        <p className="resort-name">{resortData.name}</p>
-                        <FavoriteIcon resortData={resortData} favoriteStatus={favoriteStatus}/>
-                    </div> */}
 
                     <div className='location' onClick={focusLocation}>
                         <div className="header-icon">

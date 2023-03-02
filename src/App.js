@@ -74,6 +74,19 @@ function App() {
       }
     }
 
+    if (window.innerWidth < 950) {
+      let bottomPanel = document.querySelector(".react-modal-sheet-container ");
+      if (bottomPanel) {
+        if (user) {
+          //set color theme
+          bottomPanel.classList = `react-modal-sheet-container  ${user.theme}`
+        } else {
+          //set default theme
+          bottomPanel.classList = `react-modal-sheet-container `
+        }
+      }
+    }
+
   }, [user])
 
   if (user) {

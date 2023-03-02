@@ -5,7 +5,6 @@ function WeekDay({ index }) {
         3: 'Wed',
         5: 'Fri'
     }
-    // console.log(index);
 
     return (
       <div className={`timeline-weekdays-weekday ${DayNames[index]}`}>

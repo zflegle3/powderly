@@ -1,7 +1,7 @@
 import { FaSort, FaPlus } from 'react-icons/fa';
 import ConditionsDisplay from './ConditionsDisplay';
 import { useEffect, useState, useRef } from 'react';
-import userEvent from '@testing-library/user-event';
+// import userEvent from '@testing-library/user-event';
 import { useSelector, useDispatch } from 'react-redux';
 import Sheet, { SheetRef } from 'react-modal-sheet';
 
@@ -9,18 +9,8 @@ import Sheet, { SheetRef } from 'react-modal-sheet';
 function BottomPanel({searchResults, sortData, resorts, setLng, setLat}) {
     const [sortedResults, setSortedResults] = useState(searchResults);
     const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
-
     const [isOpen, setOpen] = useState(false);
-
-    // const [isOpen, setOpen] = useState(false);
-    // const ref = useRef();
-    // const snapTo = (i) => ref.current?.snapTo(i);
-
-    //Confirm Props
-    console.log(sortData);
     
-
-
 
     const trimResults = (filteredResults) => {
         // if (filteredResults.length > 10) {
@@ -118,17 +108,24 @@ function BottomPanel({searchResults, sortData, resorts, setLng, setLat}) {
                     sortSnow("baseDepth");
                     break;
                 default:
-                    // code block
             }
         }
     },[searchResults, sortData]);
 
-
-    // useEffect(() => {
-    //     if (sortedResults) {
-    //         setOpen(true);
-    //     }
-    // },[sortedResults]);
+    useEffect(() => {
+        //sets color theme bc bottom panel
+        let bottomPanel = document.querySelector(".react-modal-sheet-container ");
+        if (bottomPanel) {
+            if (user) {
+                //set color theme
+                bottomPanel.classList = `react-modal-sheet-container  ${user.theme}`
+            } else {
+                //set default theme
+                bottomPanel.classList = `react-modal-sheet-container `
+            }
+        }
+    
+    }, [isOpen])
 
 
         
@@ -140,7 +137,6 @@ function BottomPanel({searchResults, sortData, resorts, setLng, setLat}) {
             } else {
                 return <ConditionsDisplay key={resortData.refId} resortData={resortData} favoriteStatus={false} setLng={setLng} setLat={setLat} setOpen={setOpen}/>
             }
-
         })
 
         return (
@@ -164,8 +160,6 @@ function BottomPanel({searchResults, sortData, resorts, setLng, setLat}) {
                             </div>
                         }</Sheet.Content>
                     </Sheet.Container>
-                        {/* {resultsDisplay} */}
-                        {/* <p>Add results here</p> */}
                     <Sheet.Backdrop onClick={() => setOpen(false)}/>
                 </Sheet>
 

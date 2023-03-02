@@ -1,14 +1,10 @@
 import Timeline from "../calendar/Timeline";
-import { FaTemperatureLow, FaTint, FaSnowflake, FaWind, FaSort, FaPlus, FaStar, FaRegStar, FaLocationArrow, FaCrosshairs } from 'react-icons/fa';
-import { useState } from "react";
-import ForecastDateItem from "./ForecastDateItem";
+import { FaSnowflake } from 'react-icons/fa';
 import ForecastDisplay from "./ForecastDisplay"
 
 function ConditionsDetail({resortData}) {
-    const [displayStatus, setDisplayStatus]  = useState(false);
 
     let cmToIn = 2.54;
-    //format data for display
     let baseDepth = (resortData.conditions.current.baseDepth/cmToIn).toFixed(1);
     let topDepth = (resortData.conditions.current.topDepth/cmToIn).toFixed(1);
     let snow24 = (resortData.conditions.current.snow24/cmToIn).toFixed(1);
@@ -22,16 +18,6 @@ function ConditionsDetail({resortData}) {
         fresh = fresh/cmToIn.toFixed(1);
     } else {
         fresh = (0).toFixed(1);
-    }
-
-    const expandCollapse = () => {
-        if (displayStatus) {
-            console.log("close")
-            setDisplayStatus(false)
-        } else {
-            console.log("open")
-            setDisplayStatus(true);
-        }
     }
 
     return (
@@ -80,11 +66,6 @@ function ConditionsDetail({resortData}) {
                         <p>{baseDepth}/{topDepth} in.</p>
                     </div>
                 </div>
-
-                {/* <div className="lifts-detail">
-                    <p>{resortData.lifts.open}/{resortData.lifts.total}</p>
-                    <p>Lifts Open</p>
-                </div> */}
 
             </div>
 
