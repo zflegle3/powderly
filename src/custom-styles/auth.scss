@@ -45,10 +45,10 @@ body::after{
         height: 100vh;
         background-color: var(--bg-auth-main);
         display: flex;
+        flex-direction: column;
         justify-content: center;
         align-items: center;
         position: relative;
-        flex-direction: row;
         border-left: 1px solid var(--txt-auth-sub);
         min-width: 60rem;
     }
