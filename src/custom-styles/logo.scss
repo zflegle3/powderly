@@ -3,7 +3,7 @@
     flex-direction: row;
     justify-content: center;
     align-items: baseline;
-    padding: 4rem 0rem;
+    padding: 2rem 0rem;
     width: 100%;
 
 
@@ -25,26 +25,14 @@
 
 @media only screen and (max-width: 950px) { //tablets, small desktop & mobile 
     .logo {
-        // display: flex;
-        // flex-direction: row;
-        // justify-content: center;
-        // align-items: baseline;
         padding: 2rem 0rem;
-        // width: 100%;
-    
     
         h1 {
-            // padding: 1rem 0rem;
-            // font-weight: 800;
             font-size: 5rem;
-            // background: -webkit-linear-gradient(90deg, #4cc1e2, #4c6ce2);
-            // -webkit-background-clip: text;
-            // -webkit-text-fill-color: transparent;
         }
     
         img {
             height: 3.25rem;
-            // padding: 0rem 0rem;
         }
     }
 

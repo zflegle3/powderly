@@ -98,7 +98,7 @@ function App() {
             <Route exact path="/login" element={<Login />}/>
             <Route exact path="/signup" element={<SignUp/>}/>
             <Route exact path="/forgot" element={<PasswordReset/>}/>
-            <Route exact path="/reset/:email/:id/:token" element={<Reset/>}/>
+            <Route path="/reset/:email/:id/:token" element={<Reset/>}/>
             <Route path="*" element={<Navigate to="/login" replace={true} />}/>
           </Routes>
         </HashRouter>
