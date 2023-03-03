@@ -144,7 +144,7 @@ body::after{
 //auth compnents, user account modal
 .form-item-container {
     min-width: 350px;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
 
     label {
         font-family: 'muli', sans-serif;
@@ -253,7 +253,7 @@ body::after{
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    margin-bottom: 4rem;
+    margin-bottom: 2rem;
 
     div[id*="pass-error-signin"] {
         display: flex;
