@@ -1,12 +1,13 @@
 {
   "files": {
-    "main.css": "/powderly/static/css/main.6837d2f1.css",
-    "main.js": "/powderly/static/js/main.d6d2f2a4.js",
+    "main.css": "/powderly/static/css/main.291839ff.css",
+    "main.js": "/powderly/static/js/main.7ee08765.js",
     "static/media/plane1.jpeg": "/powderly/static/media/plane1.d98564ba169d3e4bde5f.jpeg",
     "static/media/jeff2.jpeg": "/powderly/static/media/jeff2.301ad18678ff18b6bcbd.jpeg",
     "static/media/valley.jpeg": "/powderly/static/media/valley.29daa34cc51dc20bd73c.jpeg",
     "static/media/chalet.jpeg": "/powderly/static/media/chalet.d98dec56ce50f8ab3fc7.jpeg",
     "static/media/avatar.png": "/powderly/static/media/avatar.a024db4373bbc490d3b1.png",
+    "static/media/snowflake.png": "/powderly/static/media/snowflake.9054a469e5dcc8367385.png",
     "static/media/snowy-1.svg": "/powderly/static/media/snowy-1.336b153420f179bf55caf6001010ca21.svg",
     "static/media/rainy-1.svg": "/powderly/static/media/rainy-1.f0a18c18bae7dd93dc868bcdb4b371c4.svg",
     "static/media/snowy-6.svg": "/powderly/static/media/snowy-6.abf211998f21d5289adb043ca67087ad.svg",
@@ -21,11 +22,11 @@
     "static/media/night.svg": "/powderly/static/media/night.6a2ab5e9476789c627efd8f2f051442b.svg",
     "static/media/rainy-4.svg": "/powderly/static/media/rainy-4.4a3f03de6a2d0d5402199c70a13441f7.svg",
     "index.html": "/powderly/index.html",
-    "main.6837d2f1.css.map": "/powderly/static/css/main.6837d2f1.css.map",
-    "main.d6d2f2a4.js.map": "/powderly/static/js/main.d6d2f2a4.js.map"
+    "main.291839ff.css.map": "/powderly/static/css/main.291839ff.css.map",
+    "main.7ee08765.js.map": "/powderly/static/js/main.7ee08765.js.map"
   },
   "entrypoints": [
-    "static/css/main.6837d2f1.css",
-    "static/js/main.d6d2f2a4.js"
+    "static/css/main.291839ff.css",
+    "static/js/main.7ee08765.js"
   ]
 }
