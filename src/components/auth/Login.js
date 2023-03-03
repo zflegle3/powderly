@@ -11,6 +11,7 @@ import { addFocus, removeFocus} from '../../custom-styles/style';
 
 //Components
 import PasswordInput from "./PasswordInput";
+import Logo from "../Logo";
 // import LoadingSpinner from "../LoadingSpinner";
 
 function Login() {
@@ -83,6 +84,7 @@ function Login() {
         <div className="auth-container">
             {sideHero}
             <div className="auth-right">
+                <Logo size="large"/>
                 <div className="auth-content">
                     <div className="auth-header">
                         <div className="auth-header-main"> 

@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from 'react-redux';
 //Styles
 import "./custom-styles/reset.scss";
 import "./custom-styles/app.scss";
+import "./custom-styles/logo.scss"
 import "./custom-styles/calendar.scss";
 import "./custom-styles/auth.scss";
 import "./custom-styles/modal.scss";
@@ -82,8 +83,8 @@ function App() {
       // <div id="app" className={user.theme}>
         <HashRouter>
           <Routes>
-            <Route exact path="*" element={<Home profileImage={profileImage}/> }/>
-            {/* <Route path="*" element={<Navigate to="/powderly" replace={true} />}/> */}
+            <Route exact path="/" element={<Home profileImage={profileImage}/> }/>
+            <Route path="*" element={<Navigate to="/" replace={true} />}/>
           </Routes>
         </HashRouter>
       // </div>

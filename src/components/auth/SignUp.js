@@ -9,6 +9,7 @@ import { addFocus, removeFocus} from '../../custom-styles/style';
 //Components
 import LoadingSpinner from "../LoadingSpinner";
 import PasswordInput from "./PasswordInput"
+import Logo from '../Logo';
 
 function SignUp() {
     const navigate = useNavigate();
@@ -81,6 +82,7 @@ function SignUp() {
         <div className="auth-container">
             {sideHero}
             <div className="auth-right">
+                <Logo size="large"/>
                 <div className="auth-content">
                     <div className="auth-header">
                         <div className="auth-header-main">

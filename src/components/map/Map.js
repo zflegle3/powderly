@@ -118,9 +118,11 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
     };
 
     const onMapIdle = (map) => {
-        //when map done moving, sends bounds and pulls viewport bounds
+        //when map done moving, sends bounds and pulls locations within bounds
         let bounds = map.getBounds();
-        filterLocations(bounds.Ua.hi, bounds.Ua.lo, bounds.Ia.hi, bounds.Ia.lo);
+        let ne = bounds.getNorthEast(); // Coords of the northeast corner
+        let sw = bounds.getSouthWest(); // Coords of the southwest corner
+        filterLocations(ne.lat(), sw.lat(), ne.lng(), sw.lng());
     };
 
     const handleMapClick = () => {

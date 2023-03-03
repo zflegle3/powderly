@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import axios from "axios";
 import { addFocus, removeFocus} from '../../custom-styles/style';
 import { checkEmailDb, validateEmailFormat } from "../../features/auth/validation";
+import Logo from "../Logo";
 
 function PasswordReset() {
     const [userEmail, setUserEmail] = useState("");
@@ -62,6 +63,7 @@ function PasswordReset() {
             <div className="auth-container">
                 {sideHero}
                 <div className="auth-right">
+                    <Logo size="large"/>
                     <div className="auth-content">
 
                         <div className="auth-header">
@@ -91,6 +93,7 @@ function PasswordReset() {
         <div className="auth-container">
             {sideHero}
             <div className="auth-right">
+                <Logo size="large"/>
                 <div className="auth-content">
 
                     <div className="auth-header">
