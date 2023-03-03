@@ -42,15 +42,17 @@ body::after{
 
     .auth-right {
         flex: 3 3 0;
-        height: 100vh;
+        min-height: 100vh;
         background-color: var(--bg-auth-main);
         display: flex;
         flex-direction: column;
-        justify-content: center;
+        justify-content: flex-start;
         align-items: center;
         position: relative;
         border-left: 1px solid var(--txt-auth-sub);
         min-width: 60rem;
+        padding: 5rem 0rem;
+        overflow-y: scroll;
     }
 
     .auth-content {
