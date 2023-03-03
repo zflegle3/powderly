@@ -2,14 +2,17 @@
     #root {
         // height: 85vh;
         // width: 100vw;
+        // // min-height: 100vh;
+        // height: -webkit-fill-available;
+        min-height: -webkit-fill-available;
     }
     
     .home-dash {
     background-color: aqua;
-    height: 100%;
+    // height: 100%;
+    height: -webkit-fill-available;
     flex-grow: 1;
     position: relative;
-    
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -850,50 +853,52 @@
 
 
     .auth-container {
+      min-height: -webkit-fill-available;
 
-        .auth-right {
-            width: 100%;
-            flex: auto;
-            height: 100%;
-            min-width: auto;
-            padding: 2rem;
-        }
 
-        .auth-content {
-            width: 100%;
-            max-width: 50rem;
+      .auth-right {
+          width: 100%;
+          flex: auto;
+          height: 100%;
+          min-width: auto;
+          padding: 2rem;
+      }
 
-            .auth-header {
-                margin-bottom: 2rem;
-        
-                .auth-header-main {
-        
-                    h1 {
-                        font-size: 2.5rem;
-                    }  
-                }
-                
-                .auth-header-sub {
-                    font-size: 1.4rem;
-                }
-            }
+      .auth-content {
+          width: 100%;
+          max-width: 50rem;
 
-            a {
-                font-size: 1.6rem;
-            }
+          .auth-header {
+              margin-bottom: 2rem;
+      
+              .auth-header-main {
+      
+                  h1 {
+                      font-size: 2.5rem;
+                  }  
+              }
+              
+              .auth-header-sub {
+                  font-size: 1.4rem;
+              }
+          }
 
-            .form-submit-container {
+          a {
+              font-size: 1.6rem;
+          }
 
-                .form-btn-container {
-                    flex-grow: 1;
+          .form-submit-container {
 
-                    button {
-                        padding: 1.5rem 3rem;
-                        font-size: 1.4rem;
-                    }
-                }
-            }     
-        }
+              .form-btn-container {
+                  flex-grow: 1;
+
+                  button {
+                      padding: 1.5rem 3rem;
+                      font-size: 1.4rem;
+                  }
+              }
+          }     
+      }
     }
 
 
