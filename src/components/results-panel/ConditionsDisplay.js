@@ -25,7 +25,6 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat, setOpen}
             rotation: 360,
             delay: 0.2,
         });
-
     }
 
     const minusToPlus = () => {
