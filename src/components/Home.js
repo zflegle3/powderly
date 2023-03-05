@@ -69,7 +69,7 @@ function Home({profileImage}) {
     };
 
     useEffect(() => {
-        // getData(); 
+        getData(); 
     },[]);
 
 
