@@ -2,6 +2,9 @@ import React from 'react'
 import { useCallback } from "react";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
+import gsap from "gsap";
+import { useEffect } from "react";
+import snowflake from "../images/snowflake.png"
 
 function LoadingSpinner() {
   const particlesInit = useCallback(async engine => {
@@ -11,6 +14,22 @@ function LoadingSpinner() {
   // const particlesLoaded = useCallback(async container => {
   //     // await console.log(container);
   // }, []);
+
+  const spinnyBoi = () => {
+    gsap.to(`.logo-spinner`, {
+        duration: 3,
+        rotation: 720,
+        ease: "power1",
+        repeatDelay: 2,
+        repeat: -1,
+    });
+
+  } 
+
+  useEffect(() => {
+    //resets auth state anytime dependencies change
+    spinnyBoi();
+  },[]);
 
   return (
     <div className='loading-screen'>
@@ -137,7 +156,9 @@ function LoadingSpinner() {
           }
       />
       <div id="content">
-        <h1>{"Loading..."}</h1>
+            <h1>L</h1>
+            <img src={snowflake} alt="snowflake rotating" className="logo-spinner"></img>
+            <h1>ading...</h1>
       </div>
     </div>
   );

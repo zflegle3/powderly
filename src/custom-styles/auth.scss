@@ -56,10 +56,12 @@ body::after{
     }
 
     .auth-content {
-        // padding: 100px 100px 100px 100px;
         width: 50%;
-        // flex-grow: 1;
         max-width: 50rem;
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        justify-content: center;
 
         .auth-header {
             margin-bottom: 40px;
