@@ -1,4 +1,4 @@
-# Powderly - Get the most powder out of your winter sports experience!
+# Powderly
 
 [Check Out Powderly Here!](https://zflegle3.github.io/powderly)
 
