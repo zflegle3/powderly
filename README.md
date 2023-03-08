@@ -1,4 +1,4 @@
-# Powderly
+# Powderly - Ski Conditions Tracking Application
 
 [Check Out Powderly Here!](https://zflegle3.github.io/powderly)
 
