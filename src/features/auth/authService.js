@@ -33,7 +33,7 @@ const logout = async() => {
 const update= async(userData, token) => {
     let config = {
         headers: {
-            authorization: `Bearer ${token}`
+            authorization: `Bearer ${token}`,
     }}//required for protected routes
     const response = await axios.put(process.env.REACT_APP_API_URL+"/user/update/id", userData, config);
     if (response.data) {

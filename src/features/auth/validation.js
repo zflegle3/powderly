@@ -5,8 +5,16 @@ const validateUserNameFormat = (userName) => {
     return userName.match(/^[a-zA-Z0-9]+$/);
 };
 
+const config = {
+    headers: {
+        'Access-Control-Allow-Origin': '*', // Add CORS header
+    },
+};
+
+
 //ACTIVE USER DB VALIDATION BY USERNAME
 export const checkUserDb = async (userIn) => {
+    console.log('checkDb', userIn);
     //checks for user in db and returns true if found, false if not found
     const responseEmail = await axios.post(process.env.REACT_APP_API_URL+"/user/read/username", {username: userIn});
     if (responseEmail.data.username === userIn) {
@@ -18,7 +26,7 @@ export const checkUserDb = async (userIn) => {
 
 //ACTIVE USER DB VALIDATION BY EMAIL
 export const checkEmailDb = async (userEmail) => {
-    const response = await axios.post(process.env.REACT_APP_API_URL+"/user/read/email", {email: userEmail});
+    const response = await axios.post(process.env.REACT_APP_API_URL+"/user/read/email", {email: userEmail}, config);
     if (response.data.email === userEmail) {
         return true;
     } else {

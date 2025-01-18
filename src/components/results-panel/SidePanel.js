@@ -66,7 +66,7 @@ function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
 
     const sortRating = () => {
         let filteredResults = [...searchResults];
-        filteredResults.sort((a, b) => Number(b.conditions.forecast[0].rating) - Number(a.conditions.forecast[0].rating));
+        filteredResults.sort((a, b) => Number(b.conditions.forecast[0]?.rating) - Number(a.conditions.forecast[0]?.rating));
         trimResults(filteredResults)
     }
 
