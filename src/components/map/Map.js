@@ -33,17 +33,18 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
         setSelectedMarker({
             pos: position,
             name: selectedInfo.name,
-            hi: selectedInfo.conditions.forecast[0].tempHigh,
-            lo: selectedInfo.conditions.forecast[0].tempLow,
-            snow: selectedInfo.conditions.forecast[0].snowfall,
-            wind: selectedInfo.conditions.forecast[0].windMax,
-            date: DateTime.fromISO(selectedInfo.conditions.forecast[0].date, { zone: "UTC"}),
-            humidity: selectedInfo.conditions.forecast[0].humidity,
+            hi: selectedInfo.conditions.forecast[0]?.tempHigh,
+            lo: selectedInfo.conditions.forecast[0]?.tempLow,
+            snow: selectedInfo.conditions.forecast[0]?.snowfall,
+            wind: selectedInfo.conditions.forecast[0]?.windMax,
+            date: DateTime.fromISO(selectedInfo.conditions.forecast[0]?.date, { zone: "UTC"}),
+            humidity: selectedInfo.conditions.forecast[0]?.humidity,
         })
     }
 
     const markers = resorts.map((resort) => {
-        let rating = resort.conditions.forecast[0].rating;
+        let rating = resort.conditions.forecast[0]?.rating;
+        console.log("resort rate", resort, rating);
 
         if (rating > 7.5) {
             return (

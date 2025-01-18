@@ -52,13 +52,13 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat, setOpen}
     }
 
     let ratingVal = "na"
-    if (Number(resortData.conditions.forecast[0].rating) > 7.5) {
+    if (Number(resortData.conditions.forecast[0]?.rating) > 7.5) {
         ratingVal = "best";
-    } else if (Number(resortData.conditions.forecast[0].rating) > 5) {
+    } else if (Number(resortData.conditions.forecast[0]?.rating) > 5) {
         ratingVal = "good";
-    } else if (Number(resortData.conditions.forecast[0].rating) > 2.5) {
+    } else if (Number(resortData.conditions.forecast[0]?.rating) > 2.5) {
         ratingVal = "ok";
-    } else if (Number(resortData.conditions.forecast[0].rating) > 0) {
+    } else if (Number(resortData.conditions.forecast[0]?.rating) > 0) {
         ratingVal = "bad";
     } 
 
@@ -89,7 +89,7 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat, setOpen}
                     </div>
 
                     <div className='rating'>
-                        <p className={`rating-${ratingVal} value`}>{resortData.conditions.forecast[0].rating} </p>
+                        <p className={`rating-${ratingVal} value`}>{resortData.conditions.forecast[0]?.rating} </p>
                         <p className={`rating-${ratingVal} desc`}>{desc}</p>
                     </div>
 
@@ -123,7 +123,7 @@ function ConditionsDisplay({resortData, favoriteStatus, setLng, setLat, setOpen}
                     </div>
 
                     <div className='rating'>
-                        <p className={`rating-${ratingVal} value`}>{resortData.conditions.forecast[0].rating} </p>
+                        <p className={`rating-${ratingVal} value`}>{resortData.conditions.forecast[0]?.rating} </p>
                         <p className={`rating-${ratingVal} desc`}>{desc}</p>
                     </div>
 
