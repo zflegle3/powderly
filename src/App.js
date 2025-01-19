@@ -13,11 +13,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 //Styles
 import "./custom-styles/reset.scss";
-import "./custom-styles/app.scss";
+import "./custom-styles/App.scss";
 import "./custom-styles/logo.scss"
-import "./custom-styles/calendar.scss";
+import "./custom-styles/Calendar.scss";
 import "./custom-styles/auth.scss";
-import "./custom-styles/modal.scss";
+import "./custom-styles/Modal.scss";
 import "./custom-styles/loading.scss";
 import "./custom-styles/mobile.scss"
 
