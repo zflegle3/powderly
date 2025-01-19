@@ -2,6 +2,9 @@ import axios from 'axios';
 import { useEffect, useState, useMemo } from "react";
 import { useLoadScript} from "@react-google-maps/api";
 import { useSelector, useDispatch } from 'react-redux';
+//Services
+import conditionsService from '../service/conditions.js'
+
 //Components
 import Map from "./map/Map.js"
 import SidePanel from "./results-panel/SidePanel.js";
@@ -30,10 +33,9 @@ function Home({profileImage}) {
             id: 0
         },
     );
-    const center  = useMemo(() => getLocation(), []);
     const [lng, setLng] = useState(false);
     const [lat, setLat] = useState(false);
-
+    const center  = useMemo(() => getLocation(), []);
 
     function showPosition(position) {
         //if user accepts geolocation, sets lat/lng to user location
@@ -58,13 +60,13 @@ function Home({profileImage}) {
         if (user) {
             let config = {
                 headers: {
-                    authorization: `Bearer ${user.token}`
-            }}//required for protected routes
-            const dataIn = await axios.get(process.env.REACT_APP_API_URL+"/conditions/all",config)
-                .catch(function (err) {
-                    console.log("ERROR WITH MARKER DATA,", err)
-                });
-            setResorts(dataIn.data);
+                    Authorization: `Bearer ${user.token}`
+            }}
+            const data = await conditionsService.getConditionsAll(user);
+            setResorts(data);
+            } catch (err) {
+                console.log("ERROR WITH MARKER DATA,", err);
+            }
         }
     };
 
@@ -73,7 +75,7 @@ function Home({profileImage}) {
     },[]);
 
 
-    if (!isLoaded || !resorts || !lat || !lng ) {
+    if (!isLoaded || !resorts.length || !lat || !lng ) {
         return (
               <LoadingSpinner />
           );
