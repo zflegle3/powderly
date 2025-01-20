@@ -1,4 +1,4 @@
-import { GoogleMap, MarkerF, getBounds, Marker, Size, InfoWindow } from "@react-google-maps/api"
+import { GoogleMap, getBounds, Marker, Size, InfoWindow } from "@react-google-maps/api"
 import { useMemo } from "react";
 import { useState, useEffect, useRef } from "react";
 import mapStyles from "../../custom-styles/mapStyles";
@@ -114,6 +114,7 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
 
     const onMapLoad = (map) => {
         //sets myMap state with map object
+        console.log("map loaded...", map);
         setMyMap(map);
     };
 
@@ -141,6 +142,7 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
     
     useEffect(() => {
         //Updates map focus and zoom on recenter button
+        console.log("map lat/lng change", myMap, lat,lng);
         if(myMap) {
             myMap.panTo({lat: Number(lat), lng: Number(lng)})
             myMap.setZoom(9);
@@ -148,6 +150,7 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
     },[lat,lng]);
 
     useEffect(() => {
+        console.log("map selected change", myMap);
         //resets zoom on searched location
         if(myMap) {
             myMap.setZoom(9);
