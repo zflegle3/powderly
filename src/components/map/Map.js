@@ -44,7 +44,6 @@ function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, prof
 
     const markers = resorts.map((resort) => {
         let rating = resort.conditions.forecast[0]?.rating ?? 0;
-        console.log("resort rate", resort, rating);
 
         if (rating > 7.5) {
             return (
