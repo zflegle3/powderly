@@ -1,7 +1,6 @@
-import axios from 'axios';
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState } from "react";
 import { useLoadScript} from "@react-google-maps/api";
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 //Services
 import conditionsService from '../service/conditions.js'
 
@@ -12,19 +11,16 @@ import Sheet from 'react-modal-sheet';
 import ModalContainer from './modals/ModalContainer';
 import LoadingSpinner from "./LoadingSpinner.js";
 import BottomPanel from './results-panel/BottomPanel.js';
-//Images
-import { FaLocationArrow } from 'react-icons/fa';
 
 
 function Home({profileImage}) {
-    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+    const {user } = useSelector((state) => state.auth);
     const [ libraries ] = useState(['places']);
     const { isLoaded, loadError } = useLoadScript({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
         libraries,
     });
     const [resorts, setResorts] = useState(false);
-    const [resortsSorted, setResortsSorted] = useState(false);
     const [searchResults, setSearchResults] = useState(null);
     const [sort, setSort] = useState(
         {
@@ -35,7 +31,6 @@ function Home({profileImage}) {
     );
     const [lng, setLng] = useState(false);
     const [lat, setLat] = useState(false);
-    const center  = useMemo(() => getLocation(), []);
 
     function showPosition(position) {
         //if user accepts geolocation, sets lat/lng to user location
@@ -58,12 +53,10 @@ function Home({profileImage}) {
 
     const getData = async () => {
         if (user) {
-            let config = {
-                headers: {
-                    Authorization: `Bearer ${user.token}`
-            }}
-            const data = await conditionsService.getConditionsAll(user);
-            setResorts(data);
+            try {
+                const data = await conditionsService.getConditionsAll(user);
+                console.log('returned data', data);
+                setResorts(data);
             } catch (err) {
                 console.log("ERROR WITH MARKER DATA,", err);
             }
@@ -71,6 +64,7 @@ function Home({profileImage}) {
     };
 
     useEffect(() => {
+        console.log("mounted??");
         getData(); 
     },[]);
 
