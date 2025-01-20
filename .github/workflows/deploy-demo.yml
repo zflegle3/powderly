@@ -14,6 +14,10 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
 
+      # Install dependencies with --legacy-peer-deps flag
+      - name: Install dependencies
+        run: npm install --legacy-peer-deps
+
       # Build the React app
       - name: Build the React app
         env:
