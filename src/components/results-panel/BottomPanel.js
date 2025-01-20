@@ -3,7 +3,7 @@ import ConditionsDisplay from './ConditionsDisplay';
 import { useEffect, useState } from 'react';
 // import userEvent from '@testing-library/user-event';
 import { useSelector } from 'react-redux';
-// import Sheet, { SheetRef } from 'react-modal-sheet';
+import Sheet from 'react-modal-sheet';
 
 
 function BottomPanel({searchResults, sortData, resorts, setLng, setLat}) {

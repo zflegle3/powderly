@@ -15,20 +15,20 @@ import FavoriteBtn from './FavoriteBtn';
 function UserAccountModal({profileImage, resorts}) {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {user, isError, isSuccess, message } = useSelector((state) => state.auth);
+    const { user, isError, isSuccess, message } = useSelector((state) => state.auth);
     //passStatus determines if user is editing their password
     //true for editing, false for not editing 
-    const [passStatus, setPassStatus] = useState(false);
+    const [ passStatus, setPassStatus ] = useState(false);
     // const [favoritesData, setFavoritesData] = useState(user.favorites);
     //input variables from user 
-    const [firstIn, setFirstIn] = useState(user.first_name);
-    const [lastIn, setLastIn] = useState(user.family_name);
-    const [usernameIn, setUsernameIn] = useState(user.username);
-    const [emailIn, setEmailIn] = useState(user.email);
-    // const [themeIn, setThemeIn] = useState(user.theme);
-    // const [favoritesIn, setFavoritesIn] = useState(user.favorites);
-    const [currentPassword, setCurrentPassword] = useState("");
-    const [newPassword, setNewPassword] = useState("");
+    const [ firstIn, setFirstIn ] = useState(user.first_name);
+    const [ lastIn, setLastIn ] = useState(user.family_name);
+    const [ usernameIn, setUsernameIn ] = useState(user.username);
+    const [ emailIn, setEmailIn ] = useState(user.email);
+    const [ themeIn ] = useState(user.theme);
+    const [ favoritesIn ] = useState(user.favorites);
+    const [ currentPassword, setCurrentPassword ] = useState("");
+    const [ newPassword, setNewPassword ] = useState("");
 
 
     //DATA SUBMISSION & STATE CHANGE FUNCTIONS
