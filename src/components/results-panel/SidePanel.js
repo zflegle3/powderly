@@ -1,13 +1,12 @@
-import { FaSort, FaPlus } from 'react-icons/fa';
+import { FaSort } from 'react-icons/fa';
 import ConditionsDisplay from './ConditionsDisplay';
 import { useEffect, useState } from 'react';
-import userEvent from '@testing-library/user-event';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
-function SidePanel({searchResults, sortData, resorts, setLng, setLat}) {
+function SidePanel({searchResults, sortData, setLng, setLat}) {
     const [sortedResults, setSortedResults] = useState(searchResults);
-    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+    const {user } = useSelector((state) => state.auth);
     
     const trimResults = (filteredResults) => {
         // if (filteredResults.length > 10) {

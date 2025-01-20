@@ -1,8 +1,6 @@
 //used for making http requests, sending data back, setting data to local storage
 import axios from "axios";
 
-// const API_URL = "http://localhost:8080";
-
 //Register new user
 const register = async(userData) => {
     const response = await axios.post(process.env.REACT_APP_API_URL+"/user/create", userData);
@@ -52,6 +50,7 @@ const remove = async(userId, token) => {
     }//required for protected routes
     const response = await axios.delete(process.env.REACT_APP_API_URL+"/user/delete/"+userId, config);
     localStorage.removeItem("user");
+    return response.data;
 };
 
 

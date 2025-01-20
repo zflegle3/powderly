@@ -706,4 +706,5 @@ let testStyle2 = [
     }
 ]
 
-export default { testStyle, darkStyle, lightStyle, testStyle2 }
+const out = { testStyle, darkStyle, lightStyle, testStyle2 }
+export default out;
