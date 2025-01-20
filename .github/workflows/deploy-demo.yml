@@ -18,12 +18,8 @@ jobs:
       - name: Install dependencies
         run: npm install --legacy-peer-deps
 
-      # Build the React app
-      - name: Build the React app
-        env:
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}  # Add any other environment variables you need
-        run: npm run build
-
       # Deploy to GitHub Pages using the gh-pages package
       - name: Deploy to GitHub Pages
         run: npm run deploy
+        env:
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}  # Add any other environment variables you need
