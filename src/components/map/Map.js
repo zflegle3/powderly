@@ -1,31 +1,30 @@
-import { GoogleMap, getBounds, Marker, Size, InfoWindow } from "@react-google-maps/api"
-import { useMemo } from "react";
-import { useState, useEffect, useRef } from "react";
+import { GoogleMap, Marker, InfoWindow } from "@react-google-maps/api"
+import { useState, useEffect } from "react";
 import mapStyles from "../../custom-styles/mapStyles";
 import SearchBar from "./SearchBar"
 import FilterBar from "./FilterBar"
 import { FaLocationArrow } from 'react-icons/fa';
 import InfoPanel from "./InfoPanel"
 import { DateTime } from 'luxon';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 
 
-import usePlacesAutocomplete, { getGeocode, getLatLng} from "use-places-autocomplete"
-import {
-    Combobox,
-    ComboboxInput, 
-    ComboboxPopover, 
-    ComboboxList,
-    ComboboxOption,
-} from "@reach/combobox";
+// import usePlacesAutocomplete, { getGeocode, getLatLng} from "use-places-autocomplete"
+// import {
+//     Combobox,
+//     ComboboxInput, 
+//     ComboboxPopover, 
+//     ComboboxList,
+//     ComboboxOption,
+// } from "@reach/combobox";
 // import LocationMarker from "./LocationMarker";
 
 function Map({resorts, lat, setLat, lng, setLng, setSearchResults, setSort, profileImage}) {
     const [myMap, setMyMap] = useState(null); //map reference instance
     const [selected, setSelected] = useState({lat, lng}); //User or searched location
     const [selectedMarker, setSelectedMarker] = useState(null); //Places info window on selected marker
-    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+    const {user } = useSelector((state) => state.auth);
 
 
     const handleClick = (id, position) => {

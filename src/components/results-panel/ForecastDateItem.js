@@ -21,7 +21,7 @@ import { ReactComponent as Default } from "../../images/weather-icons/static/clo
 
 
 function ForecastDateItem({forecastData, expandStatus, position, setExpandSelected}) {
-    const [dateOut, setDateOut] = useState(DateTime.fromISO(forecastData.date, { zone: "UTC"}));
+    const [dateOut] = useState(DateTime.fromISO(forecastData.date, { zone: "UTC"}));
     // const [dateOut, setDateOut] = useState(DateTime.fromISO(forecastData.date.toISOString()));
 
     const weekdayShort = (day) => {
@@ -44,25 +44,25 @@ function ForecastDateItem({forecastData, expandStatus, position, setExpandSelect
           }
     }
 
-    const weekdayLong = (day) => {
-        switch (day) {
-            case 1:
-                return "Monday"
-            case 2:
-                return "Tuesday"
-            case 3:
-                return "Wedneday"
-            case 4:
-                return "Thursday"
-            case 5:
-                return "Friday"
-            case 6:
-                return "Saturday"
-            case 7:
-                return "Sunday"
-            default:
-          }
-    }
+    // const weekdayLong = (day) => {
+    //     switch (day) {
+    //         case 1:
+    //             return "Monday"
+    //         case 2:
+    //             return "Tuesday"
+    //         case 3:
+    //             return "Wedneday"
+    //         case 4:
+    //             return "Thursday"
+    //         case 5:
+    //             return "Friday"
+    //         case 6:
+    //             return "Saturday"
+    //         case 7:
+    //             return "Sunday"
+    //         default:
+    //       }
+    // }
 
     const expandForecastDisplay = (e) => {
         e.preventDefault();

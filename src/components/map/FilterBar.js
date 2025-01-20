@@ -1,6 +1,6 @@
 // import { GoogleMap, MarkerF, getBounds, Marker, Size } from "@react-google-maps/api"
 // import { useMemo } from "react";
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 // import { ReactComponent as Greaticon } from '../svgs/bestIcon.svg';
 // import IconPng from "../svgs/bestIcon.png";
 // import mapStyles from "../custom-styles/mapStyles";

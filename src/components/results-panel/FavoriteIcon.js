@@ -4,7 +4,7 @@ import { addFavorite, removeFavorite } from '../../features/auth/authSlice';
 
 function FavoriteIcon({resortData, favoriteStatus}) {
     const dispatch = useDispatch();
-    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+    const {user } = useSelector((state) => state.auth);
 
 
     const toggleFavorite = (e) => {

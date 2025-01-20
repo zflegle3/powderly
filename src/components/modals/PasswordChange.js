@@ -1,5 +1,5 @@
 import { addFocus, removeFocus} from '../../custom-styles/style';
-import { FaRegCheckCircle, FaCheck, FaRegTimesCircle } from 'react-icons/fa';
+import { FaRegCheckCircle } from 'react-icons/fa';
 
 
 function PasswordChange({togglePasswordChange, setNewPassword, setCurrentPassword}) {

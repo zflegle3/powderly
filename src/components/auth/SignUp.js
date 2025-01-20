@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate} from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {register, reset } from "../../features/auth/authSlice";
-import { FaRegCheckCircle, FaCheck, FaRegTimesCircle } from 'react-icons/fa';
+import {register } from "../../features/auth/authSlice";
+import { FaRegCheckCircle } from 'react-icons/fa';
 import {checkNewUserName, checkNewEmail, checkNewPass } from "../../features/auth/validation";
 import { addFocus, removeFocus} from '../../custom-styles/style';
 
@@ -14,7 +14,7 @@ import Logo from '../Logo';
 function SignUp() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const [passStatus, setPassStatus] = useState("");//true when user is valid
+    const [ passStatus ] = useState("");//true when user is valid
     const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
 

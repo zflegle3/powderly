@@ -2,14 +2,14 @@ import { useState } from "react";
 import { useDispatch } from 'react-redux';
 import { FaSearch } from 'react-icons/fa';
 import PlacesAutocomplete from "./PlacesAutocomplete.js";
-import {openAccountModal} from "../../features/modals/modalSlice";
+import { openAccountModal } from "../../features/modals/modalSlice";
 
 
 
 function SearchBar({setSelected, selected, profileImage}) {
     const dispatch = useDispatch();
-    const [location, setLocation] = useState("Search any Location...");
-    const [date, setDate] = useState(new Date());
+    const [ setLocation ] = useState("Search any Location...");
+    const [ date ] = useState(new Date());
 
     const openAccount = () => {
         //changes edit status to edit inputs

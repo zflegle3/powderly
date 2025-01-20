@@ -7,7 +7,6 @@ import conditionsService from '../service/conditions.js'
 //Components
 import Map from "./map/Map.js"
 import SidePanel from "./results-panel/SidePanel.js";
-import Sheet from 'react-modal-sheet';
 import ModalContainer from './modals/ModalContainer';
 import LoadingSpinner from "./LoadingSpinner.js";
 import BottomPanel from './results-panel/BottomPanel.js';
@@ -16,7 +15,7 @@ import BottomPanel from './results-panel/BottomPanel.js';
 function Home({profileImage}) {
     const {user } = useSelector((state) => state.auth);
     const [ libraries ] = useState(['places']);
-    const { isLoaded, loadError } = useJsApiLoader({
+    const { isLoaded } = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
         libraries,
     });

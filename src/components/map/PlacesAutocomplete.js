@@ -6,7 +6,7 @@ import {
     ComboboxList,
     ComboboxOption,
 } from "@reach/combobox";
-import { useState, useEffect, createRef } from "react";
+import { createRef } from "react";
 
 
 const PlacesAutocomplete = ({ setSelected,setLocation }) => {

@@ -1,12 +1,11 @@
-import axios from "axios";
 import { useState, useEffect } from 'react';
 import {
     Link,
     useNavigate
 } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {login, reset} from "../../features/auth/authSlice";
-import {validateUsernameEmail } from "../../features/auth/validation";
+import { login } from "../../features/auth/authSlice";
+import { validateUsernameEmail } from "../../features/auth/validation";
 import { addFocus, removeFocus} from '../../custom-styles/style';
 
 //Components
@@ -18,7 +17,7 @@ function Login() {
     const [passStatus, setPassStatus] = useState("hidden");//true when user is valid
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+    const {user, isError, isSuccess, message } = useSelector((state) => state.auth);
 
     async function userLogin(e) {
         //handles user email submission for login

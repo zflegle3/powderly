@@ -2,17 +2,17 @@ import {
     Link,
     useParams
 } from "react-router-dom";
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from "axios";
 import {checkPassDbReset, checkNewPass } from "../../features/auth/validation";
 //Components
 import PasswordInput from "./PasswordInput"
 //Icons
-import { FaRegCheckCircle, FaCheck, FaRegTimesCircle } from 'react-icons/fa';
+import { FaRegCheckCircle } from 'react-icons/fa';
 
 function Reset() {
-    const [passStatus, setPassStatus] = useState("");//true when user is valid
-    const [submitStatus, setSubmitStatus] = useState(false);
+    const [ passStatus ] = useState("");//true when user is valid
+    const [ submitStatus, setSubmitStatus ] = useState(false);
     let { email } = useParams();
     let { id } = useParams();
     let { token } = useParams();

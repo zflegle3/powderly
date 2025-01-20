@@ -2,10 +2,10 @@ import Cell from "./Cell";
 import WeekDay from "./Weekday";
 import Month from "./Month";
 import { DateTime } from 'luxon';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 function Timeline({dataIn}) {
-    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+    const {user } = useSelector((state) => state.auth);
     //Component takes in historical data as an array of objects
     //each object should be {date: DateObject, snowfall: number}
 

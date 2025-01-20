@@ -1,4 +1,3 @@
-import { DateTime } from 'luxon';
 //A Component that returns Month labels for calendar
 function Month({ startDate, index }) {
   //takes in a startdate DateTime object and an index number

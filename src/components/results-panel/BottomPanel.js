@@ -1,14 +1,14 @@
-import { FaSort, FaPlus } from 'react-icons/fa';
+import { FaSort } from 'react-icons/fa';
 import ConditionsDisplay from './ConditionsDisplay';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 // import userEvent from '@testing-library/user-event';
-import { useSelector, useDispatch } from 'react-redux';
-import Sheet, { SheetRef } from 'react-modal-sheet';
+import { useSelector } from 'react-redux';
+// import Sheet, { SheetRef } from 'react-modal-sheet';
 
 
 function BottomPanel({searchResults, sortData, resorts, setLng, setLat}) {
     const [sortedResults, setSortedResults] = useState(searchResults);
-    const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+    const {user } = useSelector((state) => state.auth);
     const [isOpen, setOpen] = useState(false);
     
 

@@ -1,12 +1,9 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import {
-  BrowserRouter as Router,
   HashRouter,
   Routes,
   Route,
-  Link,
   Navigate,
-  useNavigate,
 } from "react-router-dom";
 import {reset} from "./features/auth/authSlice";
 import { useSelector, useDispatch } from 'react-redux';
@@ -28,7 +25,6 @@ import Login from './components/auth/Login';
 import SignUp from './components/auth/SignUp';
 import PasswordReset from "./components/auth/PasswordReset";
 import Reset from "./components/auth/Reset";
-import ModalContainer from './components/modals/ModalContainer';
 
 //Images
 import defaultImg from "./images/avatars/avatar.png";
@@ -36,7 +32,7 @@ import defaultImg from "./images/avatars/avatar.png";
 function App() {
   // const [user, setUser] = useState(null);
   const dispatch = useDispatch();
-  const {user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+  const {user, isError, isSuccess, message } = useSelector((state) => state.auth);
   const [profileImage, setProfileImage] = useState(defaultImg);
 
 
