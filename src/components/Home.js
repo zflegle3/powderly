@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoadScript} from "@react-google-maps/api";
+import { useJsApiLoader} from "@react-google-maps/api";
 import { useSelector } from 'react-redux';
 //Services
 import conditionsService from '../service/conditions.js'
@@ -16,7 +16,7 @@ import BottomPanel from './results-panel/BottomPanel.js';
 function Home({profileImage}) {
     const {user } = useSelector((state) => state.auth);
     const [ libraries ] = useState(['places']);
-    const { isLoaded, loadError } = useLoadScript({
+    const { isLoaded, loadError } = useJsApiLoader({
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
         libraries,
     });
