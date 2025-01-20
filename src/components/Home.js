@@ -20,7 +20,7 @@ function Home({profileImage}) {
         googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API,
         libraries,
     });
-    const [resorts, setResorts] = useState(false);
+    const [resorts, setResorts] = useState([]);
     const [searchResults, setSearchResults] = useState(null);
     const [sort, setSort] = useState(
         {
@@ -56,7 +56,7 @@ function Home({profileImage}) {
             try {
                 const data = await conditionsService.getConditionsAll(user);
                 console.log('returned data', data);
-                setResorts(data);
+                await setResorts(data);
             } catch (err) {
                 console.log("ERROR WITH MARKER DATA,", err);
             }
@@ -66,6 +66,7 @@ function Home({profileImage}) {
     useEffect(() => {
         console.log("mounted??");
         getData(); 
+        getLocation();
     },[]);
 
 
