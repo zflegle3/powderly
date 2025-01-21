@@ -12,9 +12,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # check env variables
-      - if: ${{ env.REACT_APP_API_URL != '' }}
+      - if: ${{ secrets.REACT_APP_API_URL != '' }}
         run: echo 'This step will only run if the secret has a value set.'
-      - if: ${{ env.REACT_APP_API_URL == '' }}
+      - if: ${{ secrets.REACT_APP_API_URL == '' }}
         run: echo 'This step will only run if the secret does not have a value set.'
         
       # Check out the repository code
