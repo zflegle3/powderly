@@ -8,7 +8,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
+      REACT_APP_API_URL: 'https://snow-scraper-pro.vercel.app'
       REACT_APP_GOOGLE_MAPS_API: ${{ secrets.REACT_APP_GOOGLE_MAPS_API }} 
     steps:
       # check env variables
