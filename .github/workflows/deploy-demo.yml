@@ -25,7 +25,8 @@ jobs:
 
       # Deploy to GitHub Pages using the gh-pages package
       - name: Build App
-        run: npm run build
+        run: echo $REACT_APP_API_URL
+          npm run build
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
           REACT_APP_GOOGLE_MAPS_API: ${{ secrets.REACT_APP_GOOGLE_MAPS_API }} 
