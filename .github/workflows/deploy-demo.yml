@@ -32,7 +32,12 @@ jobs:
           REACT_APP_GOOGLE_MAPS_API: ${{ secrets.REACT_APP_GOOGLE_MAPS_API }} 
 
        # Deploy to GitHub Pages using the gh-pages package
+      # - name: Deploy to GitHub Pages
+      #   run: npm run deploy
+      #   env:
+      #     github_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Deploy to GitHub Pages
-        run: npm run deploy
-        env:
+        uses: peaceiris/actions-gh-pages@v4
+        with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          # publish_dir: ./build
