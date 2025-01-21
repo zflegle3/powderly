@@ -4,17 +4,17 @@ on:
   push:
     branches:
       - main
-env:
-  REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
-  REACT_APP_GOOGLE_MAPS_API: ${{ secrets.REACT_APP_GOOGLE_MAPS_API }} 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    env:
+      REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+      REACT_APP_GOOGLE_MAPS_API: ${{ secrets.REACT_APP_GOOGLE_MAPS_API }} 
     steps:
       # check env variables
-      - if: ${{ secrets.REACT_APP_API_URL != '' }}
+      - if: ${{ env.REACT_APP_API_URL != '' }}
         run: echo 'This step will only run if the secret has a value set.'
-      - if: ${{ secrets.REACT_APP_API_URL == '' }}
+      - if: ${{ env.REACT_APP_API_URL == '' }}
         run: echo 'This step will only run if the secret does not have a value set.'
         
       # Check out the repository code
@@ -34,6 +34,9 @@ jobs:
       # Build App
       - name: Build App
         run: npm run build
+        env:
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          REACT_APP_GOOGLE_MAPS_API: ${{ secrets.REACT_APP_GOOGLE_MAPS_API }}
 
        # Deploy to GitHub Pages using the gh-pages package
       # - name: Deploy to GitHub Pages
