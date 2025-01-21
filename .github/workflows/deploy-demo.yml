@@ -24,14 +24,10 @@ jobs:
         run: npm install --legacy-peer-deps
 
       # Deploy to GitHub Pages using the gh-pages package
-      - name: Build App
-        run: echo secrets.REACT_APP_API_URL
-          npm run build
+      - name: Deploy App
+        run: npm run deploy
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
           REACT_APP_GOOGLE_MAPS_API: ${{ secrets.REACT_APP_GOOGLE_MAPS_API }} 
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
