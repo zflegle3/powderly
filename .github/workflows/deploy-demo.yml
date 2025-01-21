@@ -27,7 +27,8 @@ jobs:
       - name: Build App
         run: npm run build
         env:
-          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}  # Add any other environment variables you need
+          REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+          REACT_APP_GOOGLE_MAPS_API: ${{ secrets.REACT_APP_GOOGLE_MAPS_API }} 
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
