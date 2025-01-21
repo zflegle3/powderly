@@ -29,5 +29,4 @@ jobs:
         env:
           REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
           REACT_APP_GOOGLE_MAPS_API: ${{ secrets.REACT_APP_GOOGLE_MAPS_API }} 
-        with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
