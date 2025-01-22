@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REACT_APP_API_URL: 'https://snow-scraper-pro.vercel.app'
-      REACT_APP_GOOGLE_MAPS_API: ${{ secrets.REACT_APP_GOOGLE_MAPS_API }} 
+      REACT_APP_GOOGLE_MAPS_API: ${{ env.REACT_APP_GOOGLE_MAPS_API }} 
     steps:
       # check env variables
       - if: ${{ env.REACT_APP_API_URL != '' }}
@@ -36,7 +36,7 @@ jobs:
         run: npm run build
         env:
           REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
-          REACT_APP_GOOGLE_MAPS_API: ${{ secrets.REACT_APP_GOOGLE_MAPS_API }}
+          REACT_APP_GOOGLE_MAPS_API: ${{ env.REACT_APP_GOOGLE_MAPS_API }}
 
        # Deploy to GitHub Pages using the gh-pages package
       # - name: Deploy to GitHub Pages
@@ -47,7 +47,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         env:
           REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
-          REACT_APP_GOOGLE_MAPS_API: ${{ secrets.REACT_APP_GOOGLE_MAPS_API }}
+          REACT_APP_GOOGLE_MAPS_API: ${{ env.REACT_APP_GOOGLE_MAPS_API }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
