@@ -11,10 +11,10 @@ jobs:
       REACT_APP_API_URL: 'https://snow-scraper-pro.vercel.app'
     steps:
       # check env variables
-      - if: ${{ env.REACT_APP_GOOGLE_MAPS_API }}
+      - if: ${{ vars.REACT_APP_GOOGLE_MAPS_API }}
         run: echo 'This step will only run if the secret has a value set... env.REACT_APP_GOOGLE_MAPS_API'
-      - if: ${{ !env.REACT_APP_GOOGLE_MAPS_API }}
-        run: echo 'This step will only run if the secret does not have a value set... env.REACT_APP_GOOGLE_MAPS_API'
+      - if: ${{ !vars.REACT_APP_GOOGLE_MAPS_API }}
+        run: echo 'This step will only run if the secret does not have a value set... vars.REACT_APP_GOOGLE_MAPS_API'
         
       # Check out the repository code
       - name: Check out repository code
@@ -35,7 +35,7 @@ jobs:
         run: npm run build
         env:
           REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
-          REACT_APP_GOOGLE_MAPS_API: ${{ env.REACT_APP_GOOGLE_MAPS_API }}
+          REACT_APP_GOOGLE_MAPS_API: ${{ vars.REACT_APP_GOOGLE_MAPS_API }}
 
        # Deploy to GitHub Pages using the gh-pages package
       # - name: Deploy to GitHub Pages
@@ -46,7 +46,7 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         env:
           REACT_APP_API_URL: ${{ env.REACT_APP_API_URL }}
-          REACT_APP_GOOGLE_MAPS_API: ${{ env.REACT_APP_GOOGLE_MAPS_API }}
+          REACT_APP_GOOGLE_MAPS_API: ${{ vars.REACT_APP_GOOGLE_MAPS_API }}
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
