@@ -11,9 +11,9 @@ jobs:
       REACT_APP_API_URL: 'https://snow-scraper-pro.vercel.app'
     steps:
       # check env variables
-      - if: ${{ env.REACT_APP_GOOGLE_MAPS_API != '' }}
+      - if: ${{ env.REACT_APP_GOOGLE_MAPS_API }}
         run: echo 'This step will only run if the secret has a value set... env.REACT_APP_GOOGLE_MAPS_API'
-      - if: ${{ env.REACT_APP_API_URL == '' }}
+      - if: ${{ !env.REACT_APP_GOOGLE_MAPS_API }}
         run: echo 'This step will only run if the secret does not have a value set... env.REACT_APP_GOOGLE_MAPS_API'
         
       # Check out the repository code
